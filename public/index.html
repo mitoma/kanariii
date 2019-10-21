@@ -3,7 +3,33 @@
 <head>
   <meta charset="UTF-8"/>
   <script defer src="main.js"></script>
+  <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+      }
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
+        overflow: hidden;
+      }
+      #blocklyDiv {
+        height: 99%;
+      }
+    </style>
 </head>
 <body>
+  <div id='blocklyDiv'></div>
+  <xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
+    <block type="controls_if"></block>
+    <block type="logic_compare"></block>
+    <block type="controls_repeat_ext"></block>
+    <block type="math_number">
+      <field name="NUM">123</field>
+    </block>
+    <block type="math_arithmetic"></block>
+    <block type="text"></block>
+    <block type="text_print"></block>
+  </xml>
 </body>
 </html>
