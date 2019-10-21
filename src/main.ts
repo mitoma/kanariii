@@ -1,3 +1,7 @@
 import * as Blockly from 'blockly';
 
-Blockly.inject("hoge", {});
+const workspace = Blockly.inject('blocklyDiv', {
+    toolbox: document.getElementById('toolbox'),
+    media: 'media/'
+});
+
