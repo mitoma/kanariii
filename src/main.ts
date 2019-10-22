@@ -1,8 +1,14 @@
-import * as Blockly from 'blockly';
-import Javascript from 'blockly/javascript.js';
-import JA from 'blockly/msg/ja.js';
+import * as Blockly from 'blockly/core';
+import 'blockly/blocks';
+import 'blockly/javascript';
+import * as JA from 'blockly/msg/ja.js';
+import { ShowRecordBlock } from './kintone-block';
+
+let showRecordBlock = new ShowRecordBlock();
 
 Blockly.setLocale(JA);
+Blockly.Blocks[showRecordBlock.blockName()] = showRecordBlock.blockDefinition();
+Blockly.JavaScript[showRecordBlock.blockName()] = showRecordBlock.jsGenerator();
 
 const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                    <block type="controls_if"></block>
@@ -14,6 +20,7 @@ const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="tool
                    <block type="math_arithmetic"></block>
                    <block type="text"></block>
                    <block type="text_print"></block>
+                   <block type="${showRecordBlock.blockName()}"></block>
                  </xml>`;
 
 const toolbox = Blockly.Xml.textToDom(menuXml);
@@ -38,7 +45,7 @@ function showXmlCode() {
 }
 
 function showJavascriptCode() {
-  console.log(Javascript.workspaceToCode(workspace));
+  console.log(Blockly.JavaScript.workspaceToCode(workspace));
 }
 
 const toXmlButton = document.getElementById("kintoneBlocklyToXmlButton");
