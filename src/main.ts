@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly';
+import Javascript from 'blockly/javascript.js';
 import JA from 'blockly/msg/ja.js';
 
 Blockly.setLocale(JA);
@@ -31,3 +32,17 @@ const workspace = Blockly.inject('blocklyDiv', {
   trashcan: true,
   zoom: zoom,
 });
+
+function showXmlCode() {
+  console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
+}
+
+function showJavascriptCode() {
+  console.log(Javascript.workspaceToCode(workspace));
+}
+
+const toXmlButton = document.getElementById("kintoneBlocklyToXmlButton");
+toXmlButton.onclick = showXmlCode;
+
+const toJsButton = document.getElementById("kintoneBlocklyToJsButton");
+toJsButton.onclick = showJavascriptCode;
