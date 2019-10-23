@@ -4,6 +4,34 @@ import 'blockly/javascript';
 import * as JA from 'blockly/msg/ja.js';
 import { buildKintone } from './kintone-block';
 
+const mordalElementBg = document.createElement('div');
+const mordalElementFg = document.createElement('div');
+mordalElementBg.id = 'mordalElementBg';
+mordalElementFg.id = 'mordalElementFg';
+
+mordalElementFg.style.cssText = `display: on;
+                                 width: 90%;
+                                 height: 90%;
+                                 margin: 0;
+                                 padding: 0;
+                                 background-color: #ffffff;
+                                 color: #666666;
+                                 position:fixed;
+                                 top: 5%;
+                                 left: 5%;
+                                 z-index: 101;`;
+mordalElementBg.style.cssText = `display:on;
+                                 width:100%;
+                                 height:100%;
+                                 background-color: rgba(0,0,0,0.5);
+                                 position:fixed;
+                                 top:0;
+                                 left:0;
+                                 z-index: 100;`;
+
+document.getElementById("blocklyDiv").appendChild(mordalElementBg);
+document.getElementById("blocklyDiv").appendChild(mordalElementFg);
+
 const kintoneCategory = buildKintone(Blockly.Blocks, Blockly.JavaScript);
 
 Blockly.setLocale(JA);
@@ -37,7 +65,7 @@ const zoom = {
   scaleSpeed: 1.2
 };
 
-const workspace = Blockly.inject('blocklyDiv', {
+const workspace = Blockly.inject('mordalElementFg', {
   toolbox: toolbox,
   media: 'media/',
   trashcan: true,
