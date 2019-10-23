@@ -3,6 +3,7 @@ import 'blockly/blocks';
 import 'blockly/javascript';
 import * as JA from 'blockly/msg/ja.js';
 import { buildKintone } from './kintone-block';
+import categoryXml from './category.xml';
 
 const mordalElementBg = document.createElement('div');
 const mordalElementFg = document.createElement('div');
@@ -36,23 +37,7 @@ const kintoneCategory = buildKintone(Blockly.Blocks, Blockly.JavaScript);
 
 Blockly.setLocale(JA);
 
-const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-                   <category name="Variables" custom="VARIABLE"></category>
-                   <category name="Functions" custom="PROCEDURE"></category>
-                   <category name="Logic" colour="%{BKY_LOGIC_HUE}">
-                     <block type="controls_if"></block>
-                     <block type="logic_compare"></block>
-                     <block type="controls_repeat_ext"></block>
-                     <block type="math_number">
-                       <field name="NUM">123</field>
-                     </block>
-                     <block type="math_arithmetic"></block>
-                     <block type="text"></block>
-                     <block type="text_print"></block>
-                   </category>
-                 </xml>`;
-
-const toolbox = Blockly.Xml.textToDom(menuXml);
+const toolbox = Blockly.Xml.textToDom(categoryXml);
 
 toolbox.appendChild(kintoneCategory);
 
