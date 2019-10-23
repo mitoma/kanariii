@@ -1,4 +1,4 @@
-import * as Blockly from 'blockly/core';
+import Blockly from 'blockly/core';
 import 'blockly/blocks';
 import 'blockly/javascript';
 import * as JA from 'blockly/msg/ja.js';
@@ -7,23 +7,33 @@ import { ShowRecordBlock } from './kintone-block';
 let showRecordBlock = new ShowRecordBlock();
 
 Blockly.setLocale(JA);
-Blockly.Blocks[showRecordBlock.blockName()] = showRecordBlock.blockDefinition();
-Blockly.JavaScript[showRecordBlock.blockName()] = showRecordBlock.jsGenerator();
+Blockly.Blocks[showRecordBlock.blockName] = showRecordBlock.blockDefinition;
+Blockly.JavaScript[showRecordBlock.blockName] = showRecordBlock.jsGenerator;
 
 const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
-                   <block type="controls_if"></block>
-                   <block type="logic_compare"></block>
-                   <block type="controls_repeat_ext"></block>
-                   <block type="math_number">
-                     <field name="NUM">123</field>
-                   </block>
-                   <block type="math_arithmetic"></block>
-                   <block type="text"></block>
-                   <block type="text_print"></block>
-                   <block type="${showRecordBlock.blockName()}"></block>
+                   <category name="Variables" custom="VARIABLE"></category>
+                   <category name="Functions" custom="PROCEDURE"></category>
+                   <category name="Logic" colour="%{BKY_LOGIC_HUE}">
+                     <block type="controls_if"></block>
+                     <block type="logic_compare"></block>
+                     <block type="controls_repeat_ext"></block>
+                     <block type="math_number">
+                       <field name="NUM">123</field>
+                     </block>
+                     <block type="math_arithmetic"></block>
+                     <block type="text"></block>
+                     <block type="text_print"></block>
+                   </category>
                  </xml>`;
 
 const toolbox = Blockly.Xml.textToDom(menuXml);
+
+const kintoneCategory = document.createElement("category");
+kintoneCategory.setAttribute('name', 'Kintone');
+kintoneCategory.setAttribute('colour', '#AA0');
+kintoneCategory.appendChild(showRecordBlock.menuElement());
+toolbox.appendChild(kintoneCategory);
+
 const zoom = {
   controls: true,
   wheel: true,
