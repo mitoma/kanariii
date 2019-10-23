@@ -2,13 +2,11 @@ import Blockly from 'blockly/core';
 import 'blockly/blocks';
 import 'blockly/javascript';
 import * as JA from 'blockly/msg/ja.js';
-import { ShowRecordBlock } from './kintone-block';
+import { buildKintone } from './kintone-block';
 
-let showRecordBlock = new ShowRecordBlock();
+const kintoneCategory = buildKintone(Blockly.Blocks, Blockly.JavaScript);
 
 Blockly.setLocale(JA);
-Blockly.Blocks[showRecordBlock.blockName] = showRecordBlock.blockDefinition;
-Blockly.JavaScript[showRecordBlock.blockName] = showRecordBlock.jsGenerator;
 
 const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="toolbox" style="display: none">
                    <category name="Variables" custom="VARIABLE"></category>
@@ -28,10 +26,6 @@ const menuXml = `<xml xmlns="https://developers.google.com/blockly/xml" id="tool
 
 const toolbox = Blockly.Xml.textToDom(menuXml);
 
-const kintoneCategory = document.createElement("category");
-kintoneCategory.setAttribute('name', 'Kintone');
-kintoneCategory.setAttribute('colour', '#AA0');
-kintoneCategory.appendChild(showRecordBlock.menuElement());
 toolbox.appendChild(kintoneCategory);
 
 const zoom = {
