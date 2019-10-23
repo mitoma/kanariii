@@ -18,14 +18,18 @@ module.exports = {
   module: {
     rules: [
       {
-        // 拡張子 .ts の場合
+        // .ts の場合
         test: /\.ts$/,
-        // TypeScript をコンパイルする
         use: "ts-loader"
+      },
+      {
+        // xml は template string として読み込む
+        test: /\.xml$/,
+        use: 'raw-loader',
       }
     ]
   },
-  // import 文で .ts ファイルを解決するため
+  // import 文で解決する
   resolve: {
     extensions: ['.ts', '.js']
   },
