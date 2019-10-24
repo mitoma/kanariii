@@ -8,7 +8,7 @@ module.exports = {
   mode: "development",
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/main.ts",
+  entry: "./src/main.tsx",
 
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -18,8 +18,8 @@ module.exports = {
   module: {
     rules: [
       {
-        // .ts の場合
-        test: /\.ts$/,
+        // .ts or .tsx の場合
+        test: /\.tsx?$/,
         use: "ts-loader"
       },
       {
@@ -31,7 +31,7 @@ module.exports = {
   },
   // import 文で解決する
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.tsx', '.js', '.jsx']
   },
 
   plugins: [
