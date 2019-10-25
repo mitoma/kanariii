@@ -26,12 +26,25 @@ module.exports = {
         // xml は template string として読み込む
         test: /\.xml$/,
         use: 'raw-loader',
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localsConvention: 'camelCaseOnly',
+            }
+          }
+        ]
       }
     ]
   },
   // import 文で解決する
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css']
   },
 
   plugins: [
