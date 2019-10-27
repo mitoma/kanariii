@@ -7,8 +7,9 @@ import { buildKintone } from './kintone-block';
 import categoryXml from './category.xml';
 import * as React from 'react';
 
-
 type BlocklyUiProps = {
+    visible: boolean;
+    handleToggleEditor: () => void;
 };
 
 type BlocklyUiState = {
@@ -65,14 +66,22 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         console.log(Blockly.JavaScript.workspaceToCode(this.state.workspace));
     }
 
+    componentDidUpdate() {
+        Blockly.svgResize(this.state.workspace);
+    }
+
     render() {
         return (
             <React.Fragment>
-                <input type="button" value="importXML"></input>
-                <input type="button" value="exportXML" onClick={this.handleExportXml}></input>
-                <input type="button" value="to JavaScript" onClick={this.handleToJavaScript}></input>
-                <div ref={this.blocklyDiv} id='blocklyDiv' className={styles['blocklyDiv']}></div>
-            </React.Fragment>
+                <div className={styles[this.props.visible ? 'mordalBackground' : 'hide']}
+                    onClick={this.props.handleToggleEditor}></div>
+                <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hide']}>
+                    <input type="button" value="importXML"></input>
+                    <input type="button" value="exportXML" onClick={this.handleExportXml}></input>
+                    <input type="button" value="to JavaScript" onClick={this.handleToJavaScript}></input>
+                    <div ref={this.blocklyDiv} id='blocklyDiv' className={styles['blocklyDiv']}></div>
+                </div>
+            </React.Fragment >
         );
     }
 }
