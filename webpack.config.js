@@ -56,11 +56,15 @@ module.exports = {
       }
     ]),
     // Copy over media resources from the Blockly package
+    // kintone プラグインでは media ファイルをどこかCDNから取り込む必要があると思うので
+    // Copy するのはやめてデフォルトの https://blockly-demo.appspot.com/static/media/ から取り込む。
+    /*
     new CopyPlugin([
       {
         from: path.resolve(__dirname, './node_modules/blockly/media'),
         to: path.resolve(__dirname, 'dist/media')
       }
     ])
+     */
   ]
 };

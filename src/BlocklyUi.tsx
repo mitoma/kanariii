@@ -53,7 +53,6 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
             this.blocklyDiv.current,
             {
                 toolbox: toolbox,
-                media: 'media/',
                 trashcan: true,
                 zoom: zoom,
             },
@@ -105,7 +104,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                     <input type="button" value="importXML" onClick={this.handleImportXml} />
                     <input type="button" value="exportXML" onClick={this.handleExportXml} />
                     <input type="button" value="to JavaScript" onClick={this.handleToJavaScript} />
-                    <div ref={this.blocklyDiv} id='blocklyDiv' className={styles['blocklyDiv']} />
+                    <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
                 </div>
             </React.Fragment >
         );
