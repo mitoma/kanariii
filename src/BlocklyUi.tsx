@@ -1,7 +1,7 @@
 import Blockly from 'blockly/core';
 import 'blockly/blocks';
 import 'blockly/javascript';
-import * as JA from 'blockly/msg/ja.js';
+import JA from 'blockly/msg/ja.js';
 import styles from './BlocklyUi.css';
 import { buildKintone } from './kintone-block';
 import categoryXml from './category.xml';
