@@ -2,37 +2,34 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { BlocklyUi } from './ui';
 
-class App extends React.Component {
+type AppProps = {}
+
+type AppState = {
+  showBlocklyEditor: boolean;
+}
+
+class App extends React.Component<AppProps, AppState> {
+
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { showBlocklyEditor: false };
+
+    this.handleToggleEditor = this.handleToggleEditor.bind(this);
+  }
+
+  handleToggleEditor() {
+    this.setState({ showBlocklyEditor: !this.state.showBlocklyEditor });
+  }
+
   render() {
     return (
       <React.Fragment>
         <div>Kintone with Blockly</div>
-        <BlocklyUi />
+        <input type="button" value="Toggle Blockly Editor" onClick={this.handleToggleEditor}></input>
+        <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} />
       </React.Fragment>
     );
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
-/*
-モーダルのCSSメモ
-mordalElementFg.style.cssText = `display: on;
-                                     width: 90%;
-                                     height: 90%;
-                                     margin: 0;
-                                     padding: 0;
-                                     background-color: #ffffff;
-                                     color: #666666;
-                                     position:fixed;
-                                     top: 5%;
-                                     left: 5%;
-                                     z-index: 101;`;
-mordalElementBg.style.cssText = `display:on;
-                                     width:100%;
-                                     height:100%;
-                                     background-color: rgba(0,0,0,0.5);
-                                     position:fixed;
-                                     top:0;
-                                     left:0;
-                                     z-index: 100;`;
-*/
