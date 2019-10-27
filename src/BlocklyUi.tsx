@@ -49,7 +49,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
             scaleSpeed: 1.2,
         };
 
-        let workspace = Blockly.inject(
+        const workspace = Blockly.inject(
             this.blocklyDiv.current,
             {
                 toolbox: toolbox,
@@ -62,13 +62,13 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
 
     handleImportXml() {
         if (this.importFile.current.files[0] != null) {
-            let file = this.importFile.current.files[0];
-            let reader = new FileReader();
+            const file = this.importFile.current.files[0];
+            const reader = new FileReader();
             reader.readAsText(file, "UTF-8");
             // よくわからないが ProgressEvent から target.result が取れないのじゃよ。
             // https://github.com/microsoft/TypeScript/issues/4163#issuecomment-321942932
             reader.onload = (event: ProgressEvent) => {
-                let xmlString = reader.result;
+                const xmlString = reader.result;
                 this.state.workspace.clear();
                 Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlString), this.state.workspace);
             };
@@ -76,10 +76,10 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     handleExportXml() {
-        let filename = 'kintone-blockly.xml';
-        let xmlData = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
-        let blob = new Blob([xmlData], { "type": "application/xml" });
-        let link = document.createElement('a');
+        const filename = 'kintone-blockly.xml';
+        const xmlData = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
+        const blob = new Blob([xmlData], { "type": "application/xml" });
+        const link = document.createElement('a');
         link.download = filename;
         link.href = window.URL.createObjectURL(blob);
         link.click();
