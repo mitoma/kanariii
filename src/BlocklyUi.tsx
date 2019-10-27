@@ -17,13 +17,16 @@ type BlocklyUiState = {
 }
 
 export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
+    importFile: React.RefObject<HTMLInputElement>;
     blocklyDiv: React.RefObject<HTMLDivElement>;
 
     constructor(props: BlocklyUiProps) {
         super(props);
+        this.importFile = React.createRef();
         this.blocklyDiv = React.createRef();
 
         // binds
+        this.handleImportXml = this.handleImportXml.bind(this);
         this.handleExportXml = this.handleExportXml.bind(this);
         this.handleToJavaScript = this.handleToJavaScript.bind(this);
     }
@@ -59,14 +62,32 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     handleImportXml() {
-
+        if (this.importFile.current.files[0] != null) {
+            let file = this.importFile.current.files[0];
+            let reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+            // よくわからないが ProgressEvent から target.result が取れないのじゃよ。
+            // https://github.com/microsoft/TypeScript/issues/4163#issuecomment-321942932
+            reader.onload = (event: ProgressEvent) => {
+                let xmlString = reader.result;
+                this.state.workspace.clear();
+                Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlString), this.state.workspace);
+            };
+        }
     }
 
     handleExportXml() {
-        console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)));
+        let filename = 'kintone-blockly.xml';
+        let xmlData = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
+        let blob = new Blob([xmlData], { "type": "application/xml" });
+        let link = document.createElement('a');
+        link.download = filename;
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
     }
 
     handleToJavaScript() {
+        // TODO JavaScript を kintone にアップロードする。
         console.log(Blockly.JavaScript.workspaceToCode(this.state.workspace));
     }
 
@@ -80,6 +101,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                 <div className={styles[this.props.visible ? 'mordalBackground' : 'hide']}
                     onClick={this.props.handleToggleEditor} />
                 <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hide']}>
+                    <input ref={this.importFile} type="file" />
                     <input type="button" value="importXML" onClick={this.handleImportXml} />
                     <input type="button" value="exportXML" onClick={this.handleExportXml} />
                     <input type="button" value="to JavaScript" onClick={this.handleToJavaScript} />
