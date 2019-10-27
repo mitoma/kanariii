@@ -24,7 +24,7 @@ export class App extends React.Component<AppProps, AppState> {
         return (
             <React.Fragment>
                 <div>Kintone with Blockly</div>
-                <input type="button" value="Toggle Blockly Editor" onClick={this.handleToggleEditor}></input>
+                <input type="button" value="Toggle Blockly Editor" onClick={this.handleToggleEditor} />
                 <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} />
             </React.Fragment>
         );
