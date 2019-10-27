@@ -58,6 +58,10 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         this.setState({ workspace: workspace });
     }
 
+    handleImportXml() {
+
+    }
+
     handleExportXml() {
         console.log(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)));
     }
@@ -74,12 +78,12 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         return (
             <React.Fragment>
                 <div className={styles[this.props.visible ? 'mordalBackground' : 'hide']}
-                    onClick={this.props.handleToggleEditor}></div>
+                    onClick={this.props.handleToggleEditor} />
                 <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hide']}>
-                    <input type="button" value="importXML"></input>
-                    <input type="button" value="exportXML" onClick={this.handleExportXml}></input>
-                    <input type="button" value="to JavaScript" onClick={this.handleToJavaScript}></input>
-                    <div ref={this.blocklyDiv} id='blocklyDiv' className={styles['blocklyDiv']}></div>
+                    <input type="button" value="importXML" onClick={this.handleImportXml} />
+                    <input type="button" value="exportXML" onClick={this.handleExportXml} />
+                    <input type="button" value="to JavaScript" onClick={this.handleToJavaScript} />
+                    <div ref={this.blocklyDiv} id='blocklyDiv' className={styles['blocklyDiv']} />
                 </div>
             </React.Fragment >
         );
