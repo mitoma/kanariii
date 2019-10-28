@@ -3,8 +3,8 @@ import * as ReactDOM from 'react-dom';
 import { App } from './App';
 
 document.addEventListener("DOMContentLoaded", function (loadedEvent) {
-    let sourceXml = '';
-    if (KintoneBlockly != null && KintoneBlockly.sourceXml != null) {
+    let sourceXml = '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
+    if (typeof KintoneBlockly !== 'undefined' && KintoneBlockly.sourceXml !== null) {
         sourceXml = KintoneBlockly.sourceXml;
     }
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
