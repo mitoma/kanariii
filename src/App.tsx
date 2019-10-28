@@ -23,8 +23,7 @@ export class App extends React.Component<AppProps, AppState> {
     render() {
         return (
             <React.Fragment>
-                <div>Kintone with Blockly</div>
-                <input type="button" value="Toggle Blockly Editor" onClick={this.handleToggleEditor} />
+                <a onClick={this.handleToggleEditor} >アプリをカスタマイズ</a>
                 <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} />
             </React.Fragment>
         );
