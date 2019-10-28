@@ -1,7 +1,3 @@
-.hide {
-    display: none;
-}
-
 .showBlocklyUi {
     display: on;
     width: 90%;
@@ -16,7 +12,21 @@
     z-index: 101;
 }
 
-.mordalBackground {
+.hideBlocklyUi {
+    display: on;
+    width: 90%;
+    height: 90%;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #666666;
+    position:fixed;
+    top: 100%;
+    left: 100%;
+    z-index: 101;
+}
+
+.showMordalBackground {
     display:on;
     width:100%;
     height:100%;
@@ -24,6 +34,17 @@
     position:fixed;
     top:0;
     left:0;
+    z-index: 100;
+}
+
+.hideMordalBackground {
+    display:on;
+    width:100%;
+    height:100%;
+    background-color: rgba(0,0,0,0.5);
+    position:fixed;
+    top:100%;
+    left:100%;
     z-index: 100;
 }
 
