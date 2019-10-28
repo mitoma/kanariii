@@ -1,7 +1,9 @@
 import { BlocklyUi } from "./BlocklyUi";
 import * as React from "react";
 
-type AppProps = {}
+type AppProps = {
+    sourceXml: string;
+}
 
 type AppState = {
     showBlocklyEditor: boolean;
@@ -24,7 +26,7 @@ export class App extends React.Component<AppProps, AppState> {
         return (
             <React.Fragment>
                 <a onClick={this.handleToggleEditor} >アプリをカスタマイズ</a>
-                <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} />
+                <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} sourceXml={this.props.sourceXml} />
             </React.Fragment>
         );
     }

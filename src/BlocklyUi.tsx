@@ -9,6 +9,7 @@ import * as React from 'react';
 
 type BlocklyUiProps = {
     visible: boolean;
+    sourceXml: string;
     handleToggleEditor: () => void;
 };
 
@@ -57,6 +58,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                 zoom: zoom,
             },
         );
+        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(this.props.sourceXml), workspace);
         this.setState({ workspace: workspace });
     }
 
@@ -97,9 +99,9 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     render() {
         return (
             <React.Fragment>
-                <div className={styles[this.props.visible ? 'mordalBackground' : 'hide']}
+                <div className={styles[this.props.visible ? 'showMordalBackground' : 'hideMordalBackground']}
                     onClick={this.props.handleToggleEditor} />
-                <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hide']}>
+                <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hideBlocklyUi']}>
                     <input ref={this.importFile} type="file" />
                     <input type="button" value="importXML" onClick={this.handleImportXml} />
                     <input type="button" value="exportXML" onClick={this.handleExportXml} />
