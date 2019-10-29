@@ -50,6 +50,10 @@ class ShowRecordBlock extends KintoneBaseBlocks {
 
     jsGenerator: (block) => string = function (block): string {
         let statements_success = Blockly.JavaScript.statementToCode(block, 'success');
-        return `kintone.events.on('app.record.index.show', function(event) {${statements_success}};`;
+        return `
+kintone.events.on('app.record.index.show', function(event) {
+${statements_success}
+});
+`;
     }
 }
