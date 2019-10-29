@@ -49,10 +49,6 @@ export class CustomizeJsUpdater {
         });
         customizeSetting.desktop.js.push({ type: 'FILE', file: { fileKey: uploadToBlob["fileKey"] } });
         customizeSetting.app = kintone.app.getId().toString();
-        console.log(customizeSetting);
-        console.log('good!');
-        console.log(uploadToBlob);
-        console.log('blob!!');
         await this.putCustomizeSetting(customizeSetting);
         await this.deployApp();
         while (await this.deployAppProgress() !== 'SUCCESS') {
