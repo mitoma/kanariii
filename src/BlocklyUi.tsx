@@ -92,7 +92,9 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         new CustomizeJsUpdater().uploadCustomizeCode(
             Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
             Blockly.JavaScript.workspaceToCode(this.state.workspace)
-        );
+        ).then(() => {
+            location.reload();
+        });
     }
 
     componentDidUpdate() {
@@ -108,7 +110,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                     <input ref={this.importFile} type="file" />
                     <input type="button" value="importXML" onClick={this.handleImportXml} />
                     <input type="button" value="exportXML" onClick={this.handleExportXml} />
-                    <input type="button" value="to JavaScript" onClick={this.handleToJavaScript} />
+                    <input type="button" value="Deploy!" onClick={this.handleToJavaScript} />
                     <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
                 </div>
             </React.Fragment >

@@ -53,7 +53,11 @@ export class CustomizeJsUpdater {
         console.log('good!');
         console.log(uploadToBlob);
         console.log('blob!!');
-        this.putCustomizeSetting(customizeSetting);
+        await this.putCustomizeSetting(customizeSetting);
+        await this.deployApp();
+        while (await this.deployAppProgress() !== 'SUCCESS') {
+            await this.sleep(250);
+        }
     }
 
     private generateCode(xmlCode: string, jsCode: string): string {
@@ -71,6 +75,29 @@ ${jsCode}
 
     private putCustomizeSetting(customizeSetting: CustomizeSetting) {
         return kintone.api(this.url('/k/v1/preview/app/customize'), 'PUT', customizeSetting);
+    }
+
+    private sleep(waitMsec: number) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve()
+            }, waitMsec)
+        });
+    }
+
+    private deployApp() {
+        return kintone.api(this.url('/k/v1/preview/app/deploy'), 'POST', {
+            apps: [
+                { app: kintone.app.getId(), revision: -1 }
+            ]
+        });
+    }
+
+    private async deployAppProgress() {
+        const resp = await kintone.api(this.url('/k/v1/preview/app/deploy'), 'GET', {
+            apps: [kintone.app.getId()]
+        });
+        return resp.apps[0].status;
     }
 
     private uploadToBlob(code: string) {
