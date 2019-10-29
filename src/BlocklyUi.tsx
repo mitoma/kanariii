@@ -1,4 +1,3 @@
-/// <reference path="../node_modules/@kintone/dts-gen/kintone.d.ts" />
 import Blockly from 'blockly/core';
 import 'blockly/blocks';
 import 'blockly/javascript';
@@ -7,6 +6,7 @@ import styles from './BlocklyUi.css';
 import { buildKintone } from './kintone-block';
 import categoryXml from './category.xml';
 import * as React from 'react';
+import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 
 type BlocklyUiProps = {
     visible: boolean;
@@ -16,22 +16,6 @@ type BlocklyUiProps = {
 
 type BlocklyUiState = {
     workspace: Blockly.Workspace;
-}
-
-class CustomizeJsUpdater {
-    uploadCustomizeCode(xmlCode: string, jsCode: string) {
-        kintone.api(kintone.api.url('/k/v1/app/customize'), 'GET', { app: kintone.app.getId() }).then((resp) => {
-            console.log(resp);
-        })
-    }
-
-    generateCode(xmlCode: string, jsCode: string) {
-        const customizeCode = `
-KintoneBlockly = {};
-KintoneBlockly.sourceXml='${xmlCode}';
-${jsCode}
-`;
-    }
 }
 
 export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
