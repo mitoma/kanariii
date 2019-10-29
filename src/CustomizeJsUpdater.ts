@@ -59,8 +59,10 @@ export class CustomizeJsUpdater {
     private generateCode(xmlCode: string, jsCode: string): string {
         const customizeCode = `
 KintoneBlockly = {};
-KintoneBlockly.sourceXml='${xmlCode}';
+KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
+(function(){
 ${jsCode}
+})();
 `;
         return customizeCode;
     }
