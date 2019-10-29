@@ -34,13 +34,12 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidMount() {
-        const kintoneCategory = buildKintone(Blockly.Blocks, Blockly.JavaScript);
-
         Blockly.setLocale(JA);
 
-        const toolbox = Blockly.Xml.textToDom(categoryXml);
+        const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
+        const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
-        toolbox.appendChild(kintoneCategory);
+        buildKintone(kintoneCategory, Blockly.Blocks, Blockly.JavaScript);
 
         const zoom = {
             controls: true,

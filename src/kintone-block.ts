@@ -1,33 +1,27 @@
 import Blockly from 'blockly/core';
 import 'blockly/javascript';
 
-export function buildKintone(blocks: object, js: object): HTMLElement {
-    const kintoneCategory = document.createElement("category");
-    kintoneCategory.setAttribute('name', 'Kintone');
-    kintoneCategory.setAttribute('colour', '#AA0');
-
+export function buildKintone(category: Element, blocks: object, js: object) {
     let kintoneBlocks: KintoneBlocks[] = [new ShowRecordBlock()];
     kintoneBlocks.forEach((block) => {
         blocks[block.blockName] = block.blockDefinition;
         js[block.blockName] = block.jsGenerator;
-        kintoneCategory.appendChild(block.menuElement());
+        category.appendChild(block.menuElement());
     });
-
-    return kintoneCategory;
 }
 
 interface KintoneBlocks {
     readonly blockName: string;
     readonly blockDefinition: object;
     readonly jsGenerator: (block: any) => string;
-    menuElement(): HTMLElement;
+    menuElement(): Element;
 }
 
 abstract class KintoneBaseBlocks implements KintoneBlocks {
     blockName: string;
     blockDefinition: object;
     jsGenerator: (block: any) => string;
-    menuElement(): HTMLElement {
+    menuElement(): Element {
         let blockElement = document.createElement("block");
         blockElement.setAttribute("type", this.blockName);
         return blockElement;
