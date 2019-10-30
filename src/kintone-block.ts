@@ -1,119 +1,53 @@
-import Blockly from 'blockly/core';
-import 'blockly/javascript';
-
-type KintoneEventBlockDefinition = {
-    blockName: string;
-    eventKey: string;
-    blockLabel: string;
-}
+import { KintoneBlock } from './blocks/KintoneBlock';
+import { KintoneEventBlockCategoryDef, KintoneEventBlock } from './blocks/KintoneEventBlock';
+import { ConsoleLogBlock } from './blocks/ConsoleLogBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
-const kintoneEventBlockDefinition: KintoneEventBlockDefinition[] = [
-    {
-        blockName: 'kintone_app_record_index_show',
-        eventKey: 'app.record.index.show',
-        blockLabel: 'レコード一覧画面を表示した時'
-    },
-    {
-        blockName: 'kintone_app_record_detail_show',
-        eventKey: 'app.record.detail.show',
-        blockLabel: 'レコード詳細画面を表示した時'
-    },
-    {
-        blockName: 'kintone_app_record_create_show',
-        eventKey: 'app.record.create.show',
-        blockLabel: 'レコード追加画面を表示した時'
-    },
-];
+
+// レコード一覧
+const appRecordShowDef: KintoneEventBlockCategoryDef = {
+    blockLabel: 'レコード一覧',
+    blockName: 'kintone_event_app_record_index',
+    details: [
+        {
+            eventLabel: '表示',
+            eventKey: 'app.record.index.show',
+        },
+        {
+            eventLabel: 'インライン編集開始',
+            eventKey: 'app.record.index.edit.show',
+        },
+    ]
+}
 
 export function buildKintone(category: Element, blocks: object, js: object) {
-    const kintoneBlocks: KintoneBlocks[] = [];
     // イベント系
-    kintoneEventBlockDefinition.forEach((definition) => {
-        kintoneBlocks.push(new KintoneEventBlock(definition.blockName, definition.eventKey, definition.blockLabel))
-    });
-    // デバッグ用
-    kintoneBlocks.push(new ConsoleLogBlock());
-    kintoneBlocks.forEach((block) => {
+    const eventBlocks: KintoneBlock[] = [];
+    const eventCategory = subCategory("イベント");
+    eventBlocks.push(new KintoneEventBlock(appRecordShowDef));
+    eventBlocks.forEach((block) => {
         blocks[block.blockName] = block.blockDefinition();
         js[block.blockName] = block.jsGenerator();
-        category.appendChild(block.menuElement());
+        eventCategory.appendChild(block.menuElement());
     });
+    category.appendChild(eventCategory);
+
+    // デバッグ用
+    const debugBlocks: KintoneBlock[] = [];
+    const debugCategory = subCategory("デバッグ");
+    debugBlocks.push(new ConsoleLogBlock());
+    debugBlocks.forEach((block) => {
+        blocks[block.blockName] = block.blockDefinition();
+        js[block.blockName] = block.jsGenerator();
+        debugCategory.appendChild(block.menuElement());
+    });
+    category.appendChild(debugCategory);
 }
 
-interface KintoneBlocks {
-    blockName: string;
-    blockDefinition(): object;
-    jsGenerator(): (block: any) => string;
-    menuElement(): Element;
-}
-
-class KintoneEventBlock implements KintoneBlocks {
-
-    constructor(public blockName: string, private eventKey: string, private label: string) { }
-
-    blockDefinition(): object {
-        const label = this.label;
-        return {
-            init: function () {
-                this.appendDummyInput()
-                    .appendField(label);
-                this.appendStatementInput("success")
-                    .setCheck(null);
-                this.setColour(60);
-                this.setTooltip("");
-                this.setHelpUrl("");
-            }
-        }
-    }
-
-    jsGenerator(): (block: any) => string {
-        return function (block): string {
-            let statements_success = Blockly.JavaScript.statementToCode(block, 'success');
-            return `
-kintone.events.on('${this.eventKey}', function(event) {
-${statements_success}
-});
-`;
-        };
-    }
-
-    menuElement(): Element {
-        let blockElement = document.createElement("block");
-        blockElement.setAttribute("type", this.blockName);
-        return blockElement;
-    }
-}
-
-class ConsoleLogBlock implements KintoneBlocks {
-    blockName = 'console_log';
-    blockDefinition(): object {
-        return {
-            init: function () {
-                this.appendValueInput("TEXT")
-                    .setCheck(null)
-                    .appendField("ログ出力");
-                this.setInputsInline(true);
-                this.setPreviousStatement(true, null);
-                this.setNextStatement(true, null);
-                this.setColour(0);
-                this.setTooltip("ログを出力するんだよー。");
-                this.setHelpUrl("");
-            }
-        };
-    }
-
-    jsGenerator(): (block: any) => string {
-        return function (block): string {
-            let inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
-            return `console.log(${inputValue});\n`;
-        };
-    }
-
-    menuElement(): Element {
-        let blockElement = document.createElement("block");
-        blockElement.setAttribute("type", this.blockName);
-        return blockElement;
-    }
+function subCategory(categoryName: string): Element {
+    let categoryElement = document.createElement("category");
+    categoryElement.setAttribute("name", categoryName);
+    categoryElement.setAttribute("colour", "#9fa55b");
+    return categoryElement;
 }
