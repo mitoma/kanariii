@@ -1,8 +1,10 @@
 import { BlocklyUi } from "./BlocklyUi";
 import * as React from "react";
+import { Field } from "./schema/Field";
 
 type AppProps = {
     sourceXml: string;
+    fields: Field[];
 }
 
 type AppState = {
@@ -26,7 +28,12 @@ export class App extends React.Component<AppProps, AppState> {
         return (
             <React.Fragment>
                 <a onClick={this.handleToggleEditor} >アプリをカスタマイズ</a>
-                <BlocklyUi visible={this.state.showBlocklyEditor} handleToggleEditor={this.handleToggleEditor} sourceXml={this.props.sourceXml} />
+                <BlocklyUi
+                    visible={this.state.showBlocklyEditor}
+                    handleToggleEditor={this.handleToggleEditor}
+                    sourceXml={this.props.sourceXml}
+                    fields={this.props.fields}
+                />
             </React.Fragment>
         );
     }

@@ -1,16 +1,21 @@
 import { KintoneBlock } from "./KintoneBlock";
 import Blockly from 'blockly/core';
 import 'blockly/javascript';
+import { Field } from "../schema/Field";
 
 export class FieldCodeBlock implements KintoneBlock {
-    blockName: string;
+
+    constructor(private fields: Field[]) { }
+
+    blockName: string = 'kintone_app_schema_field';
 
     blockDefinition(): object {
+        const labelVarPair = this.fields.map((f) => { return [f.label, f.var] });
         return {
             init: function () {
                 this.appendDummyInput()
-                    .appendField("フィールドコード")
-                    .appendField(new Blockly.FieldDropdown([["カラム名1", "column1"], ["カラム名2", "column2"], ["カラム名3", "column3"]]), "field_code");
+                    .appendField("フィールド")
+                    .appendField(new Blockly.FieldDropdown(labelVarPair), "field_code");
                 this.setOutput(true, null);
                 this.setColour(230);
                 this.setTooltip("");
