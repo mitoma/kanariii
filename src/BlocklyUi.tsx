@@ -8,6 +8,7 @@ import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
+import { Container, Box } from '@material-ui/core';
 
 type BlocklyUiProps = {
     visible: boolean;
@@ -105,15 +106,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     render() {
         return (
             <React.Fragment>
-                <div className={styles[this.props.visible ? 'showMordalBackground' : 'hideMordalBackground']}
-                    onClick={this.props.handleToggleEditor} />
-                <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hideBlocklyUi']}>
-                    <input ref={this.importFile} type="file" />
-                    <input type="button" value="importXML" onClick={this.handleImportXml} />
-                    <input type="button" value="exportXML" onClick={this.handleExportXml} />
-                    <input type="button" value="Deploy!" onClick={this.handleToJavaScript} />
-                    <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
-                </div>
+                <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
             </React.Fragment >
         );
     }
