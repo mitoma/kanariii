@@ -7,11 +7,13 @@ import { buildKintone } from './kintone-block';
 import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
+import { Field } from './schema/Field';
 
 type BlocklyUiProps = {
     visible: boolean;
     sourceXml: string;
     handleToggleEditor: () => void;
+    fields: Field[];
 };
 
 type BlocklyUiState = {
@@ -39,7 +41,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
         const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
-        buildKintone(kintoneCategory, Blockly.Blocks, Blockly.JavaScript);
+        buildKintone(Blockly.Blocks, Blockly.JavaScript, kintoneCategory, this.props.fields);
 
         const zoom = {
             controls: true,

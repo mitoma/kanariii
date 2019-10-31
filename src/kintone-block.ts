@@ -1,6 +1,8 @@
 import { KintoneBlock } from './blocks/KintoneBlock';
 import { KintoneEventBlockCategoryDef, KintoneEventBlock } from './blocks/KintoneEventBlock';
 import { ConsoleLogBlock } from './blocks/ConsoleLogBlock';
+import { Field } from './schema/Field';
+import { FieldCodeBlock } from './blocks/FieldCodeBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -21,7 +23,7 @@ const appRecordShowDef: KintoneEventBlockCategoryDef = {
     ]
 }
 
-export function buildKintone(category: Element, blocks: object, js: object) {
+export function buildKintone(blocks: object, js: object, category: Element, fields: Field[]) {
     // イベント系
     const eventBlocks: KintoneBlock[] = [];
     const eventCategory = subCategory("イベント");
@@ -32,6 +34,17 @@ export function buildKintone(category: Element, blocks: object, js: object) {
         eventCategory.appendChild(block.menuElement());
     });
     category.appendChild(eventCategory);
+
+    // スキーマ系
+    const schemaBlocks: KintoneBlock[] = [];
+    const schemaCategory = subCategory("スキーマ");
+    schemaBlocks.push(new FieldCodeBlock(fields));
+    schemaBlocks.forEach((block) => {
+        blocks[block.blockName] = block.blockDefinition();
+        js[block.blockName] = block.jsGenerator();
+        schemaCategory.appendChild(block.menuElement());
+    });
+    category.appendChild(schemaCategory);
 
     // デバッグ用
     const debugBlocks: KintoneBlock[] = [];

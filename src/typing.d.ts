@@ -11,3 +11,7 @@ declare module '*.css' {
 declare namespace KintoneBlockly {
     const sourceXml: string;
 }
+
+declare namespace cybozu.data.page.FORM_DATA.schema.table {
+    const fieldList: object;
+}
