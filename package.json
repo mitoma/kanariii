@@ -23,6 +23,8 @@
   },
   "homepage": "https://github.com/mitoma/kintone-blockly#readme",
   "dependencies": {
+    "@material-ui/core": "^4.5.2",
+    "@material-ui/icons": "^4.5.1",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
     "blockly": "^3.20191014.4",
