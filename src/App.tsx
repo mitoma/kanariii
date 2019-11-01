@@ -1,7 +1,7 @@
 import { BlocklyUi } from "./BlocklyUi";
 import * as React from "react";
 import { Field } from "./schema/Field";
-import { Dialog, IconButton } from "@material-ui/core";
+import { Dialog, Button } from "@material-ui/core";
 import BuildIcon from '@material-ui/icons/Build';
 
 type AppProps = {
@@ -34,9 +34,9 @@ export class App extends React.Component<AppProps, AppState> {
     render() {
         return (
             <React.Fragment>
-                <IconButton edge="start" color="inherit" onClick={this.handleOpenEditor} aria-label="open blockly">
-                    <BuildIcon >open blockly</BuildIcon>
-                </IconButton>
+                <Button startIcon={<BuildIcon />} color="inherit" onClick={this.handleOpenEditor} aria-label="open blockly">
+                    open blockly
+                </Button>
                 <Dialog
                     maxWidth={'xl'}
                     open={this.state.showBlocklyEditor}
