@@ -8,14 +8,18 @@ import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
-import { Container, Box } from '@material-ui/core';
+import { Box, AppBar, Toolbar, IconButton, Typography, Input, Button } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
 Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
     visible: boolean;
     sourceXml: string;
-    handleToggleEditor: () => void;
+    handleCloseEditor: () => void;
     fields: Field[];
 };
 
@@ -106,6 +110,29 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     render() {
         return (
             <React.Fragment>
+                <AppBar style={{ position: 'relative' }}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={this.props.handleCloseEditor} aria-label="close">
+                            <CloseIcon />
+                        </IconButton>
+                        <Box flex={1} marginLeft={4}>
+                            <Typography variant="h6">KintoneBlockly</Typography>
+                        </Box>
+                        <Button color="inherit" aria-label="upload code" component="label" >
+                            <ArrowUpwardIcon />
+                            Import
+                            <input ref={this.importFile} type="file" style={{ display: "none" }} onChange={this.handleImportXml} />
+                        </Button>
+                        <Button color="inherit" aria-label="download code" onClick={this.handleExportXml}>
+                            <ArrowDownwardIcon />
+                            Export
+                        </Button>
+                        <Button color="inherit" aria-label="deploy code">
+                            <SaveAltIcon />
+                            Deploy
+                        </Button>
+                    </Toolbar>
+                </AppBar>
                 <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
             </React.Fragment >
         );
