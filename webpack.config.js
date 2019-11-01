@@ -11,7 +11,7 @@ module.exports = {
   entry: "./src/main.tsx",
 
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     filename: '[name].js'
   },
 
@@ -52,7 +52,7 @@ module.exports = {
     new CopyPlugin([
       {
         from: path.resolve(__dirname, 'public'),
-        to: path.resolve(__dirname, 'dist')
+        to: path.resolve(__dirname, 'build')
       }
     ]),
     // Copy over media resources from the Blockly package
