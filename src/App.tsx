@@ -1,7 +1,7 @@
 import { BlocklyUi } from "./BlocklyUi";
 import * as React from "react";
 import { Field } from "./schema/Field";
-import { CssBaseline, Typography, Dialog, Button, IconButton, AppBar, Toolbar, Grid, Box, Container, List, ListItem, ListItemText, Divider, createStyles, makeStyles, Theme } from "@material-ui/core";
+import { Typography, Dialog, IconButton, AppBar, Toolbar, Box } from "@material-ui/core";
 import BuildIcon from '@material-ui/icons/Build';
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -25,11 +25,16 @@ export class App extends React.Component<AppProps, AppState> {
         this.state = { showBlocklyEditor: false };
 
         this.handleToggleEditor = this.handleToggleEditor.bind(this);
+        this.handleOpenEditor = this.handleOpenEditor.bind(this);
         this.handleCloseEditor = this.handleCloseEditor.bind(this);
     }
 
     handleToggleEditor() {
         this.setState({ showBlocklyEditor: !this.state.showBlocklyEditor });
+    }
+
+    handleOpenEditor() {
+        this.setState({ showBlocklyEditor: true });
     }
 
     handleCloseEditor() {
@@ -39,7 +44,7 @@ export class App extends React.Component<AppProps, AppState> {
     render() {
         return (
             <React.Fragment>
-                <IconButton edge="start" color="inherit" onClick={this.handleToggleEditor} aria-label="open blockly">
+                <IconButton edge="start" color="inherit" onClick={this.handleOpenEditor} aria-label="open blockly">
                     <BuildIcon >open blockly</BuildIcon>
                 </IconButton>
                 <Dialog maxWidth={'xl'} open={this.state.showBlocklyEditor} onClose={this.handleCloseEditor}>
