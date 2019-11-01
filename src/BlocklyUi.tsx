@@ -8,11 +8,18 @@ import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
+import { Box, AppBar, Toolbar, IconButton, Typography, Input, Button } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+
+Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
     visible: boolean;
     sourceXml: string;
-    handleToggleEditor: () => void;
+    handleCloseEditor: () => void;
     fields: Field[];
 };
 
@@ -36,8 +43,6 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidMount() {
-        Blockly.setLocale(JA);
-
         const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
         const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
@@ -105,15 +110,30 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     render() {
         return (
             <React.Fragment>
-                <div className={styles[this.props.visible ? 'showMordalBackground' : 'hideMordalBackground']}
-                    onClick={this.props.handleToggleEditor} />
-                <div className={styles[this.props.visible ? 'showBlocklyUi' : 'hideBlocklyUi']}>
-                    <input ref={this.importFile} type="file" />
-                    <input type="button" value="importXML" onClick={this.handleImportXml} />
-                    <input type="button" value="exportXML" onClick={this.handleExportXml} />
-                    <input type="button" value="Deploy!" onClick={this.handleToJavaScript} />
-                    <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
-                </div>
+                <AppBar style={{ position: 'relative' }}>
+                    <Toolbar>
+                        <IconButton edge="start" color="inherit" onClick={this.props.handleCloseEditor} aria-label="close">
+                            <CloseIcon />
+                        </IconButton>
+                        <Box flex={1} marginLeft={4}>
+                            <Typography variant="h6">KintoneBlockly</Typography>
+                        </Box>
+                        <Button color="inherit" aria-label="upload code" component="label" >
+                            <ArrowUpwardIcon />
+                            Import
+                            <input ref={this.importFile} type="file" style={{ display: "none" }} onChange={this.handleImportXml} />
+                        </Button>
+                        <Button color="inherit" aria-label="download code" onClick={this.handleExportXml}>
+                            <ArrowDownwardIcon />
+                            Export
+                        </Button>
+                        <Button color="inherit" aria-label="deploy code">
+                            <SaveAltIcon />
+                            Deploy
+                        </Button>
+                    </Toolbar>
+                </AppBar>
+                <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
             </React.Fragment >
         );
     }

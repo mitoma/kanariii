@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { App } from './App';
 import { Field } from './schema/Field';
+import { App } from './App';
 
 document.addEventListener("DOMContentLoaded", function (loadedEvent) {
     const fieldList = cybozu.data.page.FORM_DATA.schema.table.fieldList;
