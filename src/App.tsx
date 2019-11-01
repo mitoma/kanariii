@@ -38,7 +38,7 @@ export class App extends React.Component<AppProps, AppState> {
                 <IconButton edge="start" color="inherit" onClick={this.handleToggleEditor} aria-label="open blockly">
                     <BuildIcon >open blockly</BuildIcon>
                 </IconButton>
-                <Dialog fullScreen open={this.state.showBlocklyEditor} onClose={this.handleCloseEditor}>
+                <Dialog maxWidth={'xl'} open={this.state.showBlocklyEditor} onClose={this.handleCloseEditor}>
                     <AppBar style={{ position: 'relative' }}>
                         <Toolbar>
                             <IconButton edge="start" color="inherit" onClick={this.handleCloseEditor} aria-label="close">
