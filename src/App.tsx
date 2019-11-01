@@ -4,6 +4,10 @@ import { Field } from "./schema/Field";
 import { CssBaseline, Typography, Dialog, Button, IconButton, AppBar, Toolbar, Grid, Box, Container, List, ListItem, ListItemText, Divider, createStyles, makeStyles, Theme } from "@material-ui/core";
 import BuildIcon from '@material-ui/icons/Build';
 import CloseIcon from '@material-ui/icons/Close';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+
 
 type AppProps = {
     sourceXml: string;
@@ -44,9 +48,18 @@ export class App extends React.Component<AppProps, AppState> {
                             <IconButton edge="start" color="inherit" onClick={this.handleCloseEditor} aria-label="close">
                                 <CloseIcon />
                             </IconButton>
-                            <Box flex={1}>
+                            <Box flex={1} marginLeft={4}>
                                 <Typography variant="h6">KintoneBlockly</Typography>
                             </Box>
+                            <IconButton color="inherit" aria-label="upload code">
+                                <ArrowUpwardIcon />
+                            </IconButton>
+                            <IconButton color="inherit" aria-label="download code">
+                                <ArrowDownwardIcon />
+                            </IconButton>
+                            <IconButton color="inherit" aria-label="deploy code">
+                                <SaveAltIcon />
+                            </IconButton>
                         </Toolbar>
                     </AppBar>
                     <BlocklyUi
