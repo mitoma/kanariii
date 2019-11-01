@@ -118,17 +118,14 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                         <Box flex={1} marginLeft={4}>
                             <Typography variant="h6">KintoneBlockly</Typography>
                         </Box>
-                        <Button color="inherit" aria-label="upload code" component="label" >
-                            <ArrowUpwardIcon />
+                        <Button color="inherit" aria-label="upload code" component="label" startIcon={<ArrowUpwardIcon />} >
                             Import
                             <input ref={this.importFile} type="file" style={{ display: "none" }} onChange={this.handleImportXml} />
                         </Button>
-                        <Button color="inherit" aria-label="download code" onClick={this.handleExportXml}>
-                            <ArrowDownwardIcon />
+                        <Button color="inherit" aria-label="download code" onClick={this.handleExportXml} startIcon={<ArrowDownwardIcon />}>
                             Export
                         </Button>
-                        <Button color="inherit" aria-label="deploy code">
-                            <SaveAltIcon />
+                        <Button color="inherit" aria-label="deploy code" onClick={this.handleToJavaScript} startIcon={<SaveAltIcon />}>
                             Deploy
                         </Button>
                     </Toolbar>
