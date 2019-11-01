@@ -10,6 +10,8 @@ import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
 import { Container, Box } from '@material-ui/core';
 
+Blockly.setLocale(JA);
+
 type BlocklyUiProps = {
     visible: boolean;
     sourceXml: string;
@@ -37,8 +39,6 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidMount() {
-        Blockly.setLocale(JA);
-
         const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
         const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
