@@ -3,6 +3,7 @@ import { KintoneEventBlockCategoryDef, KintoneEventBlock } from './blocks/Kinton
 import { ConsoleLogBlock } from './blocks/ConsoleLogBlock';
 import { Field } from './schema/Field';
 import { FieldCodeBlock } from './blocks/FieldCodeBlock';
+import { DebuggerBlock } from './blocks/DebuggerBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -49,7 +50,10 @@ export function buildKintone(blocks: object, js: object, category: Element, fiel
     // デバッグ用
     const debugBlocks: KintoneBlock[] = [];
     const debugCategory = subCategory("デバッグ");
-    debugBlocks.push(new ConsoleLogBlock());
+    debugBlocks.push(
+        new ConsoleLogBlock(),
+        new DebuggerBlock(),
+    );
     debugBlocks.forEach((block) => {
         blocks[block.blockName] = block.blockDefinition();
         js[block.blockName] = block.jsGenerator();
