@@ -17,7 +17,7 @@ export class FieldCodeBlock implements KintoneBlock {
                     .appendField("フィールド")
                     .appendField(new Blockly.FieldDropdown(labelVarPair), "field_code");
                 this.setOutput(true, null);
-                this.setColour(230);
+                this.setColour('#9fa55b');
                 this.setTooltip("");
                 this.setHelpUrl("");
             }

@@ -37,7 +37,7 @@ export class KintoneEventBlock implements KintoneBlock {
                 this.appendStatementInput("event_callback")
                     .setCheck(null);
                 this.setInputsInline(false);
-                this.setColour(230);
+                this.setColour('#9fa55b');
                 this.setTooltip("");
                 this.setHelpUrl("");
             }
