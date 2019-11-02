@@ -8,7 +8,7 @@ import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
-import { Box, AppBar, Toolbar, IconButton, Typography, Input, Button } from '@material-ui/core';
+import { Box, AppBar, Toolbar, IconButton, Typography, Input, Button, Menu, MenuItem } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -25,6 +25,7 @@ type BlocklyUiProps = {
 
 type BlocklyUiState = {
     workspace: Blockly.Workspace;
+    menuElement: null | HTMLElement;
 }
 
 export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
@@ -39,7 +40,20 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         // binds
         this.handleImportXml = this.handleImportXml.bind(this);
         this.handleExportXml = this.handleExportXml.bind(this);
+        this.handleExportJavaScript = this.handleExportJavaScript.bind(this);
+        this.handleOpenExportMenu = this.handleOpenExportMenu.bind(this);
+        this.handleCloseExportMenu = this.handleCloseExportMenu.bind(this);
         this.handleToJavaScript = this.handleToJavaScript.bind(this);
+
+        this.state = { workspace: null, menuElement: null };
+    }
+
+    handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
+        this.setState({ menuElement: event.currentTarget });
+    }
+
+    handleCloseExportMenu() {
+        this.setState({ menuElement: null });
     }
 
     componentDidMount() {
@@ -66,7 +80,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
             },
         );
         Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(this.props.sourceXml), workspace);
-        this.setState({ workspace: workspace });
+        this.setState({ workspace: workspace, menuElement: null });
     }
 
     handleImportXml() {
@@ -92,6 +106,21 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         link.download = filename;
         link.href = window.URL.createObjectURL(blob);
         link.click();
+        this.handleCloseExportMenu();
+    }
+
+    handleExportJavaScript() {
+        const filename = 'kintone-blockly-app.js';
+        const jsCode = new CustomizeJsUpdater().generateCode(
+            Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
+            Blockly.JavaScript.workspaceToCode(this.state.workspace)
+        );
+        const blob = new Blob([jsCode], { "type": "application/javascript" });
+        const link = document.createElement('a');
+        link.download = filename;
+        link.href = window.URL.createObjectURL(blob);
+        link.click();
+        this.handleCloseExportMenu();
     }
 
     handleToJavaScript() {
@@ -122,9 +151,18 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
                             Import
                             <input ref={this.importFile} type="file" style={{ display: "none" }} onChange={this.handleImportXml} />
                         </Button>
-                        <Button color="inherit" aria-label="download code" onClick={this.handleExportXml} startIcon={<ArrowDownwardIcon />}>
+                        <Button color="inherit" aria-label="download code" onClick={this.handleOpenExportMenu} startIcon={<ArrowDownwardIcon />}>
                             Export
                         </Button>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={this.state.menuElement}
+                            keepMounted
+                            open={Boolean(this.state.menuElement)}
+                            onClose={this.handleCloseExportMenu} >
+                            <MenuItem onClick={this.handleExportXml}>XML</MenuItem>
+                            <MenuItem onClick={this.handleExportJavaScript}>JavaScript</MenuItem>
+                        </Menu>
                         <Button color="inherit" aria-label="deploy code" onClick={this.handleToJavaScript} startIcon={<SaveAltIcon />}>
                             Deploy
                         </Button>
