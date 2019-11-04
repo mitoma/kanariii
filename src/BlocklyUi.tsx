@@ -1,5 +1,4 @@
-import Blockly from 'blockly/core';
-import 'blockly/blocks';
+import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import JA from 'blockly/msg/ja.js';
 import styles from './BlocklyUi.css';
@@ -31,6 +30,8 @@ type BlocklyUiState = {
 }
 
 export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
+    workspaceLoader: WorkspaceLoader;
+    workspaceExporter: WorkspaceExporter;
     importFile: React.RefObject<HTMLInputElement>;
     blocklyDiv: React.RefObject<HTMLDivElement>;
 
@@ -38,6 +39,8 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         super(props);
         this.importFile = React.createRef();
         this.blocklyDiv = React.createRef();
+        this.workspaceLoader = new WorkspaceLoader();
+        this.workspaceExporter = new WorkspaceExporter();
 
         // binds
         this.handleImportXml = this.handleImportXml.bind(this);
@@ -62,6 +65,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
         const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
+        // @ts-ignore
         buildKintone(Blockly.Blocks, Blockly.JavaScript, kintoneCategory, this.props.fields);
 
         const zoom = {
@@ -88,23 +92,24 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     handleImportXml() {
         const file = this.importFile.current.files[0];
         if (file != null) {
-            new WorkspaceLoader().load(this.state.workspace, file);
+            this.workspaceLoader.load(this.state.workspace, file);
         }
     }
 
     handleExportXml() {
-        new WorkspaceExporter().exportXml(this.state.workspace);
+        this.workspaceExporter.exportXml(this.state.workspace);
         this.handleCloseExportMenu();
     }
 
     handleExportJavaScript() {
-        new WorkspaceExporter().exportJavaScript(this.state.workspace);
+        this.workspaceExporter.exportJavaScript(this.state.workspace);
         this.handleCloseExportMenu();
     }
 
     handleToJavaScript() {
         new CustomizeJsUpdater().uploadCustomizeCode(
             Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
+            // @ts-ignore
             Blockly.JavaScript.workspaceToCode(this.state.workspace)
         ).then(() => {
             location.reload();
@@ -112,6 +117,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidUpdate() {
+        // @ts-ignore
         Blockly.svgResize(this.state.workspace);
     }
 

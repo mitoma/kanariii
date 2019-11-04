@@ -14,7 +14,7 @@ export class WorkspaceExporter {
         const filename = 'kintone-blockly-app.js';
         const jsCode = new CustomizeJsUpdater().generateCode(
             Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
-            // @ts-ignore
+            // @ts-ignore Blockly.JavaScript は型定義がまだ未対応。
             Blockly.JavaScript.workspaceToCode(workspace)
         );
         const blob = new Blob([jsCode], { "type": "application/javascript" });

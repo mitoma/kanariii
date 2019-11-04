@@ -1,5 +1,5 @@
 import { KintoneBlock } from "./KintoneBlock";
-import Blockly from 'blockly/core';
+import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from "../schema/Field";
 
@@ -27,6 +27,7 @@ export class FieldCodeBlock implements KintoneBlock {
     jsGenerator(): (block: any) => any {
         return function (block: any): object[] {
             var field_code = block.getFieldValue('field_code');
+            // @ts-ignore
             return [JSON.stringify(field_code), Blockly.JavaScript.ORDER_ATOMIC];
         };
     }

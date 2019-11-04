@@ -1,5 +1,5 @@
 import { KintoneBlock } from "./KintoneBlock";
-import Blockly from 'blockly/core';
+import * as Blockly from 'blockly';
 import 'blockly/javascript';
 
 export class DebuggerBlock implements KintoneBlock {
@@ -21,6 +21,7 @@ export class DebuggerBlock implements KintoneBlock {
 
     jsGenerator(): (block: any) => string {
         return function (block): string {
+            // @ts-ignore
             let inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
             return `debugger;\n`;
         };

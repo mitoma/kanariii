@@ -1,5 +1,5 @@
 import { KintoneBlock } from "./KintoneBlock";
-import Blockly from 'blockly/core';
+import * as Blockly from 'blockly';
 import 'blockly/javascript';
 
 export type KintoneEventBlockCategoryDef = {
@@ -47,6 +47,7 @@ export class KintoneEventBlock implements KintoneBlock {
     jsGenerator(): (block: any) => string {
         return function (block): string {
             const event_type = block.getFieldValue('event_type');
+            // @ts-ignore
             const event_callback = Blockly.JavaScript.statementToCode(block, 'event_callback');
             return `
 kintone.events.on('${event_type}', function(event) {
