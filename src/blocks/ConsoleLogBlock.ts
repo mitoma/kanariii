@@ -1,5 +1,5 @@
 import { KintoneBlock } from "./KintoneBlock";
-import Blockly from 'blockly/core';
+import * as Blockly from 'blockly';
 import 'blockly/javascript';
 
 export class ConsoleLogBlock implements KintoneBlock {
@@ -22,7 +22,8 @@ export class ConsoleLogBlock implements KintoneBlock {
 
     jsGenerator(): (block: any) => string {
         return function (block): string {
-            let inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
+            // @ts-ignore
+            const inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
             return `console.log(${inputValue});\n`;
         };
     }
