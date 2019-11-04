@@ -13,6 +13,8 @@ import CloseIcon from '@material-ui/icons/Close';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import { WorkspaceLoader } from './usecase/WorkspaceLoader';
+import { WorkspaceExporter } from './usecase/WorkspaceExporter';
 
 Blockly.setLocale(JA);
 
@@ -84,42 +86,19 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     handleImportXml() {
-        if (this.importFile.current.files[0] != null) {
-            const file = this.importFile.current.files[0];
-            const reader = new FileReader();
-            reader.readAsText(file, "UTF-8");
-            // よくわからないが ProgressEvent から target.result が取れないのじゃよ。
-            // https://github.com/microsoft/TypeScript/issues/4163#issuecomment-321942932
-            reader.onload = (event: ProgressEvent) => {
-                const xmlString = reader.result;
-                this.state.workspace.clear();
-                Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlString), this.state.workspace);
-            };
+        const file = this.importFile.current.files[0];
+        if (file != null) {
+            new WorkspaceLoader().load(this.state.workspace, file);
         }
     }
 
     handleExportXml() {
-        const filename = 'kintone-blockly.xml';
-        const xmlData = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
-        const blob = new Blob([xmlData], { "type": "application/xml" });
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = window.URL.createObjectURL(blob);
-        link.click();
+        new WorkspaceExporter().exportXml(this.state.workspace);
         this.handleCloseExportMenu();
     }
 
     handleExportJavaScript() {
-        const filename = 'kintone-blockly-app.js';
-        const jsCode = new CustomizeJsUpdater().generateCode(
-            Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
-            Blockly.JavaScript.workspaceToCode(this.state.workspace)
-        );
-        const blob = new Blob([jsCode], { "type": "application/javascript" });
-        const link = document.createElement('a');
-        link.download = filename;
-        link.href = window.URL.createObjectURL(blob);
-        link.click();
+        new WorkspaceExporter().exportJavaScript(this.state.workspace);
         this.handleCloseExportMenu();
     }
 
