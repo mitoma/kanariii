@@ -10,7 +10,7 @@ export class ConsoleLogBlock implements KintoneBlock {
                 this.appendValueInput("TEXT")
                     .setCheck(null)
                     .appendField("ログ出力");
-                this.setInputsInline(true);
+                this.setInputsInline(false);
                 this.setPreviousStatement(true, null);
                 this.setNextStatement(true, null);
                 this.setColour('#9fa55b');
