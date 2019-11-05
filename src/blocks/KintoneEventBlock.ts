@@ -44,7 +44,7 @@ export class KintoneEventBlock implements KintoneBlock {
         }
     }
 
-    jsGenerator(): (block: any) => string {
+    jsGenerator(): (block: Blockly.Block) => string {
         return function (block): string {
             const event_type = block.getFieldValue('event_type');
             // @ts-ignore

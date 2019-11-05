@@ -19,7 +19,7 @@ export class DebuggerBlock implements KintoneBlock {
         };
     }
 
-    jsGenerator(): (block: any) => string {
+    jsGenerator(): (block: Blockly.Block) => string {
         return function (block): string {
             // @ts-ignore
             let inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);

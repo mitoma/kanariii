@@ -24,7 +24,7 @@ export class FieldCodeBlock implements KintoneBlock {
         };
     }
 
-    jsGenerator(): (block: any) => any {
+    jsGenerator(): (block: Blockly.Block) => any {
         return function (block: any): object[] {
             var field_code = block.getFieldValue('field_code');
             // @ts-ignore

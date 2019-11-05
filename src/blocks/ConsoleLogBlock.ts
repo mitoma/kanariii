@@ -20,7 +20,7 @@ export class ConsoleLogBlock implements KintoneBlock {
         };
     }
 
-    jsGenerator(): (block: any) => string {
+    jsGenerator(): (block: Blockly.Block) => string {
         return function (block): string {
             // @ts-ignore
             const inputValue = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_ATOMIC);
