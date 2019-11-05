@@ -29,8 +29,11 @@ type BlocklyUiState = {
 }
 
 export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
+    workspaceInitializer: WorkspaceInitializer;
     workspaceLoader: WorkspaceLoader;
     workspaceExporter: WorkspaceExporter;
+    customizeJsUpdater: CustomizeJsUpdater;
+
     importFile: React.RefObject<HTMLInputElement>;
     blocklyDiv: React.RefObject<HTMLDivElement>;
 
@@ -38,8 +41,10 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         super(props);
         this.importFile = React.createRef();
         this.blocklyDiv = React.createRef();
+        this.workspaceInitializer = new WorkspaceInitializer();
         this.workspaceLoader = new WorkspaceLoader();
         this.workspaceExporter = new WorkspaceExporter();
+        this.customizeJsUpdater = new CustomizeJsUpdater();
 
         // binds
         this.handleImportXml = this.handleImportXml.bind(this);
@@ -61,7 +66,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidMount() {
-        const workspace = new WorkspaceInitializer().initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
+        const workspace = this.workspaceInitializer.initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
         this.setState({ workspace: workspace, menuElement: null });
     }
 
@@ -83,7 +88,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     handleToJavaScript() {
-        new CustomizeJsUpdater().uploadCustomizeCode(
+        this.customizeJsUpdater.uploadCustomizeCode(
             Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
             // @ts-ignore
             Blockly.JavaScript.workspaceToCode(this.state.workspace)
@@ -95,6 +100,10 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     componentDidUpdate() {
         // @ts-ignore
         Blockly.svgResize(this.state.workspace);
+    }
+
+    componentWillUnmount() {
+        KintoneBlockly.sourceXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
     }
 
     render() {
