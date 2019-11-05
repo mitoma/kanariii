@@ -2,8 +2,6 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import JA from 'blockly/msg/ja.js';
 import styles from './BlocklyUi.css';
-import { buildKintone } from './kintone-block';
-import categoryXml from './category.xml';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Field } from './schema/Field';
@@ -14,6 +12,7 @@ import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { WorkspaceLoader } from './usecase/WorkspaceLoader';
 import { WorkspaceExporter } from './usecase/WorkspaceExporter';
+import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
 
 Blockly.setLocale(JA);
 
@@ -62,30 +61,7 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
     }
 
     componentDidMount() {
-        const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
-        const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
-
-        // @ts-ignore
-        buildKintone(Blockly.Blocks, Blockly.JavaScript, kintoneCategory, this.props.fields);
-
-        const zoom = {
-            controls: true,
-            wheel: true,
-            startScale: 1.0,
-            maxScale: 3,
-            minScale: 0.3,
-            scaleSpeed: 1.2,
-        };
-
-        const workspace = Blockly.inject(
-            this.blocklyDiv.current,
-            {
-                toolbox: toolbox,
-                trashcan: true,
-                zoom: zoom,
-            },
-        );
-        Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(this.props.sourceXml), workspace);
+        const workspace = new WorkspaceInitializer().initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
         this.setState({ workspace: workspace, menuElement: null });
     }
 
