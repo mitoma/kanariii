@@ -20,6 +20,7 @@ type BlocklyUiProps = {
     visible: boolean;
     sourceXml: string;
     handleCloseEditor: () => void;
+    handleUpdateSourceXml: (sourceXml: string) => void;
     fields: Field[];
 };
 
@@ -57,17 +58,26 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         this.state = { workspace: null, menuElement: null };
     }
 
+    componentDidMount() {
+        const workspace = this.workspaceInitializer.initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
+        this.setState({ workspace: workspace, menuElement: null });
+    }
+
+    componentDidUpdate() {
+        // @ts-ignore
+        Blockly.svgResize(this.state.workspace);
+    }
+
+    componentWillUnmount() {
+        this.props.handleUpdateSourceXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)));
+    }
+
     handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
         this.setState({ menuElement: event.currentTarget });
     }
 
     handleCloseExportMenu() {
         this.setState({ menuElement: null });
-    }
-
-    componentDidMount() {
-        const workspace = this.workspaceInitializer.initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
-        this.setState({ workspace: workspace, menuElement: null });
     }
 
     handleImportXml() {
@@ -95,15 +105,6 @@ export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  
         ).then(() => {
             location.reload();
         });
-    }
-
-    componentDidUpdate() {
-        // @ts-ignore
-        Blockly.svgResize(this.state.workspace);
-    }
-
-    componentWillUnmount() {
-        KintoneBlockly.sourceXml = Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace));
     }
 
     render() {
