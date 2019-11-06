@@ -9,7 +9,7 @@ declare module '*.css' {
 }
 
 declare namespace KintoneBlockly {
-    let sourceXml: string;
+    const sourceXml: string;
 }
 
 declare namespace cybozu.data.page.FORM_DATA.schema.table {
