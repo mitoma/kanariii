@@ -10,6 +10,7 @@ type AppProps = {
 }
 
 type AppState = {
+    sourceXml: string;
     showBlocklyEditor: boolean;
 }
 
@@ -17,10 +18,11 @@ export class App extends React.Component<AppProps, AppState> {
 
     constructor(props: AppProps) {
         super(props);
-        this.state = { showBlocklyEditor: false };
+        this.state = { showBlocklyEditor: false, sourceXml: props.sourceXml };
 
         this.handleOpenEditor = this.handleOpenEditor.bind(this);
         this.handleCloseEditor = this.handleCloseEditor.bind(this);
+        this.handleUpdateSourceXml = this.handleUpdateSourceXml.bind(this);
     }
 
     handleOpenEditor() {
@@ -29,6 +31,10 @@ export class App extends React.Component<AppProps, AppState> {
 
     handleCloseEditor() {
         this.setState({ showBlocklyEditor: false });
+    }
+
+    handleUpdateSourceXml(sourceXml: string) {
+        this.setState({ sourceXml: sourceXml });
     }
 
     render() {
@@ -45,7 +51,8 @@ export class App extends React.Component<AppProps, AppState> {
                     <BlocklyUi
                         visible={true}
                         handleCloseEditor={this.handleCloseEditor}
-                        sourceXml={this.props.sourceXml}
+                        handleUpdateSourceXml={this.handleUpdateSourceXml}
+                        sourceXml={this.state.sourceXml}
                         fields={this.props.fields}
                     />
                 </Dialog>

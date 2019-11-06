@@ -11,9 +11,6 @@ document.addEventListener("DOMContentLoaded", function (loadedEvent) {
     let sourceXml = '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
     if (typeof KintoneBlockly !== 'undefined' && KintoneBlockly.sourceXml !== null) {
         sourceXml = KintoneBlockly.sourceXml;
-    } else {
-        // @ts-ignore
-        document.KintoneBlockly = {};
     }
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
     if (kintoneMenu != null) {
