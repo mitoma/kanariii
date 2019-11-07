@@ -1,9 +1,10 @@
 .showBlocklyUi {
-    display: on;
-    width: 90vw;
-    height: 90vh;
-    top: 5vh;
-    left: 5vw;
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    height: 95vh;
+    top: 2.5vh;
+    left: 2.5vw;
     background-color: #ffffff;
     color: #666666;
     position:fixed;
