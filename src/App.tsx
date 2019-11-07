@@ -1,8 +1,9 @@
 import { BlocklyUi } from "./BlocklyUi";
 import * as React from "react";
 import { Field } from "./schema/Field";
-import { Dialog, Button } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import BuildIcon from '@material-ui/icons/Build';
+import styles from './App.css';
 
 type AppProps = {
     sourceXml: string;
@@ -43,11 +44,8 @@ export class App extends React.Component<AppProps, AppState> {
                 <Button startIcon={<BuildIcon />} color="inherit" onClick={this.handleOpenEditor} aria-label="open blockly">
                     open blockly
                 </Button>
-                <Dialog
-                    maxWidth={'xl'}
-                    open={this.state.showBlocklyEditor}
-                    onClose={this.handleCloseEditor}
-                    style={{ zIndex: 200 }}>
+                <div className={this.state.showBlocklyEditor ? styles['showMordalBackground'] : styles['hideMordalBackground']} onClick={this.handleCloseEditor}></div>
+                <div className={this.state.showBlocklyEditor ? styles['showBlocklyUi'] : styles['hideBlocklyUi']}>
                     <BlocklyUi
                         visible={true}
                         handleCloseEditor={this.handleCloseEditor}
@@ -55,7 +53,7 @@ export class App extends React.Component<AppProps, AppState> {
                         sourceXml={this.state.sourceXml}
                         fields={this.props.fields}
                     />
-                </Dialog>
+                </div>
             </React.Fragment>
         );
     }
