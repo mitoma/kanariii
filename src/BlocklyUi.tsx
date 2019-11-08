@@ -17,7 +17,6 @@ import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
 Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
-    visible: boolean;
     sourceXml: string;
     handleCloseEditor: () => void;
     handleUpdateSourceXml: (sourceXml: string) => void;
