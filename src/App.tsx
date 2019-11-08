@@ -47,7 +47,6 @@ export class App extends React.Component<AppProps, AppState> {
                 <div className={this.state.showBlocklyEditor ? styles['showMordalBackground'] : styles['hideMordalBackground']} onClick={this.handleCloseEditor}></div>
                 <div className={this.state.showBlocklyEditor ? styles['showBlocklyUi'] : styles['hideBlocklyUi']}>
                     <BlocklyUi
-                        visible={true}
                         handleCloseEditor={this.handleCloseEditor}
                         handleUpdateSourceXml={this.handleUpdateSourceXml}
                         sourceXml={this.state.sourceXml}
