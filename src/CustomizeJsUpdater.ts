@@ -60,11 +60,13 @@ export class CustomizeJsUpdater {
 
     public generateCode(xmlCode: string, jsCode: string): string {
         const customizeCode = `
-KintoneBlockly = {};
-KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
+// 作成した拡張の処理本体です。
 (function(){
 ${jsCode}
 })();
+// ここから先は kintone-blockly の定義情報です。
+KintoneBlockly = {};
+KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
 `;
         return prettier.format(customizeCode, {
             parser: "babel",
