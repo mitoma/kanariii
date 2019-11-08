@@ -11,8 +11,18 @@
     z-index: 101;
 }
 
+/* blockly のレイアウトが崩れるので display:none にはせず、画面外に追い出す。 */
 .hideBlocklyUi {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    width: 95vw;
+    height: 95vh;
+    top: 100vh;
+    left: 100vw;
+    background-color: #ffffff;
+    color: #666666;
+    position:fixed;
+    z-index: 101;
 }
 
 .showMordalBackground {
