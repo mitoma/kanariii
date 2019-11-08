@@ -1,4 +1,6 @@
 /// <reference path="../node_modules/@kintone/dts-gen/kintone.d.ts" />
+import * as parserBabel from 'prettier/parser-babylon';
+import * as prettier from 'prettier/standalone';
 
 interface CustomizeSetting {
     app: string;
@@ -64,7 +66,10 @@ KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
 ${jsCode}
 })();
 `;
-        return customizeCode;
+        return prettier.format(customizeCode, {
+            parser: "babel",
+            plugins: [parserBabel]
+        });
     }
 
     private getCustomizeSetting() {
