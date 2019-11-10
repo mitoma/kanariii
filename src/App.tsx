@@ -10,50 +10,32 @@ type AppProps = {
     fields: Field[];
 }
 
-type AppState = {
-    sourceXml: string;
-    showBlocklyEditor: boolean;
-}
+export function App(props: AppProps) {
+    const [sourceXml, setSourceXml] = React.useState(props.sourceXml);
+    const [showBlocklyEditor, setShowBlocklyEditor] = React.useState();
 
-export class App extends React.Component<AppProps, AppState> {
-
-    constructor(props: AppProps) {
-        super(props);
-        this.state = { showBlocklyEditor: false, sourceXml: props.sourceXml };
-
-        this.handleOpenEditor = this.handleOpenEditor.bind(this);
-        this.handleCloseEditor = this.handleCloseEditor.bind(this);
-        this.handleUpdateSourceXml = this.handleUpdateSourceXml.bind(this);
+    function handleOpenEditor() {
+        setShowBlocklyEditor(true);
     }
 
-    handleOpenEditor() {
-        this.setState({ showBlocklyEditor: true });
+    function handleCloseEditor() {
+        setShowBlocklyEditor(false);
     }
 
-    handleCloseEditor() {
-        this.setState({ showBlocklyEditor: false });
-    }
-
-    handleUpdateSourceXml(sourceXml: string) {
-        this.setState({ sourceXml: sourceXml });
-    }
-
-    render() {
-        return (
-            <React.Fragment>
-                <Button startIcon={<BuildIcon />} color="inherit" onClick={this.handleOpenEditor} aria-label="open blockly">
-                    open blockly
+    return (
+        <React.Fragment>
+            <Button startIcon={<BuildIcon />} color="inherit" onClick={handleOpenEditor} aria-label="open blockly">
+                open blockly
                 </Button>
-                <div className={this.state.showBlocklyEditor ? styles['showMordalBackground'] : styles['hideMordalBackground']} onClick={this.handleCloseEditor}></div>
-                <div className={this.state.showBlocklyEditor ? styles['showBlocklyUi'] : styles['hideBlocklyUi']}>
-                    <BlocklyUi
-                        handleCloseEditor={this.handleCloseEditor}
-                        handleUpdateSourceXml={this.handleUpdateSourceXml}
-                        sourceXml={this.state.sourceXml}
-                        fields={this.props.fields}
-                    />
-                </div>
-            </React.Fragment>
-        );
-    }
+            <div className={showBlocklyEditor ? styles['showMordalBackground'] : styles['hideMordalBackground']} onClick={handleCloseEditor}></div>
+            <div className={showBlocklyEditor ? styles['showBlocklyUi'] : styles['hideBlocklyUi']}>
+                <BlocklyUi
+                    handleCloseEditor={handleCloseEditor}
+                    handleUpdateSourceXml={setSourceXml}
+                    sourceXml={sourceXml}
+                    fields={props.fields}
+                />
+            </div>
+        </React.Fragment>
+    );
 }
