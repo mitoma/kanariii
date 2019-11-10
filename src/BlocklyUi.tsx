@@ -77,6 +77,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
             // @ts-ignore
             Blockly.JavaScript.workspaceToCode(workspace)
         ).then(() => {
+            // TODO いい感じにローディングのダイアログを出したい
             location.reload();
         });
     }
@@ -88,28 +89,30 @@ export function BlocklyUi(props: BlocklyUiProps) {
                     <IconButton edge="start" color="inherit" onClick={props.handleCloseEditor} aria-label="close">
                         <CloseIcon />
                     </IconButton>
-                    <Box flex={1} marginLeft={4}>
+                    <Box>
                         <Typography variant="h6">KintoneBlockly</Typography>
                     </Box>
-                    <Button color="inherit" aria-label="upload code" component="label" startIcon={<ArrowUpwardIcon />} >
-                        Import
+                    <Box flex={1}>
+                        <Button color="inherit" aria-label="upload code" component="label" startIcon={<ArrowUpwardIcon />} >
+                            Import
                             <input ref={importFile} type="file" style={{ display: "none" }} onChange={handleImportXml} />
-                    </Button>
-                    <Button color="inherit" aria-label="download code" onClick={handleOpenExportMenu} startIcon={<ArrowDownwardIcon />}>
-                        Export
                         </Button>
-                    <Menu
-                        id="simple-menu"
-                        anchorEl={menuElement}
-                        keepMounted
-                        open={Boolean(menuElement)}
-                        onClose={handleCloseExportMenu} >
-                        <MenuItem onClick={handleExportXml}>XML</MenuItem>
-                        <MenuItem onClick={handleExportJavaScript}>JavaScript</MenuItem>
-                    </Menu>
-                    <Button color="inherit" aria-label="deploy code" onClick={handleToJavaScript} startIcon={<SaveAltIcon />}>
-                        Deploy
+                        <Button color="inherit" aria-label="download code" onClick={handleOpenExportMenu} startIcon={<ArrowDownwardIcon />}>
+                            Export
                         </Button>
+                        <Menu
+                            id="simple-menu"
+                            anchorEl={menuElement}
+                            keepMounted
+                            open={Boolean(menuElement)}
+                            onClose={handleCloseExportMenu} >
+                            <MenuItem onClick={handleExportXml}>XML</MenuItem>
+                            <MenuItem onClick={handleExportJavaScript}>JavaScript</MenuItem>
+                        </Menu>
+                        <Button color="inherit" aria-label="deploy code" onClick={handleToJavaScript} startIcon={<SaveAltIcon />}>
+                            Deploy
+                        </Button>
+                    </Box>
                 </Toolbar>
             </AppBar>
             <div ref={blocklyDiv} className={styles['blocklyDiv']} />
