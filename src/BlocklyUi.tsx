@@ -14,6 +14,8 @@ import {
   Button,
   Menu,
   MenuItem,
+  Dialog,
+  DialogTitle,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
@@ -40,6 +42,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
 
   const [menuElement, setMenuElement] = React.useState(null);
   const [workspace, setWorkspace] = React.useState(null);
+  const [loading, setLoading] = React.useState(false);
 
   const importFile = React.useRef<HTMLInputElement>();
   const blocklyDiv = React.useRef<HTMLDivElement>();
@@ -63,6 +66,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
         );
     }
   }, [workspace]);
+
+  function handleOpenLoading() {
+    setLoading(true);
+  }
+
+  function handleCloseLoading() {
+    setLoading(false);
+  }
 
   function handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
     setMenuElement(event.currentTarget);
@@ -90,6 +101,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
   }
 
   function handleToJavaScript() {
+    handleOpenLoading();
     customizeJsUpdater
       .uploadCustomizeCode(
         Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
@@ -97,8 +109,11 @@ export function BlocklyUi(props: BlocklyUiProps) {
         Blockly.JavaScript.workspaceToCode(workspace),
       )
       .then(() => {
-        // TODO いい感じにローディングのダイアログを出したい
         location.reload();
+      })
+      .catch(error => {
+        console.error(error);
+        handleCloseLoading();
       });
   }
 
@@ -162,6 +177,9 @@ export function BlocklyUi(props: BlocklyUiProps) {
         </Toolbar>
       </AppBar>
       <div ref={blocklyDiv} className={styles['blocklyDiv']} />
+      <Dialog open={loading}>
+        <DialogTitle>デプロイ中</DialogTitle>
+      </Dialog>
     </React.Fragment>
   );
 }
