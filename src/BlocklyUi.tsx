@@ -40,8 +40,8 @@ export function BlocklyUi(props: BlocklyUiProps) {
   const workspaceExporter = new WorkspaceExporter();
   const customizeJsUpdater = new CustomizeJsUpdater();
 
-  const [menuElement, setMenuElement] = React.useState(null);
   const [workspace, setWorkspace] = React.useState(null);
+  const [exportMenu, setExportMenu] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
   const importFile = React.useRef<HTMLInputElement>();
@@ -76,11 +76,11 @@ export function BlocklyUi(props: BlocklyUiProps) {
   }
 
   function handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
-    setMenuElement(event.currentTarget);
+    setExportMenu(event.currentTarget);
   }
 
   function handleCloseExportMenu() {
-    setMenuElement(null);
+    setExportMenu(null);
   }
 
   function handleImportXml() {
@@ -157,9 +157,9 @@ export function BlocklyUi(props: BlocklyUiProps) {
             </Button>
             <Menu
               id="simple-menu"
-              anchorEl={menuElement}
+              anchorEl={exportMenu}
               keepMounted
-              open={Boolean(menuElement)}
+              open={Boolean(exportMenu)}
               onClose={handleCloseExportMenu}
             >
               <MenuItem onClick={handleExportXml}>XML</MenuItem>
@@ -178,7 +178,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
       </AppBar>
       <div ref={blocklyDiv} className={styles['blocklyDiv']} />
       <Dialog open={loading}>
-        <DialogTitle>デプロイ中</DialogTitle>
+        <DialogTitle>Deploying</DialogTitle>
       </Dialog>
     </React.Fragment>
   );
