@@ -23,123 +23,99 @@ type BlocklyUiProps = {
     fields: Field[];
 };
 
-type BlocklyUiState = {
-    workspace: Blockly.Workspace;
-    menuElement: null | HTMLElement;
-}
+export function BlocklyUi(props: BlocklyUiProps) {
+    const workspaceInitializer = new WorkspaceInitializer();
+    const workspaceLoader = new WorkspaceLoader();
+    const workspaceExporter = new WorkspaceExporter();
+    const customizeJsUpdater = new CustomizeJsUpdater();
 
-export class BlocklyUi extends React.Component<BlocklyUiProps, BlocklyUiState>  {
-    workspaceInitializer: WorkspaceInitializer;
-    workspaceLoader: WorkspaceLoader;
-    workspaceExporter: WorkspaceExporter;
-    customizeJsUpdater: CustomizeJsUpdater;
+    const [menuElement, setMenuElement] = React.useState(null);
+    const [workspace, setWorkspace] = React.useState(null);
 
-    importFile: React.RefObject<HTMLInputElement>;
-    blocklyDiv: React.RefObject<HTMLDivElement>;
+    const importFile = React.useRef<HTMLInputElement>();
+    const blocklyDiv = React.useRef<HTMLDivElement>();
 
-    constructor(props: BlocklyUiProps) {
-        super(props);
-        this.importFile = React.createRef();
-        this.blocklyDiv = React.createRef();
-        this.workspaceInitializer = new WorkspaceInitializer();
-        this.workspaceLoader = new WorkspaceLoader();
-        this.workspaceExporter = new WorkspaceExporter();
-        this.customizeJsUpdater = new CustomizeJsUpdater();
+    React.useEffect(() => {
+        if (workspace == null) {
+            setWorkspace(workspaceInitializer.initWorkspace(blocklyDiv.current, props.sourceXml, props.fields));
+            return;
+        } else {
+            // @ts-ignore
+            Blockly.svgResize(workspace);
+            return () => props.handleUpdateSourceXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)));
+        }
+    }, [workspace]);
 
-        // binds
-        this.handleImportXml = this.handleImportXml.bind(this);
-        this.handleExportXml = this.handleExportXml.bind(this);
-        this.handleExportJavaScript = this.handleExportJavaScript.bind(this);
-        this.handleOpenExportMenu = this.handleOpenExportMenu.bind(this);
-        this.handleCloseExportMenu = this.handleCloseExportMenu.bind(this);
-        this.handleToJavaScript = this.handleToJavaScript.bind(this);
-
-        this.state = { workspace: null, menuElement: null };
+    function handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
+        setMenuElement(event.currentTarget);
     }
 
-    componentDidMount() {
-        const workspace = this.workspaceInitializer.initWorkspace(this.blocklyDiv.current, this.props.sourceXml, this.props.fields);
-        this.setState({ workspace: workspace, menuElement: null });
+    function handleCloseExportMenu() {
+        setMenuElement(null);
     }
 
-    componentDidUpdate() {
-        // @ts-ignore
-        Blockly.svgResize(this.state.workspace);
-    }
-
-    componentWillUnmount() {
-        this.props.handleUpdateSourceXml(Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)));
-    }
-
-    handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
-        this.setState({ menuElement: event.currentTarget });
-    }
-
-    handleCloseExportMenu() {
-        this.setState({ menuElement: null });
-    }
-
-    handleImportXml() {
-        const file = this.importFile.current.files[0];
+    function handleImportXml() {
+        const file = importFile.current.files[0];
         if (file != null) {
-            this.workspaceLoader.load(this.state.workspace, file);
+            workspaceLoader.load(workspace, file);
         }
     }
 
-    handleExportXml() {
-        this.workspaceExporter.exportXml(this.state.workspace);
-        this.handleCloseExportMenu();
+    function handleExportXml() {
+        workspaceExporter.exportXml(workspace);
+        handleCloseExportMenu();
     }
 
-    handleExportJavaScript() {
-        this.workspaceExporter.exportJavaScript(this.state.workspace);
-        this.handleCloseExportMenu();
+    function handleExportJavaScript() {
+        workspaceExporter.exportJavaScript(workspace);
+        handleCloseExportMenu();
     }
 
-    handleToJavaScript() {
-        this.customizeJsUpdater.uploadCustomizeCode(
-            Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(this.state.workspace)),
+    function handleToJavaScript() {
+        customizeJsUpdater.uploadCustomizeCode(
+            Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
             // @ts-ignore
-            Blockly.JavaScript.workspaceToCode(this.state.workspace)
+            Blockly.JavaScript.workspaceToCode(workspace)
         ).then(() => {
+            // TODO いい感じにローディングのダイアログを出したい
             location.reload();
         });
     }
 
-    render() {
-        return (
-            <React.Fragment>
-                <AppBar style={{ position: 'relative' }}>
-                    <Toolbar>
-                        <IconButton edge="start" color="inherit" onClick={this.props.handleCloseEditor} aria-label="close">
-                            <CloseIcon />
-                        </IconButton>
-                        <Box flex={1} marginLeft={4}>
-                            <Typography variant="h6">KintoneBlockly</Typography>
-                        </Box>
+    return (
+        <React.Fragment>
+            <AppBar style={{ position: 'relative' }}>
+                <Toolbar>
+                    <IconButton edge="start" color="inherit" onClick={props.handleCloseEditor} aria-label="close">
+                        <CloseIcon />
+                    </IconButton>
+                    <Box>
+                        <Typography variant="h6">KintoneBlockly</Typography>
+                    </Box>
+                    <Box flex={1}>
                         <Button color="inherit" aria-label="upload code" component="label" startIcon={<ArrowUpwardIcon />} >
                             Import
-                            <input ref={this.importFile} type="file" style={{ display: "none" }} onChange={this.handleImportXml} />
+                            <input ref={importFile} type="file" style={{ display: "none" }} onChange={handleImportXml} />
                         </Button>
-                        <Button color="inherit" aria-label="download code" onClick={this.handleOpenExportMenu} startIcon={<ArrowDownwardIcon />}>
+                        <Button color="inherit" aria-label="download code" onClick={handleOpenExportMenu} startIcon={<ArrowDownwardIcon />}>
                             Export
                         </Button>
                         <Menu
                             id="simple-menu"
-                            anchorEl={this.state.menuElement}
+                            anchorEl={menuElement}
                             keepMounted
-                            open={Boolean(this.state.menuElement)}
-                            onClose={this.handleCloseExportMenu} >
-                            <MenuItem onClick={this.handleExportXml}>XML</MenuItem>
-                            <MenuItem onClick={this.handleExportJavaScript}>JavaScript</MenuItem>
+                            open={Boolean(menuElement)}
+                            onClose={handleCloseExportMenu} >
+                            <MenuItem onClick={handleExportXml}>XML</MenuItem>
+                            <MenuItem onClick={handleExportJavaScript}>JavaScript</MenuItem>
                         </Menu>
-                        <Button color="inherit" aria-label="deploy code" onClick={this.handleToJavaScript} startIcon={<SaveAltIcon />}>
+                        <Button color="inherit" aria-label="deploy code" onClick={handleToJavaScript} startIcon={<SaveAltIcon />}>
                             Deploy
                         </Button>
-                    </Toolbar>
-                </AppBar>
-                <div ref={this.blocklyDiv} className={styles['blocklyDiv']} />
-            </React.Fragment >
-        );
-    }
+                    </Box>
+                </Toolbar>
+            </AppBar>
+            <div ref={blocklyDiv} className={styles['blocklyDiv']} />
+        </React.Fragment >
+    );
 }
