@@ -1,59 +1,57 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-  <meta charset="UTF-8" />
-  <script>
-    // テストデータ
-    cybozu = {
-      data: {
-        page: {
-          FORM_DATA: {
-            schema: {
-              table: {
-                fieldList: {
-                  数値_code: {
-                    id: '1',
-                    label: '数値',
-                    type: 'number',
-                    var: '数値_code',
-                    properties: {}
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      // テストデータ
+      cybozu = {
+        data: {
+          page: {
+            FORM_DATA: {
+              schema: {
+                table: {
+                  fieldList: {
+                    数値_code: {
+                      id: '1',
+                      label: '数値',
+                      type: 'number',
+                      var: '数値_code',
+                      properties: {},
+                    },
+                    文字列_code: {
+                      id: '2',
+                      label: '文字列',
+                      type: 'string',
+                      var: '文字列_code',
+                      properties: {},
+                    },
                   },
-                  文字列_code: {
-                    id: '2',
-                    label: '文字列',
-                    type: 'string',
-                    var: '文字列_code',
-                    properties: {}
-                  }
-                }
-              }
-            }
-          }
-        }
+                },
+              },
+            },
+          },
+        },
+      };
+    </script>
+    <script defer src="main.js"></script>
+    <style>
+      html,
+      body {
+        height: 100%;
+        margin: 0;
       }
-    };
-  </script>
-  <script defer src="main.js"></script>
-  <style>
-    html,
-    body {
-      height: 100%;
-      margin: 0;
-    }
 
-    body {
-      background-color: #fff;
-      font-family: sans-serif;
-      overflow: hidden;
-    }
-  </style>
-</head>
+      body {
+        background-color: #fff;
+        font-family: sans-serif;
+        overflow: hidden;
+      }
+    </style>
+  </head>
 
-<body>
-  <div class="gaia-argoui-app-toolbar-menu">
-    <div class="gaia-argoui-app-menu-settings"></div>
-  </div>
-</body>
-
+  <body>
+    <div class="gaia-argoui-app-toolbar-menu">
+      <div class="gaia-argoui-app-menu-settings"></div>
+    </div>
+  </body>
 </html>
