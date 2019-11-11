@@ -28,8 +28,7 @@ export function App(props: AppProps) {
         startIcon={<BuildIcon />}
         color="inherit"
         onClick={handleOpenEditor}
-        aria-label="open blockly"
-      >
+        aria-label="open blockly">
         open blockly
       </Button>
       <div
@@ -39,12 +38,11 @@ export function App(props: AppProps) {
             : styles['hideMordalBackground']
         }
         onClick={handleCloseEditor}
-      ></div>
+      />
       <div
         className={
           showBlocklyEditor ? styles['showBlocklyUi'] : styles['hideBlocklyUi']
-        }
-      >
+        }>
         <BlocklyUi
           handleCloseEditor={handleCloseEditor}
           handleUpdateSourceXml={setSourceXml}
