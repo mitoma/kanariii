@@ -125,8 +125,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
             edge="start"
             color="inherit"
             onClick={props.handleCloseEditor}
-            aria-label="close"
-          >
+            aria-label="close">
             <CloseIcon />
           </IconButton>
           <Box>
@@ -137,8 +136,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               color="inherit"
               aria-label="upload code"
               component="label"
-              startIcon={<ArrowUpwardIcon />}
-            >
+              startIcon={<ArrowUpwardIcon />}>
               Import
               <input
                 ref={importFile}
@@ -151,8 +149,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               color="inherit"
               aria-label="download code"
               onClick={handleOpenExportMenu}
-              startIcon={<ArrowDownwardIcon />}
-            >
+              startIcon={<ArrowDownwardIcon />}>
               Export
             </Button>
             <Menu
@@ -160,8 +157,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               anchorEl={exportMenu}
               keepMounted
               open={Boolean(exportMenu)}
-              onClose={handleCloseExportMenu}
-            >
+              onClose={handleCloseExportMenu}>
               <MenuItem onClick={handleExportXml}>XML</MenuItem>
               <MenuItem onClick={handleExportJavaScript}>JavaScript</MenuItem>
             </Menu>
@@ -169,8 +165,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               color="inherit"
               aria-label="deploy code"
               onClick={handleToJavaScript}
-              startIcon={<SaveAltIcon />}
-            >
+              startIcon={<SaveAltIcon />}>
               Deploy
             </Button>
           </Box>
