@@ -6,7 +6,8 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack -w",
-    "clean": "rimraf build"
+    "clean": "rimraf build",
+    "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
   },
   "repository": {
     "type": "git",
@@ -45,5 +46,10 @@
     "typescript": "^3.7.2",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.10"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "semi": false,
+    "trailingComma": "all"
   }
 }
