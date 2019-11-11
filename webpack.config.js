@@ -5,14 +5,14 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   // モード値を production に設定すると最適化された状態で、
   // development に設定するとソースマップ有効でJSファイルが出力される
-  mode: "development",
+  mode: 'development',
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: "./src/main.tsx",
+  entry: './src/main.tsx',
 
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: '[name].js'
+    filename: '[name].js',
   },
 
   module: {
@@ -20,7 +20,7 @@ module.exports = {
       {
         // .ts or .tsx の場合
         test: /\.tsx?$/,
-        use: "ts-loader"
+        use: 'ts-loader',
       },
       {
         // xml は template string として読み込む
@@ -36,15 +36,15 @@ module.exports = {
             options: {
               modules: true,
               localsConvention: 'camelCaseOnly',
-            }
-          }
-        ]
-      }
-    ]
+            },
+          },
+        ],
+      },
+    ],
   },
   // import 文で解決する
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css']
+    extensions: ['.ts', '.tsx', '.js', '.jsx', '.css'],
   },
 
   plugins: [
@@ -52,8 +52,8 @@ module.exports = {
     new CopyPlugin([
       {
         from: path.resolve(__dirname, 'public'),
-        to: path.resolve(__dirname, 'build')
-      }
+        to: path.resolve(__dirname, 'build'),
+      },
     ]),
     // Copy over media resources from the Blockly package
     // kintone プラグインでは media ファイルをどこかCDNから取り込む必要があると思うので
@@ -66,5 +66,5 @@ module.exports = {
       }
     ])
      */
-  ]
+  ],
 };
