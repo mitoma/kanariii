@@ -7,6 +7,7 @@ import { ConsoleLogBlock } from './ConsoleLogBlock';
 import { Field } from '../schema/Field';
 import { FieldCodeBlock } from './FieldCodeBlock';
 import { DebuggerBlock } from './DebuggerBlock';
+import { KintoneEventFieldBlock } from './KintoneFieldEventBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -27,6 +28,17 @@ const appRecordShowDef: KintoneEventBlockCategoryDef = {
   ],
 };
 
+const appRecordFieldShowDef: KintoneEventBlockCategoryDef = {
+  blockLabel: 'レコード一覧(インライン編集フィールド値変更)',
+  blockName: 'kintone_event_app_record_index_field',
+  details: [
+    {
+      eventLabel: 'インライン編集開始',
+      eventKey: 'app.record.index.edit.change',
+    },
+  ],
+};
+
 export function buildKintone(
   blocks: object,
   js: object,
@@ -37,6 +49,7 @@ export function buildKintone(
   category.appendChild(
     createSubCategoryElement(blocks, js, 'イベント', [
       new KintoneEventBlock(appRecordShowDef),
+      new KintoneEventFieldBlock(appRecordFieldShowDef, fields),
     ]),
   );
 
