@@ -34,37 +34,41 @@ export function buildKintone(
   fields: Field[],
 ) {
   // イベント系
-  const eventBlocks: KintoneBlock[] = [];
-  const eventCategory = subCategory('イベント');
-  eventBlocks.push(new KintoneEventBlock(appRecordShowDef));
-  eventBlocks.forEach(block => {
-    blocks[block.blockName] = block.blockDefinition();
-    js[block.blockName] = block.jsGenerator();
-    eventCategory.appendChild(block.menuElement());
-  });
-  category.appendChild(eventCategory);
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'イベント', [
+      new KintoneEventBlock(appRecordShowDef),
+    ]),
+  );
 
   // スキーマ系
-  const schemaBlocks: KintoneBlock[] = [];
-  const schemaCategory = subCategory('スキーマ');
-  schemaBlocks.push(new FieldCodeBlock(fields));
-  schemaBlocks.forEach(block => {
-    blocks[block.blockName] = block.blockDefinition();
-    js[block.blockName] = block.jsGenerator();
-    schemaCategory.appendChild(block.menuElement());
-  });
-  category.appendChild(schemaCategory);
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'スキーマ', [
+      new FieldCodeBlock(fields),
+    ]),
+  );
 
   // デバッグ用
-  const debugBlocks: KintoneBlock[] = [];
-  const debugCategory = subCategory('デバッグ');
-  debugBlocks.push(new ConsoleLogBlock(), new DebuggerBlock());
-  debugBlocks.forEach(block => {
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'デバッグ', [
+      new ConsoleLogBlock(),
+      new DebuggerBlock(),
+    ]),
+  );
+}
+
+function createSubCategoryElement(
+  blocks: object,
+  js: object,
+  subCategoryName: string,
+  kintoneBlocks: KintoneBlock[],
+): Element {
+  const category = subCategory(subCategoryName);
+  kintoneBlocks.forEach(block => {
     blocks[block.blockName] = block.blockDefinition();
     js[block.blockName] = block.jsGenerator();
-    debugCategory.appendChild(block.menuElement());
+    category.appendChild(block.menuElement());
   });
-  category.appendChild(debugCategory);
+  return category;
 }
 
 function subCategory(categoryName: string): Element {
