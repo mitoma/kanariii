@@ -1,12 +1,12 @@
-import { KintoneBlock } from './blocks/KintoneBlock';
+import { KintoneBlock } from './KintoneBlock';
 import {
   KintoneEventBlockCategoryDef,
   KintoneEventBlock,
-} from './blocks/KintoneEventBlock';
-import { ConsoleLogBlock } from './blocks/ConsoleLogBlock';
-import { Field } from './schema/Field';
-import { FieldCodeBlock } from './blocks/FieldCodeBlock';
-import { DebuggerBlock } from './blocks/DebuggerBlock';
+} from './KintoneEventBlock';
+import { ConsoleLogBlock } from './ConsoleLogBlock';
+import { Field } from '../schema/Field';
+import { FieldCodeBlock } from './FieldCodeBlock';
+import { DebuggerBlock } from './DebuggerBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
