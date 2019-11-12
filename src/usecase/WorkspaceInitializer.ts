@@ -1,7 +1,7 @@
 import * as Blockly from 'blockly';
 import categoryXml from '../category.xml';
 import JA from 'blockly/msg/ja.js';
-import { buildKintone } from '../kintone-block';
+import { buildKintone } from '../blocks/kintone-block';
 import { Field } from '../schema/Field';
 
 export class WorkspaceInitializer {
