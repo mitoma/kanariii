@@ -12,11 +12,12 @@ import {
   KintoneFieldEventBlockCategoryDef,
 } from './KintoneFieldEventBlock';
 import { KintoneRecordGetIdBlock } from './KintoneRecordGetIdBlock';
-import { KintoneRecordGetBlock } from './KintoneRecordGetBlock';
+import { KintoneRecordGetFieldBlock } from './KintoneRecordGetFieldBlock';
 import { KintoneRecordGetFieldElementBlock } from './KintoneRecordGetFieldElementBlock';
 import { KintoneRecordSetValueBlock } from './KintoneRecordSetValueBlock';
 import { KintoneRecordSetErrorBlock } from './KintoneRecordSetErrorBlock';
 import { KintoneRecordSetDisabledBlock } from './KintoneRecordSetDisabledBlock';
+import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -127,7 +128,7 @@ const appRecordEditFieldDef: KintoneFieldEventBlockCategoryDef = {
   blockLabel: 'レコード編集',
   blockLabelSub: '(フィールド値変更)',
   blockName: 'kintone_event_app_record_edit_field',
-  eventKeyPrefix: 'app.record.create.change',
+  eventKeyPrefix: 'app.record.edit.change',
 };
 
 export function buildKintone(
@@ -154,7 +155,8 @@ export function buildKintone(
     createSubCategoryElement(blocks, js, 'レコード', [
       new FieldCodeBlock(fields),
       new KintoneRecordGetIdBlock(),
-      new KintoneRecordGetBlock(fields),
+      new KintoneRecordGetEventBlock(),
+      new KintoneRecordGetFieldBlock(fields),
       new KintoneRecordGetFieldElementBlock(fields),
       new KintoneRecordSetValueBlock(fields),
       new KintoneRecordSetErrorBlock(fields),
