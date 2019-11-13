@@ -38,7 +38,7 @@ export class KintoneRecordGetBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get';
 
   blockDefinition(): object {
-    const labelVarPair = this.fields.map(f => {
+    const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
     });
 
@@ -46,7 +46,7 @@ export class KintoneRecordGetBlock implements KintoneBlock {
       init: function() {
         this.appendDummyInput()
           .appendField('フィールド値')
-          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
+          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
 
         this.setOutput(true, null);
         this.setColour('#9fa55b');
@@ -58,9 +58,9 @@ export class KintoneRecordGetBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => any {
     return function(block: Blockly.Block): object[] {
-      var field_code = block.getFieldValue('field_code');
+      var fieldCode = block.getFieldValue('field_code');
       return [
-        `event.record[${JSON.stringify(field_code)}].value`,
+        `event.record[${JSON.stringify(fieldCode)}].value`,
         // @ts-ignore
         Blockly.JavaScript.ORDER_ATOMIC,
       ];
@@ -80,7 +80,7 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_field_element';
 
   blockDefinition(): object {
-    const labelVarPair = this.fields.map(f => {
+    const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
     });
 
@@ -88,7 +88,7 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
       init: function() {
         this.appendDummyInput()
           .appendField('フィールドエレメント')
-          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
+          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
 
         this.setOutput(true, null);
         this.setColour('#9fa55b');
@@ -100,9 +100,9 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => any {
     return function(block: Blockly.Block): object[] {
-      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
       return [
-        `kintone.app.record.getFieldElement(${field_code})`,
+        `kintone.app.record.getFieldElement(${fieldCode})`,
         // @ts-ignore
         Blockly.JavaScript.ORDER_ATOMIC,
       ];
@@ -120,7 +120,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
   blockName = 'kintone_app_record_set_value';
   blockDefinition(): object {
-    const labelVarPair = this.fields.map(f => {
+    const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
     });
     return {
@@ -128,7 +128,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
         this.appendValueInput('TEXT')
           .setCheck(null)
           .appendField('フィールド値セット')
-          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
+          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -141,7 +141,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => string {
     return function(block): string {
-      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
       const inputValue =
         // @ts-ignore
         Blockly.JavaScript.valueToCode(
@@ -150,7 +150,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
           // @ts-ignore
           Blockly.JavaScript.ORDER_ATOMIC,
         );
-      return `event['record'][${field_code}]['value'] = ${inputValue};`;
+      return `event['record'][${fieldCode}]['value'] = ${inputValue};`;
     };
   }
 
@@ -165,7 +165,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
   blockName = 'kintone_app_record_set_error';
   blockDefinition(): object {
-    const labelVarPair = this.fields.map(f => {
+    const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
     });
     return {
@@ -173,7 +173,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
         this.appendValueInput('TEXT')
           .setCheck(null)
           .appendField('フィールドエラーセット')
-          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
+          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
         this.setInputsInline(false);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -186,7 +186,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => string {
     return function(block): string {
-      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
       const inputValue =
         // @ts-ignore
         Blockly.JavaScript.valueToCode(
@@ -195,7 +195,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
           // @ts-ignore
           Blockly.JavaScript.ORDER_ATOMIC,
         );
-      return `event['record'][${field_code}]['error'] = ${inputValue};`;
+      return `event['record'][${fieldCode}]['error'] = ${inputValue};`;
     };
   }
 
@@ -210,7 +210,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
   blockName = 'kintone_app_record_set_disabled';
   blockDefinition(): object {
-    const labelVarPair = this.fields.map(f => {
+    const fieldsDropDown = this.fields.map(f => {
       return [f.label, f.var];
     });
     const disabledDropdown = [
@@ -221,7 +221,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
       init: function() {
         this.appendDummyInput()
           .appendField('フィールド編集可/不可')
-          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code')
+          .appendField(new Blockly.FieldDropdown(fieldsDropDown), 'field_code')
           .appendField(new Blockly.FieldDropdown(disabledDropdown), 'disabled');
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
@@ -234,10 +234,10 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => string {
     return function(block): string {
-      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
       // disabled は文字列で "true", "false" が入っているので stringify 不要
       var disabled = block.getFieldValue('disabled');
-      return `event['record'][${field_code}]['disabled'] = ${disabled};`;
+      return `event['record'][${fieldCode}]['disabled'] = ${disabled};`;
     };
   }
 
