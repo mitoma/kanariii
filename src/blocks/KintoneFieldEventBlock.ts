@@ -55,7 +55,8 @@ export class KintoneEventFieldBlock implements KintoneBlock {
       );
       return `
 kintone.events.on('${categoryDef.eventKeyPrefix}.${fieldCode}', function(event) {
-${eventCallback}
+${eventCallback};
+return event;
 });
 `;
     };
