@@ -18,6 +18,7 @@ import { KintoneRecordSetValueBlock } from './KintoneRecordSetValueBlock';
 import { KintoneRecordSetErrorBlock } from './KintoneRecordSetErrorBlock';
 import { KintoneRecordSetDisabledBlock } from './KintoneRecordSetDisabledBlock';
 import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
+import { KintoneUserBlock } from './KintoneUserBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -161,6 +162,13 @@ export function buildKintone(
       new KintoneRecordSetValueBlock(fields),
       new KintoneRecordSetErrorBlock(fields),
       new KintoneRecordSetDisabledBlock(fields),
+    ]),
+  );
+
+  // レコードの値系
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'ユーザー', [
+      new KintoneUserBlock(),
     ]),
   );
 
