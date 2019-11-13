@@ -1,24 +1,22 @@
 import { KintoneBlock } from './KintoneBlock';
-import {
-  KintoneEventBlockCategoryDef,
-  KintoneEventBlock,
-} from './KintoneEventBlock';
 import { ConsoleLogBlock } from './ConsoleLogBlock';
 import { Field } from '../schema/Field';
 import { FieldCodeBlock } from './FieldCodeBlock';
 import { DebuggerBlock } from './DebuggerBlock';
 import {
+  KintoneEventBlockCategoryDef,
+  KintoneEventBlock,
+} from './KintoneEventBlock';
+import {
   KintoneEventFieldBlock,
   KintoneFieldEventBlockCategoryDef,
 } from './KintoneFieldEventBlock';
-import {
-  KintoneRecordGetIdBlock,
-  KintoneRecordGetFieldElementBlock,
-  KintoneRecordGetBlock,
-  KintoneRecordSetValueBlock,
-  KintoneRecordSetErrorBlock,
-  KintoneRecordSetDisabledBlock,
-} from './KintoneRecordGetIdBlock';
+import { KintoneRecordGetIdBlock } from './KintoneRecordGetIdBlock';
+import { KintoneRecordGetBlock } from './KintoneRecordGetBlock';
+import { KintoneRecordGetFieldElementBlock } from './KintoneRecordGetFieldElementBlock';
+import { KintoneRecordSetValueBlock } from './KintoneRecordSetValueBlock';
+import { KintoneRecordSetErrorBlock } from './KintoneRecordSetErrorBlock';
+import { KintoneRecordSetDisabledBlock } from './KintoneRecordSetDisabledBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
