@@ -118,7 +118,7 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
 
 export class KintoneRecordSetValueBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
-  blockName = 'kintone_app_record_set';
+  blockName = 'kintone_app_record_set_value';
   blockDefinition(): object {
     const labelVarPair = this.fields.map(f => {
       return [f.label, f.var];
@@ -133,7 +133,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour('#9fa55b');
-        this.setTooltip('フィールドの値を保存します');
+        this.setTooltip('フィールドの値をセットします');
         this.setHelpUrl('');
       },
     };
@@ -150,10 +150,94 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
           // @ts-ignore
           Blockly.JavaScript.ORDER_ATOMIC,
         );
-      return `{
-      const record = event['record'];
-      record[${field_code}]['value'] = ${inputValue};
-      }`;
+      return `event['record'][${field_code}]['value'] = ${inputValue};`;
+    };
+  }
+
+  menuElement(): Element {
+    let blockElement = document.createElement('block');
+    blockElement.setAttribute('type', this.blockName);
+    return blockElement;
+  }
+}
+
+export class KintoneRecordSetErrorBlock implements KintoneBlock {
+  constructor(private fields: Field[]) {}
+  blockName = 'kintone_app_record_set_error';
+  blockDefinition(): object {
+    const labelVarPair = this.fields.map(f => {
+      return [f.label, f.var];
+    });
+    return {
+      init: function() {
+        this.appendValueInput('TEXT')
+          .setCheck(null)
+          .appendField('フィールドエラーセット')
+          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
+        this.setInputsInline(false);
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour('#9fa55b');
+        this.setTooltip('フィールドのエラー設定します');
+        this.setHelpUrl('');
+      },
+    };
+  }
+
+  jsGenerator(): (block: Blockly.Block) => string {
+    return function(block): string {
+      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      const inputValue =
+        // @ts-ignore
+        Blockly.JavaScript.valueToCode(
+          block,
+          'TEXT',
+          // @ts-ignore
+          Blockly.JavaScript.ORDER_ATOMIC,
+        );
+      return `event['record'][${field_code}]['error'] = ${inputValue};`;
+    };
+  }
+
+  menuElement(): Element {
+    let blockElement = document.createElement('block');
+    blockElement.setAttribute('type', this.blockName);
+    return blockElement;
+  }
+}
+
+export class KintoneRecordSetDisabledBlock implements KintoneBlock {
+  constructor(private fields: Field[]) {}
+  blockName = 'kintone_app_record_set_disabled';
+  blockDefinition(): object {
+    const labelVarPair = this.fields.map(f => {
+      return [f.label, f.var];
+    });
+    const disabledDropdown = [
+      ['編集可', 'false'],
+      ['編集不可', 'true'],
+    ];
+    return {
+      init: function() {
+        this.appendDummyInput()
+          .appendField('フィールド編集可/不可')
+          .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code')
+          .appendField(new Blockly.FieldDropdown(disabledDropdown), 'disabled');
+        this.setPreviousStatement(true, null);
+        this.setNextStatement(true, null);
+        this.setColour('#9fa55b');
+        this.setTooltip('フィールドの編集可/不可を設定します');
+        this.setHelpUrl('');
+      },
+    };
+  }
+
+  jsGenerator(): (block: Blockly.Block) => string {
+    return function(block): string {
+      var field_code = JSON.stringify(block.getFieldValue('field_code'));
+      // disabled は文字列で "true", "false" が入っているので stringify 不要
+      var disabled = block.getFieldValue('disabled');
+      return `event['record'][${field_code}]['disabled'] = ${disabled};`;
     };
   }
 

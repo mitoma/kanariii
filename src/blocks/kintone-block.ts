@@ -16,6 +16,8 @@ import {
   KintoneRecordGetFieldElementBlock,
   KintoneRecordGetBlock,
   KintoneRecordSetValueBlock,
+  KintoneRecordSetErrorBlock,
+  KintoneRecordSetDisabledBlock,
 } from './KintoneRecordGetIdBlock';
 
 // イベントの定義
@@ -157,6 +159,8 @@ export function buildKintone(
       new KintoneRecordGetBlock(fields),
       new KintoneRecordGetFieldElementBlock(fields),
       new KintoneRecordSetValueBlock(fields),
+      new KintoneRecordSetErrorBlock(fields),
+      new KintoneRecordSetDisabledBlock(fields),
     ]),
   );
 
