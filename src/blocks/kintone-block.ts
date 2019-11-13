@@ -11,6 +11,12 @@ import {
   KintoneEventFieldBlock,
   KintoneFieldEventBlockCategoryDef,
 } from './KintoneFieldEventBlock';
+import {
+  KintoneRecordGetIdBlock,
+  KintoneRecordGetFieldElementBlock,
+  KintoneRecordGetBlock,
+  KintoneRecordSetValueBlock,
+} from './KintoneRecordGetIdBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -143,10 +149,14 @@ export function buildKintone(
     ]),
   );
 
-  // スキーマ系
+  // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'スキーマ', [
+    createSubCategoryElement(blocks, js, 'レコード', [
       new FieldCodeBlock(fields),
+      new KintoneRecordGetIdBlock(),
+      new KintoneRecordGetBlock(fields),
+      new KintoneRecordGetFieldElementBlock(fields),
+      new KintoneRecordSetValueBlock(fields),
     ]),
   );
 

@@ -55,7 +55,8 @@ export class KintoneEventBlock implements KintoneBlock {
       );
       return `
 kintone.events.on('${event_type}', function(event) {
-${event_callback}
+${event_callback};
+return event;
 });
 `;
     };
