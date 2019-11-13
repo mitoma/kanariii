@@ -167,9 +167,7 @@ export function buildKintone(
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'ユーザー', [
-      new KintoneUserBlock(),
-    ]),
+    createSubCategoryElement(blocks, js, 'ユーザー', [new KintoneUserBlock()]),
   );
 
   // デバッグ用
