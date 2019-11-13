@@ -2,13 +2,19 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
-import { KintoneEventBlockCategoryDef } from './KintoneEventBlock';
+
+export type KintoneFieldEventBlockCategoryDef = {
+  blockName: string;
+  blockLabel: string;
+  blockLabelSub: string;
+  eventKeyPrefix: string;
+};
 
 export class KintoneEventFieldBlock implements KintoneBlock {
   blockName: string;
 
   constructor(
-    private categoryDef: KintoneEventBlockCategoryDef,
+    private categoryDef: KintoneFieldEventBlockCategoryDef,
     private fields: Field[],
   ) {
     this.blockName = categoryDef.blockName;
@@ -20,23 +26,15 @@ export class KintoneEventFieldBlock implements KintoneBlock {
     return {
       init: function() {
         this.appendDummyInput().appendField(categoryDef.blockLabel);
-        this.appendDummyInput()
-          .appendField(
-            new Blockly.FieldDropdown(
-              categoryDef.details.map(detail => {
-                return [detail.eventLabel, detail.eventKey];
-              }),
-            ),
-            'event_type',
-          )
-          .appendField(
-            new Blockly.FieldDropdown(
-              fields.map(field => {
-                return [field.label, field.var];
-              }),
-            ),
-            'field_code',
-          );
+        this.appendDummyInput().appendField(categoryDef.blockLabelSub);
+        this.appendDummyInput().appendField(
+          new Blockly.FieldDropdown(
+            fields.map(field => {
+              return [field.label, field.var];
+            }),
+          ),
+          'field_code',
+        );
         this.appendStatementInput('event_callback').setCheck(null);
         this.setInputsInline(false);
         this.setColour('#9fa55b');
@@ -47,17 +45,17 @@ export class KintoneEventFieldBlock implements KintoneBlock {
   }
 
   jsGenerator(): (block: Blockly.Block) => string {
+    const categoryDef = this.categoryDef;
     return function(block): string {
-      const event_type = block.getFieldValue('event_type');
-      const field_code = block.getFieldValue('field_code');
+      const fieldCode = block.getFieldValue('field_code');
       // @ts-ignore
-      const event_callback = Blockly.JavaScript.statementToCode(
+      const eventCallback = Blockly.JavaScript.statementToCode(
         block,
         'event_callback',
       );
       return `
-kintone.events.on('${event_type}.${field_code}', function(event) {
-${event_callback}
+kintone.events.on('${categoryDef.eventKeyPrefix}.${fieldCode}', function(event) {
+${eventCallback}
 });
 `;
     };
