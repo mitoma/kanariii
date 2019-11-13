@@ -50,6 +50,80 @@ const appRecordIndexFieldDef: KintoneFieldEventBlockCategoryDef = {
   eventKeyPrefix: 'app.record.index.edit.change',
 };
 
+// レコード詳細画面
+const appRecordDetailDef: KintoneEventBlockCategoryDef = {
+  blockLabel: 'レコード詳細画面',
+  blockName: 'kintone_event_app_record_detail',
+  details: [
+    {
+      eventLabel: '表示',
+      eventKey: 'app.record.detail.show',
+    },
+    {
+      eventLabel: '削除前',
+      eventKey: 'app.record.detail.delete.submit',
+    },
+    {
+      eventLabel: 'プロセス管理のアクション実行',
+      eventKey: 'app.record.detail.process.proceed',
+    },
+  ],
+};
+
+// レコード追加画面
+const appRecordCreateDef: KintoneEventBlockCategoryDef = {
+  blockLabel: 'レコード追加',
+  blockName: 'kintone_event_app_record_create',
+  details: [
+    {
+      eventLabel: '表示',
+      eventKey: 'app.record.create.show',
+    },
+    {
+      eventLabel: '保存実行前',
+      eventKey: 'app.record.create.submit',
+    },
+    {
+      eventLabel: '保存実行後',
+      eventKey: 'app.record.create.submit.success',
+    },
+  ],
+};
+
+const appRecordCreateFieldDef: KintoneFieldEventBlockCategoryDef = {
+  blockLabel: 'レコード追加',
+  blockLabelSub: '(フィールド値変更)',
+  blockName: 'kintone_event_app_record_create_field',
+  eventKeyPrefix: 'app.record.create.change',
+};
+
+// レコード編集画面
+const appRecordEditDef: KintoneEventBlockCategoryDef = {
+  blockLabel: 'レコード編集',
+  blockName: 'kintone_event_app_record_edit',
+  details: [
+    {
+      eventLabel: '表示',
+      eventKey: 'app.record.edit.show',
+    },
+    {
+      eventLabel: '保存実行前',
+      eventKey: 'app.record.edit.submit',
+    },
+    {
+      eventLabel: '保存実行後',
+      eventKey: 'app.record.edit.submit.success',
+    },
+  ],
+};
+
+const appRecordEditFieldDef: KintoneFieldEventBlockCategoryDef = {
+  blockLabel: 'レコード編集',
+  blockLabelSub: '(フィールド値変更)',
+  blockName: 'kintone_event_app_record_edit_field',
+  eventKeyPrefix: 'app.record.create.change',
+};
+
 export function buildKintone(
   blocks: object,
   js: object,
@@ -61,6 +135,11 @@ export function buildKintone(
     createSubCategoryElement(blocks, js, 'イベント', [
       new KintoneEventBlock(appRecordIndexDef),
       new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
+      new KintoneEventBlock(appRecordDetailDef),
+      new KintoneEventBlock(appRecordCreateDef),
+      new KintoneEventFieldBlock(appRecordCreateFieldDef, fields),
+      new KintoneEventBlock(appRecordEditDef),
+      new KintoneEventFieldBlock(appRecordEditFieldDef, fields),
     ]),
   );
 
