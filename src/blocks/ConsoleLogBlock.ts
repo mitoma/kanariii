@@ -1,4 +1,4 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock, appendShadowText } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 
@@ -34,17 +34,8 @@ export class ConsoleLogBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    const field = document.createElement('field');
-    field.setAttribute('name', 'TEXT');
-    const shadow = document.createElement('shadow');
-    shadow.setAttribute('type', 'text');
-    shadow.appendChild(field);
-    const value = document.createElement('value');
-    value.setAttribute('name', 'TEXT');
-    value.appendChild(shadow);
     const blockElement = document.createElement('block');
     blockElement.setAttribute('type', this.blockName);
-    blockElement.appendChild(value);
-    return blockElement;
+    return appendShadowText(blockElement, 'debug message');
   }
 }
