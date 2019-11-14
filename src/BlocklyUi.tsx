@@ -16,6 +16,9 @@ import {
   MenuItem,
   Dialog,
   DialogTitle,
+  List,
+  ListItem,
+  ListItemText,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import HistoryIcon from '@material-ui/icons/History';
@@ -45,7 +48,8 @@ export function BlocklyUi(props: BlocklyUiProps) {
   const workspaceExporter = new WorkspaceExporter();
   const customizeJsUpdater = new CustomizeJsUpdater();
 
-  const [workspace, setWorkspace] = React.useState(null);
+  const [workspace, setWorkspace] = React.useState(null as Blockly.Workspace);
+  const [historyDialog, setHistoryDialog] = React.useState(false);
   const [exportMenu, setExportMenu] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
 
@@ -79,6 +83,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
 
   function handleCloseLoading() {
     setLoading(false);
+  }
+
+  function handleOpenHistoryDialog() {
+    setHistoryDialog(true);
+  }
+
+  function handleCloseHistoryDialog() {
+    setHistoryDialog(false);
   }
 
   function handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
@@ -124,6 +136,20 @@ export function BlocklyUi(props: BlocklyUiProps) {
       });
   }
 
+  const revisionList = props.revisions.map(revision => {
+    const title = `${revision.revisionId} : ${revision.deployDate}`;
+    const handleUpdateSourceXml = props.handleUpdateSourceXml;
+    function updateSourceXml() {
+      handleUpdateSourceXml(revision.source);
+      handleCloseHistoryDialog();
+    }
+    return (
+      <ListItem key={title} button>
+        <ListItemText primary={title} onClick={updateSourceXml} />
+      </ListItem>
+    );
+  });
+
   return (
     <React.Fragment>
       <AppBar style={{ position: 'relative' }}>
@@ -143,7 +169,8 @@ export function BlocklyUi(props: BlocklyUiProps) {
               color="inherit"
               aria-label="history"
               component="label"
-              startIcon={<HistoryIcon />}>
+              startIcon={<HistoryIcon />}
+              onClick={handleOpenHistoryDialog}>
               history
             </Button>
             <Button
@@ -188,6 +215,10 @@ export function BlocklyUi(props: BlocklyUiProps) {
       <div ref={blocklyDiv} className={styles['blocklyDiv']} />
       <Dialog open={loading}>
         <DialogTitle>Deploying</DialogTitle>
+      </Dialog>
+      <Dialog open={historyDialog} onClose={handleCloseHistoryDialog}>
+        <DialogTitle>History</DialogTitle>
+        <List component="nav">{revisionList}</List>
       </Dialog>
     </React.Fragment>
   );
