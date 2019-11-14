@@ -18,6 +18,7 @@ import {
   DialogTitle,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import HistoryIcon from '@material-ui/icons/History';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
@@ -140,10 +141,17 @@ export function BlocklyUi(props: BlocklyUiProps) {
           <Box flex={1}>
             <Button
               color="inherit"
+              aria-label="history"
+              component="label"
+              startIcon={<HistoryIcon />}>
+              history
+            </Button>
+            <Button
+              color="inherit"
               aria-label="upload code"
               component="label"
               startIcon={<ArrowUpwardIcon />}>
-              Import
+              import
               <input
                 ref={importFile}
                 type="file"
@@ -156,7 +164,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               aria-label="download code"
               onClick={handleOpenExportMenu}
               startIcon={<ArrowDownwardIcon />}>
-              Export
+              export
             </Button>
             <Menu
               id="simple-menu"
@@ -172,7 +180,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               aria-label="deploy code"
               onClick={handleToJavaScript}
               startIcon={<SaveAltIcon />}>
-              Deploy
+              deploy
             </Button>
           </Box>
         </Toolbar>
