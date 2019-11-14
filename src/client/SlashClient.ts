@@ -51,7 +51,7 @@ type Groups = {
 export class SlashClient {
   async loadUserOrganizations() {
     const resp: OrganizationTitles = await kintone.api(
-      this.url('/v1/user/organizations.json'),
+      this.url('/v1/user/organizations'),
       'GET',
       { code: kintone.getLoginUser().code },
     );
@@ -62,7 +62,7 @@ export class SlashClient {
 
   async loadOrganizations() {
     const resp: Organizations = await kintone.api(
-      this.url('/v1/organizations.json'),
+      this.url('/v1/organizations'),
       'GET',
       {},
     );
@@ -70,16 +70,14 @@ export class SlashClient {
   }
 
   async loadUserGroups() {
-    const resp: Groups = await kintone.api(
-      this.url('/v1/user/groups.json'),
-      'GET',
-      { code: kintone.getLoginUser().code },
-    );
+    const resp: Groups = await kintone.api(this.url('/v1/user/groups'), 'GET', {
+      code: kintone.getLoginUser().code,
+    });
     return resp.groups;
   }
 
   async loadGroups() {
-    const resp: Groups = await kintone.api(this.url('/v1/groups.json'), 'GET', {
+    const resp: Groups = await kintone.api(this.url('/v1/groups'), 'GET', {
       code: kintone.getLoginUser().code,
     });
     return resp.groups;
