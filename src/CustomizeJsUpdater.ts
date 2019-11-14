@@ -66,7 +66,24 @@ export class CustomizeJsUpdater {
     const customizeCode = `
 // 作成した拡張の処理本体です。
 (function(){
-${jsCode}
+  Promise.all([
+    kintone.api(kintone.api.url('/v1/user/organizations.json', true),
+                'GET',
+                { code: kintone.getLoginUser().code }).then((resp) => {
+      const organizations = resp['organizationTitles'].map((ot) => {return ot['organization']['id']});
+      return organizations;
+    }),
+    kintone.api(kintone.api.url('/v1/user/groups.json', true),
+                'GET',
+                { code: kintone.getLoginUser().code }).then((resp) => {
+      const groups = resp['groups'].map((g) => {return g['id'];});
+      return groups;
+    }),
+  ]).then((orgAndGroups) => {
+    const userOrganizationIds = orgAndGroups[0];
+    const userGroupIds = orgAndGroups[1];
+    ${jsCode}
+  });
 })();
 // ここから先は kintone-blockly の定義情報です。
 KintoneBlockly = {};

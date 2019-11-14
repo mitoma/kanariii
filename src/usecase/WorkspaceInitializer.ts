@@ -3,12 +3,14 @@ import categoryXml from '../category.xml';
 import { loadEnLocale, loadJaLocale } from '../msg/all';
 import { buildKintone } from '../blocks/kintone-block';
 import { Field } from '../schema/Field';
+import { UserInfo } from '../client/SlashClient';
 
 export class WorkspaceInitializer {
   initWorkspace(
     blocklyDiv: HTMLDivElement,
     sourceXml: string,
     fields: Field[],
+    userInfo: UserInfo,
   ): Blockly.Workspace {
     if (kintone.getLoginUser()['language'] === 'ja') {
       loadJaLocale();
@@ -19,8 +21,15 @@ export class WorkspaceInitializer {
     const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
     const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');
 
-    // @ts-ignore
-    buildKintone(Blockly.Blocks, Blockly.JavaScript, kintoneCategory, fields);
+    buildKintone(
+      // @ts-ignore
+      Blockly.Blocks,
+      // @ts-ignore
+      Blockly.JavaScript,
+      kintoneCategory,
+      fields,
+      userInfo,
+    );
 
     const zoom = {
       controls: true,
