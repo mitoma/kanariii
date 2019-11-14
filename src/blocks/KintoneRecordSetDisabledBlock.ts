@@ -7,24 +7,36 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
   blockName = 'kintone_app_record_set_disabled';
   blockDefinition(): object {
-    const fieldsDropDown = this.fields.map(f => {
+    const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
     });
-    const disabledDropdown = [
-      ['編集可', 'false'],
-      ['編集不可', 'true'],
-    ];
     return {
       init: function() {
-        this.appendDummyInput()
-          .appendField('フィールド編集可/不可')
-          .appendField(new Blockly.FieldDropdown(fieldsDropDown), 'field_code')
-          .appendField(new Blockly.FieldDropdown(disabledDropdown), 'disabled');
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour('#9fa55b');
-        this.setTooltip('フィールドの編集可/不可を設定します');
-        this.setHelpUrl('');
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_SET_DISABLED_MSG}',
+          args0: [
+            {
+              type: 'field_dropdown',
+              name: 'field_code',
+              options: fieldsDropdown,
+            },
+            {
+              type: 'field_dropdown',
+              name: 'disabled',
+              options: [
+                ['%{BKY_KINTONE_APP_RECORD_SET_DISABLED_FALSE_MSG}', 'false'],
+                ['%{BKY_KINTONE_APP_RECORD_SET_DISABLED_TRUE_MSG}', 'true'],
+              ],
+            },
+          ],
+          inputsInline: true,
+          previousStatement: 'Action',
+          nextStatement: 'Action',
+          colour: '#9fa55b',
+          tooltip: 'フィールドの編集可/不可を設定します',
+          helpUrl: '',
+        };
+        this.jsonInit(jsonDefinition);
       },
     };
   }
