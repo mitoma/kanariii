@@ -24,6 +24,7 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { WorkspaceLoader } from './usecase/WorkspaceLoader';
 import { WorkspaceExporter } from './usecase/WorkspaceExporter';
 import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
+import { UserInfo } from './client/SlashClient';
 
 Blockly.setLocale(JA);
 
@@ -32,6 +33,7 @@ type BlocklyUiProps = {
   handleCloseEditor: () => void;
   handleUpdateSourceXml: (sourceXml: string) => void;
   fields: Field[];
+  userInfo: UserInfo;
 };
 
 export function BlocklyUi(props: BlocklyUiProps) {
@@ -54,6 +56,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
           blocklyDiv.current,
           props.sourceXml,
           props.fields,
+          props.userInfo,
         ),
       );
       return;

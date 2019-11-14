@@ -4,10 +4,12 @@ import { Field } from './schema/Field';
 import { Button } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/Build';
 import styles from './App.css';
+import { UserInfo } from './client/SlashClient';
 
 type AppProps = {
   sourceXml: string;
   fields: Field[];
+  userInfo: UserInfo;
 };
 
 export function App(props: AppProps) {
@@ -48,6 +50,7 @@ export function App(props: AppProps) {
           handleUpdateSourceXml={setSourceXml}
           sourceXml={sourceXml}
           fields={props.fields}
+          userInfo={props.userInfo}
         />
       </div>
     </React.Fragment>

@@ -21,6 +21,8 @@ import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
 import { KintoneUserBlock } from './KintoneUserBlock';
 import { KintoneRecordSetVisibleBlock } from './KintoneRecordSetVisibleBlock';
 import { KintoneRecordSetGroupFieldOpenBlock } from './KintoneRecordSetGroupFieldOpenBlock';
+import { UserInfo } from '../client/SlashClient';
+import { SlashUserOrganizationBlock } from './SlashUserOrganizationBlock';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -139,6 +141,7 @@ export function buildKintone(
   js: object,
   category: Element,
   fields: Field[],
+  userInfo: UserInfo,
 ) {
   // イベント系
   category.appendChild(
@@ -171,7 +174,10 @@ export function buildKintone(
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'ユーザー', [new KintoneUserBlock()]),
+    createSubCategoryElement(blocks, js, 'ユーザー', [
+      new KintoneUserBlock(),
+      new SlashUserOrganizationBlock(userInfo.organizations),
+    ]),
   );
 
   // デバッグ用
