@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly';
 import categoryXml from '../category.xml';
-import JA from 'blockly/msg/ja.js';
+import { loadEnLocale, loadJaLocale } from '../msg/all';
 import { buildKintone } from '../blocks/kintone-block';
 import { Field } from '../schema/Field';
 
@@ -10,7 +10,11 @@ export class WorkspaceInitializer {
     sourceXml: string,
     fields: Field[],
   ): Blockly.Workspace {
-    Blockly.setLocale(JA);
+    if (kintone.getLoginUser()['language'] === 'ja') {
+      loadJaLocale();
+    } else {
+      loadEnLocale();
+    }
 
     const toolbox: Element = Blockly.Xml.textToDom(categoryXml);
     const kintoneCategory: Element = toolbox.querySelector('[name=Kintone]');

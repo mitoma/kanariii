@@ -1,4 +1,4 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock, appendShadowText } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
@@ -12,16 +12,28 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
     });
     return {
       init: function() {
-        this.appendValueInput('TEXT')
-          .setCheck(null)
-          .appendField('フィールドエラーセット')
-          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
-        this.setInputsInline(false);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour('#9fa55b');
-        this.setTooltip('フィールドのエラー設定します');
-        this.setHelpUrl('');
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_SET_ERROR_MSG}',
+          args0: [
+            {
+              type: 'field_dropdown',
+              name: 'field_code',
+              options: fieldsDropdown,
+            },
+            {
+              type: 'input_value',
+              name: 'TEXT',
+              check: 'String',
+            },
+          ],
+          inputsInline: true,
+          previousStatement: 'Action',
+          nextStatement: 'Action',
+          colour: '#9fa55b',
+          tooltip: 'フィールドのエラーメッセージをセットします',
+          helpUrl: '',
+        };
+        this.jsonInit(jsonDefinition);
       },
     };
   }
@@ -44,6 +56,6 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
   menuElement(): Element {
     let blockElement = document.createElement('block');
     blockElement.setAttribute('type', this.blockName);
-    return blockElement;
+    return appendShadowText(blockElement, 'error message');
   }
 }
