@@ -9,7 +9,13 @@ declare module '*.css' {
 }
 
 declare namespace KintoneBlockly {
+  interface Revision {
+    revisionId: number;
+    deployDate: Date;
+    source: string;
+  }
   const sourceXml: string;
+  const revisions: Revision[];
 }
 
 declare namespace cybozu.data.page.FORM_DATA.schema.table {

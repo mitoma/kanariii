@@ -25,11 +25,13 @@ import { WorkspaceLoader } from './usecase/WorkspaceLoader';
 import { WorkspaceExporter } from './usecase/WorkspaceExporter';
 import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
 import { UserInfo } from './client/SlashClient';
+import { Revision } from './history/Revision';
 
 Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
   sourceXml: string;
+  revisions: Revision[];
   handleCloseEditor: () => void;
   handleUpdateSourceXml: (sourceXml: string) => void;
   fields: Field[];
@@ -99,7 +101,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
   }
 
   function handleExportJavaScript() {
-    workspaceExporter.exportJavaScript(workspace);
+    workspaceExporter.exportJavaScript(workspace, props.revisions);
     handleCloseExportMenu();
   }
 
@@ -110,6 +112,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
         Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
         // @ts-ignore
         Blockly.JavaScript.workspaceToCode(workspace),
+        props.revisions,
       )
       .then(() => {
         location.reload();
