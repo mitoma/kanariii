@@ -4,14 +4,14 @@ import { Field } from './schema/Field';
 import { Button } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/Build';
 import styles from './App.css';
-import { UserInfo } from './client/SlashClient';
+import { OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 
 type AppProps = {
   sourceXml: string;
   revisions: Revision[];
   fields: Field[];
-  userInfo: UserInfo;
+  organizationsAndGroups: OrganizationsAndGroups;
 };
 
 export function App(props: AppProps) {
@@ -53,7 +53,7 @@ export function App(props: AppProps) {
           sourceXml={sourceXml}
           revisions={props.revisions}
           fields={props.fields}
-          userInfo={props.userInfo}
+          organizationsAndGroups={props.organizationsAndGroups}
         />
       </div>
     </React.Fragment>

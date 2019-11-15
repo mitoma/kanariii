@@ -22,7 +22,7 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { WorkspaceLoader } from './usecase/WorkspaceLoader';
 import { WorkspaceExporter } from './usecase/WorkspaceExporter';
 import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
-import { UserInfo } from './client/SlashClient';
+import { OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { DeployDialog } from './view/DeployDialog';
 import { HistoryDialog } from './view/HistoryDialog';
@@ -33,7 +33,7 @@ type BlocklyUiProps = {
   handleCloseEditor: () => void;
   handleUpdateSourceXml: (sourceXml: string) => void;
   fields: Field[];
-  userInfo: UserInfo;
+  organizationsAndGroups: OrganizationsAndGroups;
 };
 
 export function BlocklyUi(props: BlocklyUiProps) {
@@ -58,7 +58,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
           blocklyDiv.current,
           props.sourceXml,
           props.fields,
-          props.userInfo,
+          props.organizationsAndGroups,
         ),
       );
       return;

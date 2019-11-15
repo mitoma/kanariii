@@ -4,9 +4,7 @@ import { Field } from './schema/Field';
 import { App } from './App';
 import {
   SlashClient,
-  UserInfo,
-  Organization,
-  Group,
+  OrganizationsAndGroups,
 } from './client/SlashClient';
 import { Revision } from './history/Revision';
 
@@ -37,15 +35,7 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
 
   async function setup() {
     const slashClient = new SlashClient();
-    const [organizations, groups] = await Promise.all([
-      slashClient.loadOrganizations(),
-      slashClient.loadGroups(),
-    ]);
-
-    const userInfo: UserInfo = {
-      organizations: organizations as Organization[],
-      groups: groups as Group[],
-    };
+    const organizationsAndGroups: OrganizationsAndGroups = await slashClient.loadOrganizationsAndGroups();
     const fieldList = cybozu.data.page.FORM_DATA.schema.table.fieldList;
     const fieldKeys = Object.keys(
       cybozu.data.page.FORM_DATA.schema.table.fieldList,
@@ -67,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
           sourceXml={sourceXml}
           revisions={revisions}
           fields={fields}
-          userInfo={userInfo}
+          organizationsAndGroups={organizationsAndGroups}
         />,
         blocklyToggle,
       );
