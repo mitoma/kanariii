@@ -8,7 +8,7 @@ module.exports = {
   mode: 'development',
 
   // メインとなるJavaScriptファイル（エントリーポイント）
-  entry: './src/main.tsx',
+  entry: { 'kintone-blockly': './src/main.tsx' },
 
   output: {
     path: path.resolve(__dirname, 'build'),
