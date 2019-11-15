@@ -138,14 +138,13 @@ export function BlocklyUi(props: BlocklyUiProps) {
 
   const revisionList = props.revisions.map(revision => {
     const title = `${revision.revisionId} : ${revision.deployDate}`;
-    const handleUpdateSourceXml = props.handleUpdateSourceXml;
-    function updateSourceXml() {
-      handleUpdateSourceXml(revision.source);
+    function rollbackWorkspace() {
+      workspaceLoader.loadByString(workspace, revision.source);
       handleCloseHistoryDialog();
     }
     return (
       <ListItem key={title} button>
-        <ListItemText primary={title} onClick={updateSourceXml} />
+        <ListItemText primary={title} onClick={rollbackWorkspace} />
       </ListItem>
     );
   });
