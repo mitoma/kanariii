@@ -58,9 +58,6 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
         />,
         blocklyToggle,
       );
-      console.log('done');
-    } else {
-      console.log('hello');
     }
   }
 
