@@ -21,7 +21,7 @@ import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
 import { KintoneUserBlock } from './KintoneUserBlock';
 import { KintoneRecordSetVisibleBlock } from './KintoneRecordSetVisibleBlock';
 import { KintoneRecordSetGroupFieldOpenBlock } from './KintoneRecordSetGroupFieldOpenBlock';
-import { UserInfo } from '../client/SlashClient';
+import { OrganizationsAndGroups } from '../client/SlashClient';
 import { SlashUserOrganizationBlock } from './SlashUserOrganizationBlock';
 import { SlashUserGroupBlock } from './SlashUserGroupBlock';
 
@@ -142,7 +142,7 @@ export function buildKintone(
   js: object,
   category: Element,
   fields: Field[],
-  userInfo: UserInfo,
+  organizationsAndGroups: OrganizationsAndGroups,
 ) {
   // イベント系
   category.appendChild(
@@ -177,8 +177,8 @@ export function buildKintone(
   category.appendChild(
     createSubCategoryElement(blocks, js, 'ユーザー', [
       new KintoneUserBlock(),
-      new SlashUserOrganizationBlock(userInfo.organizations),
-      new SlashUserGroupBlock(userInfo.groups),
+      new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
+      new SlashUserGroupBlock(organizationsAndGroups.groups),
     ]),
   );
 
