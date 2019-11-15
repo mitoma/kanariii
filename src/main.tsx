@@ -2,10 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Field } from './schema/Field';
 import { App } from './App';
-import {
-  SlashClient,
-  OrganizationsAndGroups,
-} from './client/SlashClient';
+import { SlashClient, OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 
 document.addEventListener('DOMContentLoaded', function(loadedEvent) {
