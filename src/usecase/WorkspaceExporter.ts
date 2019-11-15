@@ -19,6 +19,7 @@ export class WorkspaceExporter {
       Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
       // @ts-ignore Blockly.JavaScript は型定義がまだ未対応。
       Blockly.JavaScript.workspaceToCode(workspace),
+      'empty message',
       revisions,
     );
     const blob = new Blob([jsCode], { type: 'application/javascript' });
