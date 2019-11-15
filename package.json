@@ -4,8 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "build-production": "webpack --mode production",
+    "build:dev": "webpack",
+    "build:production": "webpack --mode production",
+    "build": "npm run clean && npm run build:dev",
+    "build-prod": "npm run clean && npm run build:production",
     "watch": "webpack -w",
     "clean": "rimraf build",
     "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
