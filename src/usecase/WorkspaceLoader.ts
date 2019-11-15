@@ -8,8 +8,12 @@ export class WorkspaceLoader {
     // https://github.com/microsoft/TypeScript/issues/4163#issuecomment-321942932
     reader.onload = (event: ProgressEvent) => {
       const xmlString = reader.result as string;
-      workspace.clear();
-      Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(xmlString), workspace);
+      this.loadByString(workspace, xmlString);
     };
+  }
+
+  loadByString(workspace: Blockly.Workspace, sourceXml: string) {
+    workspace.clear();
+    Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(sourceXml), workspace);
   }
 }
