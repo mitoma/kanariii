@@ -100,7 +100,7 @@ KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
   }
 
   private getCustomizeSetting() {
-    return kintone.api(this.url('/k/v1/app/customize'), 'GET', {
+    return kintone.api(this.url('/k/v1/preview/app/customize'), 'GET', {
       app: kintone.app.getId(),
     });
   }
