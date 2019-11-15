@@ -2,7 +2,12 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Field } from './schema/Field';
 import { App } from './App';
-import { SlashClient, UserInfo } from './client/SlashClient';
+import {
+  SlashClient,
+  UserInfo,
+  Organization,
+  Group,
+} from './client/SlashClient';
 import { Revision } from './history/Revision';
 
 document.addEventListener('DOMContentLoaded', function(loadedEvent) {
@@ -32,16 +37,14 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
 
   async function setup() {
     const slashClient = new SlashClient();
-    const userOrganizations = await slashClient.loadUserOrganizations();
-    const organizations = await slashClient.loadOrganizations();
-    const userGroups = await slashClient.loadUserGroups();
-    const groups = await slashClient.loadGroups();
+    const [organizations, groups] = await Promise.all([
+      slashClient.loadOrganizations(),
+      slashClient.loadGroups(),
+    ]);
 
     const userInfo: UserInfo = {
-      userOrganizations: userOrganizations,
-      organizations: organizations,
-      userGroups: userGroups,
-      groups: groups,
+      organizations: organizations as Organization[],
+      groups: groups as Group[],
     };
     const fieldList = cybozu.data.page.FORM_DATA.schema.table.fieldList;
     const fieldKeys = Object.keys(
