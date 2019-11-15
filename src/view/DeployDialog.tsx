@@ -1,4 +1,11 @@
-import { Dialog, DialogTitle, TextField, Button } from '@material-ui/core';
+import {
+  Dialog,
+  DialogTitle,
+  TextField,
+  Button,
+  DialogActions,
+  DialogContent,
+} from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import * as React from 'react';
@@ -25,28 +32,35 @@ export function DeployDialog(props: DeployDialogProps) {
 
   return (
     <React.Fragment>
-      <Dialog open={props.open} onClose={props.handleCloseDialog}>
+      <Dialog
+        open={props.open}
+        onClose={props.handleCloseDialog}
+        fullWidth={true}
+        maxWidth={'md'}>
         <DialogTitle>Deploy</DialogTitle>
-        <TextField
-          id="outlined-basic"
-          label="Deploy Message"
-          margin="normal"
-          variant="outlined"
-          defaultValue="empty message"
-          onChange={handleMessageChange}
-        />
-        <Button
-          aria-label="ship it"
-          onClick={handleDeploy}
-          startIcon={<FlightTakeoffIcon />}>
-          Deploy It!
-        </Button>
-        <Button
-          aria-label="cancel"
-          onClick={props.handleCloseDialog}
-          startIcon={<CloseIcon />}>
-          Cancel
-        </Button>
+        <DialogContent>
+          <TextField
+            id="outlined-basic"
+            label="Deploy Message"
+            margin="normal"
+            variant="outlined"
+            defaultValue="empty message"
+            onChange={handleMessageChange}
+            fullWidth={true}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button startIcon={<CloseIcon />} onClick={props.handleCloseDialog}>
+            Cancel
+          </Button>
+          <Button
+            startIcon={<FlightTakeoffIcon />}
+            onClick={handleDeploy}
+            color="primary"
+            autoFocus>
+            Deploy It!
+          </Button>
+        </DialogActions>
       </Dialog>
       <Dialog open={props.deploying}>
         <DialogTitle>Deploying</DialogTitle>
