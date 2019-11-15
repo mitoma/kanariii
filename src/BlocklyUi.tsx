@@ -1,6 +1,5 @@
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import JA from 'blockly/msg/ja.js';
 import styles from './BlocklyUi.css';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './CustomizeJsUpdater';
@@ -27,8 +26,6 @@ import { UserInfo } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { DeployDialog } from './view/DeployDialog';
 import { HistoryDialog } from './view/HistoryDialog';
-
-Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
   sourceXml: string;
