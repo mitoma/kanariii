@@ -42,11 +42,12 @@ export class CustomizeJsUpdater {
   async uploadCustomizeCode(
     xmlCode: string,
     jsCode: string,
+    deployMessage: string,
     revisions: Revision[],
   ) {
     const customizeSetting: CustomizeSetting = await this.getCustomizeSetting();
     const uploadToBlob = await this.uploadToBlob(
-      this.generateCode(xmlCode, jsCode, revisions),
+      this.generateCode(xmlCode, jsCode, deployMessage, revisions),
     );
     customizeSetting.desktop.js = customizeSetting.desktop.js.filter(source => {
       if (source.type === 'FILE') {
@@ -78,11 +79,13 @@ export class CustomizeJsUpdater {
   public generateCode(
     xmlCode: string,
     jsCode: string,
+    deployMessage: string,
     revisions: Revision[],
   ): string {
     revisions.push({
       revisionId: this.calcNextRevision(revisions),
       deployDate: new Date(),
+      message: deployMessage,
       source: xmlCode,
     });
     const customizeCode = `

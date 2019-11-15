@@ -13,6 +13,7 @@ declare namespace KintoneBlockly {
     revisionId: number;
     deployDate: Date;
     source: string;
+    message: string;
   }
   const sourceXml: string;
   const revisions: Revision[];
