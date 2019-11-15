@@ -5,6 +5,7 @@ import {
   Dialog,
   DialogTitle,
   List,
+  DialogContent,
 } from '@material-ui/core';
 import { WorkspaceLoader } from '../usecase/WorkspaceLoader';
 import { Revision } from '../history/Revision';
@@ -44,9 +45,15 @@ export function HistoryDialog(props: HistoryDialogProps) {
     });
   return (
     <React.Fragment>
-      <Dialog open={props.open} onClose={props.handleCloseDialog}>
+      <Dialog
+        open={props.open}
+        onClose={props.handleCloseDialog}
+        fullWidth={true}
+        maxWidth={'md'}>
         <DialogTitle>History</DialogTitle>
-        <List component="nav">{revisionList}</List>
+        <DialogContent>
+          <List component="nav">{revisionList}</List>
+        </DialogContent>
       </Dialog>
     </React.Fragment>
   );
