@@ -1,9 +1,7 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
 export type UserInfo = {
-  userOrganizations: Organization[];
   organizations: Organization[];
-  userGroups: Group[];
   groups: Group[];
 };
 
