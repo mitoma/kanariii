@@ -47,7 +47,6 @@ type Groups = {
 };
 
 export class SlashClient {
-
   async loadOrganizationsAndGroups() {
     const [organizations, groups] = await Promise.all([
       this.loadOrganizations(),
