@@ -16,20 +16,28 @@ import {
   MenuItem,
   Dialog,
   DialogTitle,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import HistoryIcon from '@material-ui/icons/History';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import { WorkspaceLoader } from './usecase/WorkspaceLoader';
 import { WorkspaceExporter } from './usecase/WorkspaceExporter';
 import { WorkspaceInitializer } from './usecase/WorkspaceInitializer';
 import { UserInfo } from './client/SlashClient';
+import { Revision } from './history/Revision';
 
 Blockly.setLocale(JA);
 
 type BlocklyUiProps = {
   sourceXml: string;
+  revisions: Revision[];
   handleCloseEditor: () => void;
   handleUpdateSourceXml: (sourceXml: string) => void;
   fields: Field[];
@@ -42,9 +50,11 @@ export function BlocklyUi(props: BlocklyUiProps) {
   const workspaceExporter = new WorkspaceExporter();
   const customizeJsUpdater = new CustomizeJsUpdater();
 
-  const [workspace, setWorkspace] = React.useState(null);
+  const [workspace, setWorkspace] = React.useState(null as Blockly.Workspace);
+  const [historyDialog, setHistoryDialog] = React.useState(false);
   const [exportMenu, setExportMenu] = React.useState(null);
   const [loading, setLoading] = React.useState(false);
+  const [deployDialog, setDeployDialog] = React.useState(false);
 
   const importFile = React.useRef<HTMLInputElement>();
   const blocklyDiv = React.useRef<HTMLDivElement>();
@@ -78,6 +88,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
     setLoading(false);
   }
 
+  function handleOpenHistoryDialog() {
+    setHistoryDialog(true);
+  }
+
+  function handleCloseHistoryDialog() {
+    setHistoryDialog(false);
+  }
+
   function handleOpenExportMenu(event: React.MouseEvent<HTMLButtonElement>) {
     setExportMenu(event.currentTarget);
   }
@@ -99,7 +117,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
   }
 
   function handleExportJavaScript() {
-    workspaceExporter.exportJavaScript(workspace);
+    workspaceExporter.exportJavaScript(workspace, props.revisions);
     handleCloseExportMenu();
   }
 
@@ -110,6 +128,8 @@ export function BlocklyUi(props: BlocklyUiProps) {
         Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
         // @ts-ignore
         Blockly.JavaScript.workspaceToCode(workspace),
+        'empty message',
+        props.revisions,
       )
       .then(() => {
         location.reload();
@@ -119,6 +139,56 @@ export function BlocklyUi(props: BlocklyUiProps) {
         handleCloseLoading();
       });
   }
+
+  function handleOpenDeployDialog() {
+    setDeployDialog(true);
+  }
+
+  function handleCloseDeployDialog() {
+    setDeployDialog(false);
+  }
+
+  function handleDeploy(deployMessage: string) {
+    handleOpenLoading();
+    customizeJsUpdater
+      .uploadCustomizeCode(
+        Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
+        // @ts-ignore
+        Blockly.JavaScript.workspaceToCode(workspace),
+        deployMessage,
+        props.revisions,
+      )
+      .then(() => {
+        location.reload();
+      })
+      .catch(error => {
+        console.error(error);
+        handleCloseLoading();
+      });
+  }
+
+  const revisionList = props.revisions
+    .slice()
+    .reverse()
+    .map(revision => {
+      const title = `${revision.message}`;
+      const message = `Revision: ${
+        revision.revisionId
+      }, DeployDate: ${revision.deployDate.toLocaleString()}`;
+      function rollbackWorkspace() {
+        workspaceLoader.loadByString(workspace, revision.source);
+        handleCloseHistoryDialog();
+      }
+      return (
+        <ListItem key={revision.revisionId} button>
+          <ListItemText
+            primary={title}
+            secondary={message}
+            onClick={rollbackWorkspace}
+          />
+        </ListItem>
+      );
+    });
 
   return (
     <React.Fragment>
@@ -137,10 +207,18 @@ export function BlocklyUi(props: BlocklyUiProps) {
           <Box flex={1}>
             <Button
               color="inherit"
+              aria-label="history"
+              component="label"
+              startIcon={<HistoryIcon />}
+              onClick={handleOpenHistoryDialog}>
+              history
+            </Button>
+            <Button
+              color="inherit"
               aria-label="upload code"
               component="label"
               startIcon={<ArrowUpwardIcon />}>
-              Import
+              import
               <input
                 ref={importFile}
                 type="file"
@@ -153,7 +231,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
               aria-label="download code"
               onClick={handleOpenExportMenu}
               startIcon={<ArrowDownwardIcon />}>
-              Export
+              export
             </Button>
             <Menu
               id="simple-menu"
@@ -167,17 +245,89 @@ export function BlocklyUi(props: BlocklyUiProps) {
             <Button
               color="inherit"
               aria-label="deploy code"
-              onClick={handleToJavaScript}
+              onClick={handleOpenDeployDialog}
               startIcon={<SaveAltIcon />}>
-              Deploy
+              deploy
             </Button>
           </Box>
         </Toolbar>
       </AppBar>
       <div ref={blocklyDiv} className={styles['blocklyDiv']} />
+
+      <Dialog open={false}>
+        <DialogTitle>Deploy</DialogTitle>
+        <TextField
+          id="outlined-basic"
+          label="Deploy Message"
+          margin="normal"
+          variant="outlined"
+        />
+        <Button
+          aria-label="ship it"
+          onClick={handleToJavaScript}
+          startIcon={<FlightTakeoffIcon />}>
+          Ship It!
+        </Button>
+      </Dialog>
+
+      <DeployDialog
+        open={deployDialog}
+        handleDeploy={handleDeploy}
+        closeDialog={handleCloseDeployDialog}
+      />
       <Dialog open={loading}>
         <DialogTitle>Deploying</DialogTitle>
       </Dialog>
+      <Dialog open={historyDialog} onClose={handleCloseHistoryDialog}>
+        <DialogTitle>History</DialogTitle>
+        <List component="nav">{revisionList}</List>
+      </Dialog>
     </React.Fragment>
+  );
+}
+
+type DeployDialogProps = {
+  open: boolean;
+  handleDeploy: (deployMessage: string) => void;
+  closeDialog: () => void;
+};
+
+function DeployDialog(props: DeployDialogProps) {
+  const [deployMessage, setDeployMessage] = React.useState('empty message');
+
+  function handleMessageChange(event: object) {
+    // @ts-ignore
+    setDeployMessage(event.target.value);
+  }
+
+  function handleDeploy() {
+    props.handleDeploy(deployMessage);
+    props.closeDialog();
+  }
+
+  return (
+    <Dialog open={props.open} onClose={props.closeDialog}>
+      <DialogTitle>Deploy</DialogTitle>
+      <TextField
+        id="outlined-basic"
+        label="Deploy Message"
+        margin="normal"
+        variant="outlined"
+        defaultValue="empty message"
+        onChange={handleMessageChange}
+      />
+      <Button
+        aria-label="ship it"
+        onClick={handleDeploy}
+        startIcon={<FlightTakeoffIcon />}>
+        Deploy It!
+      </Button>
+      <Button
+        aria-label="cancel"
+        onClick={props.closeDialog}
+        startIcon={<CloseIcon />}>
+        Cancel
+      </Button>
+    </Dialog>
   );
 }

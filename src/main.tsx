@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 import { Field } from './schema/Field';
 import { App } from './App';
 import { SlashClient, UserInfo } from './client/SlashClient';
+import { Revision } from './history/Revision';
 
 document.addEventListener('DOMContentLoaded', function(loadedEvent) {
   function initialSourceXml(): string {
@@ -13,6 +14,19 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
       return KintoneBlockly.sourceXml;
     } else {
       return '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
+    }
+  }
+
+  function initialRevisions(): Revision[] {
+    if (
+      typeof KintoneBlockly !== 'undefined' &&
+      typeof KintoneBlockly.revisions !== 'undefined' &&
+      KintoneBlockly.revisions !== null
+    ) {
+      const revisions: Revision[] = KintoneBlockly.revisions;
+      return revisions;
+    } else {
+      return [];
     }
   }
 
@@ -38,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
     });
 
     const sourceXml = initialSourceXml();
+    const revisions = initialRevisions();
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
     if (kintoneMenu != null) {
       const blocklyToggle = document.createElement('span');
@@ -45,7 +60,12 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
         .querySelector('.gaia-argoui-app-menu-settings')
         .before(blocklyToggle);
       ReactDOM.render(
-        <App sourceXml={sourceXml} fields={fields} userInfo={userInfo} />,
+        <App
+          sourceXml={sourceXml}
+          revisions={revisions}
+          fields={fields}
+          userInfo={userInfo}
+        />,
         blocklyToggle,
       );
       console.log('done');
