@@ -14,6 +14,9 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
       .map(f => {
         return [f.label, f.var];
       });
+    if (fieldsDropdown.length == 0) {
+      fieldsDropdown.push(['No Group Field', 'UNKNOWN']);
+    }
     return {
       init: function() {
         const jsonDefinition = {
