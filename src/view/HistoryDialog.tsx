@@ -6,7 +6,10 @@ import {
   DialogTitle,
   List,
   DialogContent,
+  DialogActions,
+  Button,
 } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 import { WorkspaceLoader } from '../usecase/WorkspaceLoader';
 import { Revision } from '../history/Revision';
 import * as Blockly from 'blockly';
@@ -54,6 +57,11 @@ export function HistoryDialog(props: HistoryDialogProps) {
         <DialogContent>
           <List component="nav">{revisionList}</List>
         </DialogContent>
+        <DialogActions>
+          <Button startIcon={<CloseIcon />} onClick={props.handleCloseDialog}>
+            Cancel
+          </Button>
+        </DialogActions>
       </Dialog>
     </React.Fragment>
   );
