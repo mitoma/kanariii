@@ -1,4 +1,4 @@
-import { KintoneBlock, appendShadowText } from './KintoneBlock';
+import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Organization } from '../client/SlashClient';
@@ -46,6 +46,6 @@ export class SlashUserOrganizationBlock implements KintoneBlock {
   menuElement(): Element {
     let blockElement = document.createElement('block');
     blockElement.setAttribute('type', this.blockName);
-    return appendShadowText(blockElement, '');
+    return blockElement;
   }
 }
