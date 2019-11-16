@@ -9,6 +9,7 @@
     "build": "npm run clean && npm run build:dev",
     "build-prod": "npm run clean && npm run build:production",
     "watch": "webpack -w",
+    "test": "jest",
     "clean": "rimraf build",
     "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
   },
@@ -40,6 +41,7 @@
   },
   "devDependencies": {
     "@kintone/dts-gen": "^2.1.1",
+    "@testing-library/react": "^9.3.2",
     "@types/jest": "^24.0.23",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
