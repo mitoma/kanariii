@@ -7,15 +7,25 @@ export class ConsoleLogBlock implements KintoneBlock {
   blockDefinition(): object {
     return {
       init: function() {
-        this.appendValueInput('TEXT')
-          .setCheck(null)
-          .appendField('ログ出力');
-        this.setInputsInline(false);
-        this.setPreviousStatement(true, null);
-        this.setNextStatement(true, null);
-        this.setColour('#9fa55b');
-        this.setTooltip('ログを出力するんだよー。');
-        this.setHelpUrl('');
+        const block: Blockly.Block = this;
+
+        const jsonDefinition = {
+          message0: '%{BKY_CONSOLE_LOG_MSG}',
+          args0: [
+            {
+              type: 'input_value',
+              name: 'TEXT',
+              check: null,
+            },
+          ],
+          inputsInline: false,
+          colour: '#9fa55b',
+          tooltip: '%{BKY_CONSOLE_LOG_TOOLTIP}',
+          helpUrl: '',
+          previousStatement: 'Action',
+          nextStatement: 'Action',
+        };
+        block.jsonInit(jsonDefinition);
       },
     };
   }

@@ -19,6 +19,8 @@ export function loadJaLocale() {
   JA['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'ユーザーが組織に所属するかどうかを返します';
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属する';
   JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属するかどうかを返します';
+  JA['CONSOLE_LOG_MSG'] = 'ログ出力 %1';
+  JA['CONSOLE_LOG_TOOLTIP'] = 'console.log でログを出力します';
 
   Blockly.setLocale(JA);
 }
@@ -40,6 +42,8 @@ export function loadEnLocale() {
   EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
   EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
+  EN['CONSOLE_LOG_MSG'] = 'logger %1';
+  EN['CONSOLE_LOG_TOOLTIP'] = 'write log with console.log';
 
   Blockly.setLocale(EN);
 }
