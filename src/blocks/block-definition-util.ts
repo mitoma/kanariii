@@ -6,7 +6,9 @@ function enableInEventBlock(
   const innerBlock = block;
   return (e: Blockly.Events.BlockChange) => {
     if (!innerBlock.isInFlyout) {
-      innerBlock.setEnabled(innerBlock.getRootBlock().type.startsWith('kintone_event_'));
+      innerBlock.setEnabled(
+        innerBlock.getRootBlock().type.startsWith('kintone_event_'),
+      );
     }
   };
 }
