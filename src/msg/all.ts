@@ -16,7 +16,9 @@ export function loadJaLocale() {
   JA['KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_TRUE_MSG'] = '開く';
   JA['KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_FALSE_MSG'] = '閉じる';
   JA['SLASH_USER_ORGANIZATION_MSG'] = 'ログインユーザーが組織 %1 に所属する';
+  JA['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'ユーザーが組織に所属するかどうかを返します';
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属する';
+  JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属するかどうかを返します';
 
   Blockly.setLocale(JA);
 }
@@ -35,7 +37,9 @@ export function loadEnLocale() {
   EN['KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_TRUE_MSG'] = 'open';
   EN['KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_FALSE_MSG'] = 'close';
   EN['SLASH_USER_ORGANIZATION_MSG'] = 'login user in organization of %1';
+  EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
+  EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
 
   Blockly.setLocale(EN);
 }

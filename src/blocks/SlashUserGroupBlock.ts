@@ -24,7 +24,7 @@ export class SlashUserGroupBlock implements KintoneBlock {
           inputsInline: true,
           output: 'Boolean',
           colour: '#9fa55b',
-          tooltip: 'ユーザーがグループに所属するかどうかを返します',
+          tooltip: '%{BKY_SLASH_USER_ORGANIZATION_TOOLTIP}',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);
