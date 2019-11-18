@@ -1,39 +1,39 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
-export interface CustomizeSetting {
+type CustomizeSetting = {
   app: string;
   scope: 'ALL';
   desktop: SettingForDevice;
   revision: string;
-}
+};
 
-export interface SettingForDevice {
+type SettingForDevice = {
   css: Array<any>;
   js: Array<UrlSource | FileSource>;
-}
+};
 
-export interface UrlSource {
+type UrlSource = {
   type: 'URL';
   url: string;
-}
+};
 
-export interface FileSource {
+type FileSource = {
   type: 'FILE';
   file: FileBlob | UploadFileBlob;
-}
+};
 
-export interface FileBlob {
+type FileBlob = {
   contentType: string;
   fileKey: string;
   name: string;
   size: string;
-}
+};
 
-export interface UploadFileBlob {
+type UploadFileBlob = {
   fileKey: string;
-}
+};
 
-export class KintoneClient {
+class KintoneClient {
   getCustomizeSetting() {
     return kintone.api(this.url('/k/v1/preview/app/customize'), 'GET', {
       app: kintone.app.getId(),
@@ -100,3 +100,5 @@ export class KintoneClient {
     return kintone.api.url(path, true);
   }
 }
+
+export { KintoneClient, CustomizeSetting, FileSource, FileBlob };

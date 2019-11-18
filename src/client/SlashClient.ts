@@ -1,11 +1,11 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
-export type OrganizationsAndGroups = {
+type OrganizationsAndGroups = {
   organizations: Organization[];
   groups: Group[];
 };
 
-export type Organization = {
+type Organization = {
   id: string;
   name: string;
   code: string;
@@ -35,7 +35,7 @@ type OrganizationTitles = {
   organizationTitles: OrganizationTitle[];
 };
 
-export type Group = {
+type Group = {
   id: string;
   code: string;
   name: string;
@@ -46,7 +46,7 @@ type Groups = {
   groups: Group[];
 };
 
-export class SlashClient {
+class SlashClient {
   async loadOrganizationsAndGroups() {
     const [organizations, groups] = await Promise.all([
       this.loadOrganizations(),
@@ -98,3 +98,5 @@ export class SlashClient {
     return kintone.api.url(path, true);
   }
 }
+
+export { SlashClient, OrganizationsAndGroups, Organization, Group };
