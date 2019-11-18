@@ -54,7 +54,7 @@ export class KintoneEventFieldBlock implements KintoneBlock {
         'event_callback',
       );
       return `
-kintone.events.on('${categoryDef.eventKeyPrefix}.${fieldCode}', function(event) {
+kintone.events.on('${categoryDef.eventKeyPrefix}.${fieldCode}', async function(event) {
 ${eventCallback};
 return event;
 });

@@ -2,6 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Group } from '../client/SlashClient';
+import { enableInEventBlock } from './block-definition-util';
 
 export class SlashUserGroupBlock implements KintoneBlock {
   constructor(private groups: Group[]) {}
@@ -12,6 +13,8 @@ export class SlashUserGroupBlock implements KintoneBlock {
     });
     return {
       init: function() {
+        const block: Blockly.Block = this;
+
         const jsonDefinition = {
           message0: '%{BKY_SLASH_USER_GROUP_MSG}',
           args0: [
@@ -27,16 +30,36 @@ export class SlashUserGroupBlock implements KintoneBlock {
           tooltip: '%{BKY_SLASH_USER_ORGANIZATION_TOOLTIP}',
           helpUrl: '',
         };
-        this.jsonInit(jsonDefinition);
+        block.jsonInit(jsonDefinition);
+
+        block.setOnChange(enableInEventBlock(block));
       },
     };
   }
 
   jsGenerator(): (block: Blockly.Block) => object[] {
     return function(block): object[] {
+      const functionNamePlaceholder =
+        // @ts-ignore
+        Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_;
+      // @ts-ignore
+      const functionName = Blockly.JavaScript.provideFunction_('loadGroup', [
+        `
+          async function ${functionNamePlaceholder}() {
+            return kintone.api(
+              kintone.api.url('/v1/user/groups.json', true),
+              'GET',
+              { code: kintone.getLoginUser().code }
+            ).then((resp) => {
+              const groups = resp['groups'].map((g) => {return g['id'];});
+              return groups;
+            });
+          }
+          `,
+      ]);
       var group = JSON.stringify(block.getFieldValue('group'));
       return [
-        `userGroupIds.includes(${group})`,
+        `(await ${functionName}()).includes(${group})`,
         // @ts-ignore
         Blockly.JavaScript.ORDER_ATOMIC,
       ];
