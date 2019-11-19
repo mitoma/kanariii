@@ -15,11 +15,13 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
       .map(f => {
         return [f.label, f.var];
       });
-    if (fieldsDropdown.length == 0) {
+    const enable = fieldsDropdown.length != 0;
+    if (!enable) {
       fieldsDropdown.push(['No Group Field', 'UNKNOWN']);
     }
     return {
       init: function() {
+        const block: Blockly.Block = this;
         const jsonDefinition = {
           message0: '%{BKY_KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_MSG}',
           args0: [
@@ -50,7 +52,8 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
           tooltip: 'グループフィールドの表示/非表示を設定します',
           helpUrl: '',
         };
-        this.jsonInit(jsonDefinition);
+        block.jsonInit(jsonDefinition);
+        block.setEnabled(enable);
       },
     };
   }
