@@ -24,6 +24,7 @@ import { KintoneRecordSetGroupFieldOpenBlock } from './KintoneRecordSetGroupFiel
 import { OrganizationsAndGroups } from '../client/SlashClient';
 import { SlashUserOrganizationBlock } from './SlashUserOrganizationBlock';
 import { SlashUserGroupBlock } from './SlashUserGroupBlock';
+import { BlockColors } from './block-definition-util';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -144,9 +145,26 @@ export function buildKintone(
   fields: Field[],
   organizationsAndGroups: OrganizationsAndGroups,
 ) {
+  // デバッグ用
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'デバッグ', BlockColors.SLASH, [
+      new ConsoleLogBlock(),
+      new DebuggerBlock(),
+    ]),
+  );
+
+  // ユーザー管理系
+  category.appendChild(
+    createSubCategoryElement(blocks, js, 'ユーザー', BlockColors.SLASH, [
+      new KintoneUserBlock(),
+      new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
+      new SlashUserGroupBlock(organizationsAndGroups.groups),
+    ]),
+  );
+
   // イベント系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'イベント', [
+    createSubCategoryElement(blocks, js, 'イベント', BlockColors.KINTONE, [
       new KintoneEventBlock(appRecordIndexDef),
       new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
       new KintoneEventBlock(appRecordDetailDef),
@@ -159,7 +177,7 @@ export function buildKintone(
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'レコード', [
+    createSubCategoryElement(blocks, js, 'レコード', BlockColors.KINTONE, [
       new FieldCodeBlock(fields),
       new KintoneRecordGetIdBlock(),
       new KintoneRecordGetEventBlock(),
@@ -172,32 +190,16 @@ export function buildKintone(
       new KintoneRecordSetGroupFieldOpenBlock(fields),
     ]),
   );
-
-  // レコードの値系
-  category.appendChild(
-    createSubCategoryElement(blocks, js, 'ユーザー', [
-      new KintoneUserBlock(),
-      new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
-      new SlashUserGroupBlock(organizationsAndGroups.groups),
-    ]),
-  );
-
-  // デバッグ用
-  category.appendChild(
-    createSubCategoryElement(blocks, js, 'デバッグ', [
-      new ConsoleLogBlock(),
-      new DebuggerBlock(),
-    ]),
-  );
 }
 
 function createSubCategoryElement(
   blocks: object,
   js: object,
   subCategoryName: string,
+  colour: string,
   kintoneBlocks: KintoneBlock[],
 ): Element {
-  const category = subCategory(subCategoryName);
+  const category = subCategory(subCategoryName, colour);
   kintoneBlocks.forEach(block => {
     blocks[block.blockName] = block.blockDefinition();
     js[block.blockName] = block.jsGenerator();
@@ -206,9 +208,9 @@ function createSubCategoryElement(
   return category;
 }
 
-function subCategory(categoryName: string): Element {
+function subCategory(categoryName: string, colour: string): Element {
   let categoryElement = document.createElement('category');
   categoryElement.setAttribute('name', categoryName);
-  categoryElement.setAttribute('colour', '#9fa55b');
+  categoryElement.setAttribute('colour', colour);
   return categoryElement;
 }
