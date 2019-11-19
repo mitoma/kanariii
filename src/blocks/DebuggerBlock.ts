@@ -12,7 +12,7 @@ export class DebuggerBlock implements KintoneBlock {
         this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
-        this.setColour(BlockColors.KINTONE);
+        this.setColour(BlockColors.SLASH);
         this.setTooltip('debugger を起動する');
         this.setHelpUrl('');
       },

@@ -3,8 +3,8 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { BlockColors } from './block-definition-util';
 
-export class KintoneUserBlock implements KintoneBlock {
-  blockName = 'kintone_user';
+export class SlashUserBlock implements KintoneBlock {
+  blockName = 'slash_user';
   /*
    */
   blockDefinition(): object {
@@ -31,7 +31,7 @@ export class KintoneUserBlock implements KintoneBlock {
           );
         this.setOutput(true, null);
         this.setInputsInline(false);
-        this.setColour(BlockColors.KINTONE);
+        this.setColour(BlockColors.SLASH);
         this.setTooltip('');
         this.setHelpUrl('');
       },

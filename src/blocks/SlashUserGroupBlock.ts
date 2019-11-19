@@ -11,6 +11,10 @@ export class SlashUserGroupBlock implements KintoneBlock {
     const groupsDropdown = this.groups.map(o => {
       return [o.name, o.id];
     });
+    let enable = groupsDropdown.length != 0;
+    if (!enable) {
+      groupsDropdown.push(['No Group', 'UNKNOWN']);
+    }
     return {
       init: function() {
         const block: Blockly.Block = this;
@@ -26,12 +30,13 @@ export class SlashUserGroupBlock implements KintoneBlock {
           ],
           inputsInline: true,
           output: 'Boolean',
-          colour: BlockColors.KINTONE,
+          colour: BlockColors.SLASH,
           tooltip: '%{BKY_SLASH_USER_ORGANIZATION_TOOLTIP}',
           helpUrl: '',
         };
         block.jsonInit(jsonDefinition);
 
+        block.setEnabled(enable);
         block.setOnChange(enableInEventBlock(block));
       },
     };

@@ -18,10 +18,10 @@ import { KintoneRecordSetValueBlock } from './KintoneRecordSetValueBlock';
 import { KintoneRecordSetErrorBlock } from './KintoneRecordSetErrorBlock';
 import { KintoneRecordSetDisabledBlock } from './KintoneRecordSetDisabledBlock';
 import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
-import { KintoneUserBlock } from './KintoneUserBlock';
 import { KintoneRecordSetVisibleBlock } from './KintoneRecordSetVisibleBlock';
 import { KintoneRecordSetGroupFieldOpenBlock } from './KintoneRecordSetGroupFieldOpenBlock';
 import { OrganizationsAndGroups } from '../client/SlashClient';
+import { SlashUserBlock } from './SlashUserBlock';
 import { SlashUserOrganizationBlock } from './SlashUserOrganizationBlock';
 import { SlashUserGroupBlock } from './SlashUserGroupBlock';
 import { BlockColors } from './block-definition-util';
@@ -156,7 +156,7 @@ export function buildKintone(
   // ユーザー管理系
   category.appendChild(
     createSubCategoryElement(blocks, js, 'ユーザー', BlockColors.SLASH, [
-      new KintoneUserBlock(),
+      new SlashUserBlock(),
       new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
       new SlashUserGroupBlock(organizationsAndGroups.groups),
     ]),
