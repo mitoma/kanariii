@@ -2,6 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
+import { BlockColors } from './block-definition-util';
 
 export class FieldCodeBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -18,7 +19,7 @@ export class FieldCodeBlock implements KintoneBlock {
           .appendField('フィールドコード')
           .appendField(new Blockly.FieldDropdown(labelVarPair), 'field_code');
         this.setOutput(true, null);
-        this.setColour('#9fa55b');
+        this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
       },

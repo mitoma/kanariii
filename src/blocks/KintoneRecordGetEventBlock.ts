@@ -1,6 +1,7 @@
 import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
+import { BlockColors } from './block-definition-util';
 
 export class KintoneRecordGetEventBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_event';
@@ -10,7 +11,7 @@ export class KintoneRecordGetEventBlock implements KintoneBlock {
       init: function() {
         this.appendDummyInput().appendField('レコードイベント');
         this.setOutput(true, null);
-        this.setColour('#9fa55b');
+        this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
       },

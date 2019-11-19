@@ -1,6 +1,7 @@
 import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
+import { BlockColors } from './block-definition-util';
 
 export class KintoneRecordGetIdBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_id';
@@ -10,7 +11,7 @@ export class KintoneRecordGetIdBlock implements KintoneBlock {
       init: function() {
         this.appendDummyInput().appendField('レコードID');
         this.setOutput(true, null);
-        this.setColour('#9fa55b');
+        this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
       },
