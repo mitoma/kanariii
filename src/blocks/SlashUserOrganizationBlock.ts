@@ -2,7 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Organization } from '../client/SlashClient';
-import { enableInEventBlock } from './block-definition-util';
+import { enableInEventBlock, BlockColors } from './block-definition-util';
 
 export class SlashUserOrganizationBlock implements KintoneBlock {
   constructor(private organization: Organization[]) {}
@@ -26,7 +26,7 @@ export class SlashUserOrganizationBlock implements KintoneBlock {
           ],
           inputsInline: true,
           output: 'Boolean',
-          colour: '#9fa55b',
+          colour: BlockColors.KINTONE,
           tooltip: '%{BKY_SLASH_USER_ORGANIZATION_TOOLTIP}',
           helpUrl: '',
         };

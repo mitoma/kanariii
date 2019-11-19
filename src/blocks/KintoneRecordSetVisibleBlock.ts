@@ -2,6 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
+import { BlockColors } from './block-definition-util';
 
 export class KintoneRecordSetVisibleBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -32,7 +33,7 @@ export class KintoneRecordSetVisibleBlock implements KintoneBlock {
           inputsInline: true,
           previousStatement: 'Action',
           nextStatement: 'Action',
-          colour: '#9fa55b',
+          colour: BlockColors.KINTONE,
           tooltip: 'フィールドの表示/非表示を設定します',
           helpUrl: '',
         };

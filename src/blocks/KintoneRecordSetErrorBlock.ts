@@ -2,6 +2,7 @@ import { KintoneBlock, appendShadowText } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
+import { BlockColors } from './block-definition-util';
 
 export class KintoneRecordSetErrorBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -29,7 +30,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
           inputsInline: true,
           previousStatement: 'Action',
           nextStatement: 'Action',
-          colour: '#9fa55b',
+          colour: BlockColors.KINTONE,
           tooltip: 'フィールドのエラーメッセージをセットします',
           helpUrl: '',
         };

@@ -1,6 +1,7 @@
 import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
+import { BlockColors } from './block-definition-util';
 
 export class KintoneUserBlock implements KintoneBlock {
   blockName = 'kintone_user';
@@ -30,7 +31,7 @@ export class KintoneUserBlock implements KintoneBlock {
           );
         this.setOutput(true, null);
         this.setInputsInline(false);
-        this.setColour('#9fa55b');
+        this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
       },

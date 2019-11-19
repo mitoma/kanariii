@@ -1,6 +1,7 @@
 import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
+import { BlockColors } from './block-definition-util';
 
 export type KintoneEventBlockCategoryDef = {
   blockName: string;
@@ -38,7 +39,7 @@ export class KintoneEventBlock implements KintoneBlock {
         );
         this.appendStatementInput('event_callback').setCheck(null);
         this.setInputsInline(false);
-        this.setColour('#9fa55b');
+        this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
       },
