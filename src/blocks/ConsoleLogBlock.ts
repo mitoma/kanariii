@@ -20,7 +20,7 @@ export class ConsoleLogBlock implements KintoneBlock {
             },
           ],
           inputsInline: false,
-          colour: BlockColors.KINTONE,
+          colour: BlockColors.SLASH,
           tooltip: '%{BKY_CONSOLE_LOG_TOOLTIP}',
           helpUrl: '',
           previousStatement: 'Action',

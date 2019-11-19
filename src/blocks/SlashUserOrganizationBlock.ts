@@ -11,6 +11,10 @@ export class SlashUserOrganizationBlock implements KintoneBlock {
     const organizationsDropdown = this.organization.map(o => {
       return [o.name, o.id];
     });
+    let enable = organizationsDropdown.length != 0;
+    if (!enable) {
+      organizationsDropdown.push(['No Organization', 'UNKNOWN']);
+    }
     return {
       init: function() {
         const block: Blockly.Block = this;
@@ -26,12 +30,13 @@ export class SlashUserOrganizationBlock implements KintoneBlock {
           ],
           inputsInline: true,
           output: 'Boolean',
-          colour: BlockColors.KINTONE,
+          colour: BlockColors.SLASH,
           tooltip: '%{BKY_SLASH_USER_ORGANIZATION_TOOLTIP}',
           helpUrl: '',
         };
         block.jsonInit(jsonDefinition);
 
+        block.setEnabled(enable);
         block.setOnChange(enableInEventBlock(block));
       },
     };
