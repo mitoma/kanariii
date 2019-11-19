@@ -13,4 +13,9 @@ function enableInEventBlock(
   };
 }
 
-export { enableInEventBlock };
+namespace BlockColors {
+  export const SLASH: string = '#BB4444';
+  export const KINTONE: string = '#9fa55b';
+}
+
+export { enableInEventBlock, BlockColors };
