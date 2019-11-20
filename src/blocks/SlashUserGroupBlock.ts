@@ -2,7 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Group } from '../client/SlashClient';
-import { enableInEventBlock, BlockColors } from './block-definition-util';
+import { BlockColors, enableInAsyncEventBlock } from './block-definition-util';
 
 export class SlashUserGroupBlock implements KintoneBlock {
   constructor(private groups: Group[]) {}
@@ -37,7 +37,7 @@ export class SlashUserGroupBlock implements KintoneBlock {
         block.jsonInit(jsonDefinition);
 
         block.setEnabled(enable);
-        block.setOnChange(enableInEventBlock(block));
+        enableInAsyncEventBlock(block);
       },
     };
   }
