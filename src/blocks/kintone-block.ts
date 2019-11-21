@@ -10,9 +10,9 @@ import {
   KintoneEventFieldBlock,
   KintoneFieldEventBlockCategoryDef,
 } from './event/KintoneFieldEventBlock';
-import { KintoneRecordGetIdBlock } from './KintoneRecordGetIdBlock';
-import { KintoneRecordGetFieldValueBlock } from './KintoneRecordGetFieldValueBlock';
-import { KintoneRecordGetFieldElementBlock } from './KintoneRecordGetFieldElementBlock';
+import { KintoneRecordGetIdBlock } from './record/KintoneRecordGetIdBlock';
+import { KintoneRecordGetFieldValueBlock } from './record/KintoneRecordGetFieldValueBlock';
+import { KintoneRecordGetFieldElementBlock } from './record/KintoneRecordGetFieldElementBlock';
 import { KintoneRecordSetValueBlock } from './record/KintoneRecordSetValueBlock';
 import { KintoneRecordSetErrorBlock } from './record/KintoneRecordSetErrorBlock';
 import { KintoneRecordSetDisabledBlock } from './record/KintoneRecordSetDisabledBlock';
