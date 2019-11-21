@@ -21,9 +21,9 @@ import { KintoneRecordGetEventBlock } from './KintoneRecordGetEventBlock';
 import { KintoneRecordSetVisibleBlock } from './KintoneRecordSetVisibleBlock';
 import { KintoneRecordSetGroupFieldOpenBlock } from './KintoneRecordSetGroupFieldOpenBlock';
 import { OrganizationsAndGroups } from '../client/SlashClient';
-import { SlashUserBlock } from './SlashUserBlock';
-import { SlashUserOrganizationBlock } from './SlashUserOrganizationBlock';
-import { SlashUserGroupBlock } from './SlashUserGroupBlock';
+import { SlashUserBlock } from './user/SlashUserBlock';
+import { SlashUserOrganizationBlock } from './user/SlashUserOrganizationBlock';
+import { SlashUserGroupBlock } from './user/SlashUserGroupBlock';
 import { BlockColors } from './block-definition-util';
 
 // イベントの定義
