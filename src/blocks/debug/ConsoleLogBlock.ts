@@ -1,7 +1,7 @@
-import { KintoneBlock, appendShadowText } from './KintoneBlock';
+import { KintoneBlock, appendShadowText } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { BlockColors } from './block-definition-util';
+import { BlockColors } from '../block-definition-util';
 
 export class ConsoleLogBlock implements KintoneBlock {
   blockName = 'console_log';

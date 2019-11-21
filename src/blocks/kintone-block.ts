@@ -1,8 +1,8 @@
 import { KintoneBlock } from './KintoneBlock';
-import { ConsoleLogBlock } from './ConsoleLogBlock';
+import { ConsoleLogBlock } from './debug/ConsoleLogBlock';
 import { Field } from '../schema/Field';
 import { FieldCodeBlock } from './FieldCodeBlock';
-import { DebuggerBlock } from './DebuggerBlock';
+import { DebuggerBlock } from './debug/DebuggerBlock';
 import {
   KintoneEventBlockCategoryDef,
   KintoneEventBlock,
