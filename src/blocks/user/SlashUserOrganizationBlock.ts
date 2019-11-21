@@ -1,8 +1,8 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { Organization } from '../client/SlashClient';
-import { BlockColors, enableInAsyncEventBlock } from './block-definition-util';
+import { Organization } from '../../client/SlashClient';
+import { BlockColors, enableInAsyncEventBlock } from '../block-definition-util';
 
 export class SlashUserOrganizationBlock implements KintoneBlock {
   constructor(private organization: Organization[]) {}

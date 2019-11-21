@@ -1,8 +1,8 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { Group } from '../client/SlashClient';
-import { BlockColors, enableInAsyncEventBlock } from './block-definition-util';
+import { Group } from '../../client/SlashClient';
+import { BlockColors, enableInAsyncEventBlock } from '../block-definition-util';
 
 export class SlashUserGroupBlock implements KintoneBlock {
   constructor(private groups: Group[]) {}
