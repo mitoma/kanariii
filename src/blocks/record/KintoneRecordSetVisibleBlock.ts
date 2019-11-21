@@ -1,12 +1,12 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { Field } from '../schema/Field';
-import { BlockColors } from './block-definition-util';
+import { Field } from '../../schema/Field';
+import { BlockColors } from '../block-definition-util';
 
-export class KintoneRecordSetDisabledBlock implements KintoneBlock {
+export class KintoneRecordSetVisibleBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
-  blockName = 'kintone_app_record_set_disabled';
+  blockName = 'kintone_app_record_set_visible';
   blockDefinition(): object {
     const fieldsDropdown = this.fields.map(f => {
       return [f.label, f.var];
@@ -14,7 +14,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
     return {
       init: function() {
         const jsonDefinition = {
-          message0: '%{BKY_KINTONE_APP_RECORD_SET_DISABLED_MSG}',
+          message0: '%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_MSG}',
           args0: [
             {
               type: 'field_dropdown',
@@ -23,10 +23,10 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
             },
             {
               type: 'field_dropdown',
-              name: 'disabled',
+              name: 'visible',
               options: [
-                ['%{BKY_KINTONE_APP_RECORD_SET_DISABLED_FALSE_MSG}', 'false'],
-                ['%{BKY_KINTONE_APP_RECORD_SET_DISABLED_TRUE_MSG}', 'true'],
+                ['%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_FALSE_MSG}', 'false'],
+                ['%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_TRUE_MSG}', 'true'],
               ],
             },
           ],
@@ -34,7 +34,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'フィールドの編集可/不可を設定します',
+          tooltip: 'フィールドの表示/非表示を設定します',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);
@@ -46,8 +46,8 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
     return function(block): string {
       var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
       // disabled は文字列で "true", "false" が入っているので stringify 不要
-      var disabled = block.getFieldValue('disabled');
-      return `event['record'][${fieldCode}]['disabled'] = ${disabled};`;
+      var visible = block.getFieldValue('visible');
+      return `kintone.app.record.setFieldShown(${fieldCode}, ${visible});`;
     };
   }
 

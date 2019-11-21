@@ -1,8 +1,8 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { Field } from '../schema/Field';
-import { BlockColors } from './block-definition-util';
+import { Field } from '../../schema/Field';
+import { BlockColors } from '../block-definition-util';
 
 export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
