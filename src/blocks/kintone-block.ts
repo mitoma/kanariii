@@ -1,7 +1,6 @@
 import { KintoneBlock } from './KintoneBlock';
 import { ConsoleLogBlock } from './debug/ConsoleLogBlock';
 import { Field } from '../schema/Field';
-import { FieldCodeBlock } from './FieldCodeBlock';
 import { DebuggerBlock } from './debug/DebuggerBlock';
 import {
   KintoneEventBlockCategoryDef,
@@ -178,7 +177,6 @@ export function buildKintone(
   // レコードの値系
   category.appendChild(
     createSubCategoryElement(blocks, js, 'レコード', BlockColors.KINTONE, [
-      new FieldCodeBlock(fields),
       new KintoneRecordGetIdBlock(),
       new KintoneRecordGetEventBlock(),
       new KintoneRecordGetFieldBlock(fields),
