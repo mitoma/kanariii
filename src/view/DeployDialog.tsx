@@ -58,7 +58,7 @@ export function DeployDialog(props: DeployDialogProps) {
             onClick={handleDeploy}
             color="primary"
             autoFocus>
-            Deploy It!
+            Take Off!
           </Button>
         </DialogActions>
       </Dialog>
