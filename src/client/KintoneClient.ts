@@ -1,5 +1,7 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
+import { Field, UNSUPPORTED_FIELD_TYPES } from '../schema/Field';
+
 type CustomizeSetting = {
   app: string;
   scope: 'ALL';
@@ -98,6 +100,18 @@ class KintoneClient {
 
   private url(path: string): string {
     return kintone.api.url(path, true);
+  }
+
+  async getAppFields() {
+    const resp = await kintone.api(this.url('/k/v1/form'), 'GET', {
+      app: kintone.app.getId(),
+    });
+    const fields: Field[] = resp.properties.map((f: any) => ({
+      code: f.code,
+      type: f.type,
+      label: f.label,
+    }));
+    return fields.filter(f => !UNSUPPORTED_FIELD_TYPES.includes(f.type));
   }
 }
 

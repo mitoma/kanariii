@@ -11,7 +11,7 @@ export class KintoneRecordGetFieldValueBlock implements KintoneBlock {
 
   blockDefinition(): object {
     const fieldsDropdown = this.fields.map(f => {
-      return [f.label, f.var];
+      return [f.label, f.code];
     });
 
     return {

@@ -4,6 +4,7 @@ import { Field } from './schema/Field';
 import { App } from './App';
 import { SlashClient, OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
+import { KintoneClient } from './client/KintoneClient';
 
 document.addEventListener('DOMContentLoaded', function(loadedEvent) {
   function initialSourceXml(): string {
@@ -32,14 +33,14 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
 
   async function setup() {
     const slashClient = new SlashClient();
-    const organizationsAndGroups: OrganizationsAndGroups = await slashClient.loadOrganizationsAndGroups();
-    const fieldList = cybozu.data.page.FORM_DATA.schema.table.fieldList;
-    const fieldKeys = Object.keys(
-      cybozu.data.page.FORM_DATA.schema.table.fieldList,
-    );
-    const fields = fieldKeys.map(key => {
-      return fieldList[key] as Field;
-    });
+    const kintoneClient = new KintoneClient();
+    const [fields, organizationsAndGroups]: [
+      Field[],
+      OrganizationsAndGroups,
+    ] = await Promise.all([
+      kintoneClient.getAppFields(),
+      slashClient.loadOrganizationsAndGroups(),
+    ]);
 
     const sourceXml = initialSourceXml();
     const revisions = initialRevisions();
