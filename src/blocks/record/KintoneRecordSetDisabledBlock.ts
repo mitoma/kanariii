@@ -9,7 +9,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
   blockName = 'kintone_app_record_set_disabled';
   blockDefinition(): object {
     const fieldsDropdown = this.fields.map(f => {
-      return [f.label, f.var];
+      return [f.label, f.code];
     });
     return {
       init: function() {

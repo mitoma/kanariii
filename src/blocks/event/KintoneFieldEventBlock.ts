@@ -32,7 +32,7 @@ export class KintoneEventFieldBlock implements KintoneBlock {
         this.appendDummyInput().appendField(
           new Blockly.FieldDropdown(
             fields.map(field => {
-              return [field.label, field.var];
+              return [field.label, field.code];
             }),
           ),
           'field_code',

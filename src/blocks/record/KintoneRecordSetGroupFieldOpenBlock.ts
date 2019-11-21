@@ -13,7 +13,7 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
         return f.type === 'GROUP';
       })
       .map(f => {
-        return [f.label, f.var];
+        return [f.label, f.code];
       });
     const enable = fieldsDropdown.length != 0;
     if (!enable) {

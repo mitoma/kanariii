@@ -18,7 +18,3 @@ declare namespace KintoneBlockly {
   const sourceXml: string;
   const revisions: Revision[];
 }
-
-declare namespace cybozu.data.page.FORM_DATA.schema.table {
-  const fieldList: object;
-}
