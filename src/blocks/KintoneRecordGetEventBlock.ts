@@ -9,18 +9,23 @@ export class KintoneRecordGetEventBlock implements KintoneBlock {
   blockDefinition(): object {
     return {
       init: function() {
-        this.appendDummyInput().appendField('レコードイベント');
-        this.setOutput(true, null);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
+        const block: Blockly.Block = this;
+
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_GET_EVENT_MSG}',
+          output: null,
+          colour: BlockColors.KINTONE,
+          tooltip: '%{BKY_KINTONE_APP_RECORD_GET_EVENT_TOOLTIP}',
+          helpUrl: '',
+        };
+
+        block.jsonInit(jsonDefinition);
       },
     };
   }
 
   jsGenerator(): (block: Blockly.Block) => any {
-    return function(block: Blockly.Block): object[] {
-      var fieldCode = block.getFieldValue('field_code');
+    return function(_: Blockly.Block): object[] {
       return [
         `event`,
         // @ts-ignore

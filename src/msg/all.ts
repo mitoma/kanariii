@@ -12,6 +12,8 @@ export function loadJaLocale() {
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属している';
   JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
 
+  JA['KINTONE_APP_RECORD_GET_EVENT_MSG'] = 'レコードイベント';
+  JA['KINTONE_APP_RECORD_GET_EVENT_TOOLTIP'] = '関数の引数にレコードイベントを渡すためのオブジェクト';
   JA['KINTONE_APP_RECORD_SET_VALUE_MSG'] = '%1 の値に %2 をセット';
   JA['KINTONE_APP_RECORD_SET_ERROR_MSG'] = '%1 のエラーメッセージに %2 をセット';
   JA['KINTONE_APP_RECORD_SET_DISABLED_MSG'] = '%1 を %2 にする';
@@ -37,6 +39,8 @@ export function loadEnLocale() {
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
   EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
 
+  EN['KINTONE_APP_RECORD_GET_EVENT_MSG'] = 'record event';
+  EN['KINTONE_APP_RECORD_GET_EVENT_TOOLTIP'] = 'record event for function args';
   EN['KINTONE_APP_RECORD_SET_VALUE_MSG'] = 'set %1 to %2';
   EN['KINTONE_APP_RECORD_SET_ERROR_MSG'] = 'set error of %1 to %2';
   EN['KINTONE_APP_RECORD_SET_DISABLED_MSG'] = 'set %1 to %2';
