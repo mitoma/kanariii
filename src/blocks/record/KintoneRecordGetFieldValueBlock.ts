@@ -1,13 +1,13 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { Field } from '../schema/Field';
-import { BlockColors } from './block-definition-util';
+import { Field } from '../../schema/Field';
+import { BlockColors, enableInEventBlock } from '../block-definition-util';
 
-export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
+export class KintoneRecordGetFieldValueBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
 
-  blockName: string = 'kintone_app_record_get_field_element';
+  blockName: string = 'kintone_app_record_get_field_value';
 
   blockDefinition(): object {
     const fieldsDropdown = this.fields.map(f => {
@@ -17,22 +17,23 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
     return {
       init: function() {
         this.appendDummyInput()
-          .appendField('フィールドエレメント')
+          .appendField('フィールド値')
           .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
 
         this.setOutput(true, null);
         this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
+        enableInEventBlock(this);
       },
     };
   }
 
   jsGenerator(): (block: Blockly.Block) => any {
     return function(block: Blockly.Block): object[] {
-      var fieldCode = JSON.stringify(block.getFieldValue('field_code'));
+      var fieldCode = block.getFieldValue('field_code');
       return [
-        `kintone.app.record.getFieldElement(${fieldCode})`,
+        `event.record[${JSON.stringify(fieldCode)}].value`,
         // @ts-ignore
         Blockly.JavaScript.ORDER_ATOMIC,
       ];

@@ -1,7 +1,7 @@
-import { KintoneBlock } from './KintoneBlock';
+import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { BlockColors } from './block-definition-util';
+import { BlockColors } from '../block-definition-util';
 
 export class KintoneRecordGetIdBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_id';
