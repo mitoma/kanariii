@@ -4,10 +4,10 @@ import 'blockly/javascript';
 import { Field } from '../schema/Field';
 import { BlockColors, enableInEventBlock } from './block-definition-util';
 
-export class KintoneRecordGetFieldBlock implements KintoneBlock {
+export class KintoneRecordGetFieldValueBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
 
-  blockName: string = 'kintone_app_record_get_field';
+  blockName: string = 'kintone_app_record_get_field_value';
 
   blockDefinition(): object {
     const fieldsDropdown = this.fields.map(f => {

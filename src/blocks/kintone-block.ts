@@ -11,7 +11,7 @@ import {
   KintoneFieldEventBlockCategoryDef,
 } from './event/KintoneFieldEventBlock';
 import { KintoneRecordGetIdBlock } from './KintoneRecordGetIdBlock';
-import { KintoneRecordGetFieldBlock } from './KintoneRecordGetFieldBlock';
+import { KintoneRecordGetFieldValueBlock } from './KintoneRecordGetFieldValueBlock';
 import { KintoneRecordGetFieldElementBlock } from './KintoneRecordGetFieldElementBlock';
 import { KintoneRecordSetValueBlock } from './record/KintoneRecordSetValueBlock';
 import { KintoneRecordSetErrorBlock } from './record/KintoneRecordSetErrorBlock';
@@ -179,7 +179,7 @@ export function buildKintone(
     createSubCategoryElement(blocks, js, 'レコード', BlockColors.KINTONE, [
       new KintoneRecordGetIdBlock(),
       new KintoneRecordGetEventBlock(),
-      new KintoneRecordGetFieldBlock(fields),
+      new KintoneRecordGetFieldValueBlock(fields),
       new KintoneRecordGetFieldElementBlock(fields),
       new KintoneRecordSetValueBlock(fields),
       new KintoneRecordSetErrorBlock(fields),
