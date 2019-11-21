@@ -44,6 +44,8 @@ export class WorkspaceInitializer {
       toolbox: toolbox,
       trashcan: true,
       zoom: zoom,
+      // @ts-ignore
+      media: kintoneBlocklyMediaUrl,
     });
     Blockly.Xml.domToWorkspace(Blockly.Xml.textToDom(sourceXml), workspace);
     return workspace;
