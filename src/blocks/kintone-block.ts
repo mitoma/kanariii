@@ -6,11 +6,11 @@ import { DebuggerBlock } from './debug/DebuggerBlock';
 import {
   KintoneEventBlockCategoryDef,
   KintoneEventBlock,
-} from './KintoneEventBlock';
+} from './event/KintoneEventBlock';
 import {
   KintoneEventFieldBlock,
   KintoneFieldEventBlockCategoryDef,
-} from './KintoneFieldEventBlock';
+} from './event/KintoneFieldEventBlock';
 import { KintoneRecordGetIdBlock } from './KintoneRecordGetIdBlock';
 import { KintoneRecordGetFieldBlock } from './KintoneRecordGetFieldBlock';
 import { KintoneRecordGetFieldElementBlock } from './KintoneRecordGetFieldElementBlock';
