@@ -6,6 +6,8 @@ import * as Blockly from 'blockly';
 export function loadJaLocale() {
   JA['CONSOLE_LOG_MSG'] = 'ログ出力 %1';
   JA['CONSOLE_LOG_TOOLTIP'] = 'console.log でログを出力します';
+  JA['DEBUGGER_MSG'] = 'デバッガー';
+  JA['DEBUGGER_TOOLTIP'] = 'debugger を立ち上げます';
 
   JA['SLASH_USER_ORGANIZATION_MSG'] = 'ログインユーザーが組織 %1 に所属している';
   JA['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
@@ -33,6 +35,8 @@ export function loadJaLocale() {
 export function loadEnLocale() {
   EN['CONSOLE_LOG_MSG'] = 'logger %1';
   EN['CONSOLE_LOG_TOOLTIP'] = 'write log with console.log';
+  EN['DEBUGGER_MSG'] = 'debugger';
+  EN['DEBUGGER_TOOLTIP'] = 'open debugger';
 
   EN['SLASH_USER_ORGANIZATION_MSG'] = 'login user in organization of %1';
   EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
