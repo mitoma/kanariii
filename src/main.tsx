@@ -6,7 +6,13 @@ import { SlashClient, OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { KintoneClient } from './client/KintoneClient';
 
-document.addEventListener('DOMContentLoaded', function(loadedEvent) {
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', afterDOMLoaded);
+} else {
+  afterDOMLoaded();
+}
+
+function afterDOMLoaded() {
   function initialSourceXml(): string {
     if (
       typeof KintoneBlockly !== 'undefined' &&
