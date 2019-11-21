@@ -1,6 +1,6 @@
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { CustomizeJsUpdater } from '../CustomizeJsUpdater';
+import { CustomizeJsUpdater } from './CustomizeJsUpdater';
 import { Revision } from '../history/Revision';
 
 export class WorkspaceExporter {
