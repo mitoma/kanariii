@@ -2,7 +2,7 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import styles from './BlocklyUi.css';
 import * as React from 'react';
-import { CustomizeJsUpdater } from './CustomizeJsUpdater';
+import { CustomizeJsUpdater } from './usecase/CustomizeJsUpdater';
 import { Field } from './schema/Field';
 import {
   Box,

@@ -1,12 +1,12 @@
 import * as parserBabel from 'prettier/parser-babylon';
 import * as prettier from 'prettier/standalone';
-import { Revision } from './history/Revision';
+import { Revision } from '../history/Revision';
 import {
   KintoneClient,
   CustomizeSetting,
   FileSource,
   FileBlob,
-} from './client/KintoneClient';
+} from '../client/KintoneClient';
 
 export class CustomizeJsUpdater {
   kintoneClient: KintoneClient;
