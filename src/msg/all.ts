@@ -9,6 +9,20 @@ export function loadJaLocale() {
   JA['DEBUGGER_MSG'] = 'デバッガー';
   JA['DEBUGGER_TOOLTIP'] = 'debugger を立ち上げます';
 
+  JA['SLASH_USER_MSG'] = 'ユーザー情報 %1';
+  JA['SLASH_USER_TOOLTIP'] = 'ログインユーザーの情報を返します';
+  JA['SLASH_USER_ATTR_ID'] = 'ユーザーID';
+  JA['SLASH_USER_ATTR_CODE'] = 'ログイン名';
+  JA['SLASH_USER_ATTR_NAME'] = '表示名';
+  JA['SLASH_USER_ATTR_EMAIL'] = 'E-mail';
+  JA['SLASH_USER_ATTR_URL'] = 'URL';
+  JA['SLASH_USER_ATTR_EMPLOYEE_NUMBER'] = '従業員ID';
+  JA['SLASH_USER_ATTR_PHONE'] = '電話番号';
+  JA['SLASH_USER_ATTR_MOBILE_PHONE'] = '携帯';
+  JA['SLASH_USER_ATTR_EXTENSION_NUMBER'] = '内線';
+  JA['SLASH_USER_ATTR_TIMEZONE'] = 'タイムゾーン';
+  JA['SLASH_USER_ATTR_IS_GUEST'] = 'ゲストユーザーである';
+  JA['SLASH_USER_ATTR_LANGUAGE'] = 'ユーザーの言語';
   JA['SLASH_USER_ORGANIZATION_MSG'] = 'ログインユーザーが組織 %1 に所属している';
   JA['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属している';
@@ -38,6 +52,20 @@ export function loadEnLocale() {
   EN['DEBUGGER_MSG'] = 'debugger';
   EN['DEBUGGER_TOOLTIP'] = 'open debugger';
 
+  EN['SLASH_USER_MSG'] = 'user info %1';
+  EN['SLASH_USER_TOOLTIP'] = 'return login user attribute';
+  EN['SLASH_USER_ATTR_ID'] = 'User ID';
+  EN['SLASH_USER_ATTR_CODE'] = 'Login code';
+  EN['SLASH_USER_ATTR_NAME'] = 'Name';
+  EN['SLASH_USER_ATTR_EMAIL'] = 'E-mail';
+  EN['SLASH_USER_ATTR_URL'] = 'URL';
+  EN['SLASH_USER_ATTR_EMPLOYEE_NUMBER'] = 'Employee number';
+  EN['SLASH_USER_ATTR_PHONE'] = 'Phone';
+  EN['SLASH_USER_ATTR_MOBILE_PHONE'] = 'Mobile phone';
+  EN['SLASH_USER_ATTR_EXTENSION_NUMBER'] = 'Extension number';
+  EN['SLASH_USER_ATTR_TIMEZONE'] = 'Timezone';
+  EN['SLASH_USER_ATTR_IS_GUEST'] = 'Is guest user';
+  EN['SLASH_USER_ATTR_LANGUAGE'] = 'Language';
   EN['SLASH_USER_ORGANIZATION_MSG'] = 'login user in organization of %1';
   EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
