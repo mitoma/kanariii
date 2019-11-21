@@ -1,32 +1,44 @@
 import * as Blockly from 'blockly';
 
+// 返り値に Promise が使えない(async function)にできないイベントキーのprefix
+const syncOnlyEventKeyPrefixes = [
+  'app.record.index.show',
+  'app.record.index.edit.show',
+  'app.record.index.edit.change',
+  'app.record.detail.show',
+  'app.record.create.show',
+  'app.record.create.change',
+  'app.record.edit.show',
+  'app.record.edit.change',
+];
+
+function isAsyncableEventKey(eventType: string): boolean {
+  // ブロックの移動中に eventType が null になるケースがあるため null なら false を返す。
+  if (eventType == null) {
+    return false;
+  }
+  return (
+    syncOnlyEventKeyPrefixes.filter(p => eventType.startsWith(p)).length == 0
+  );
+}
+
+function isAsyncableEventBlock(block: Blockly.Block): boolean {
+  const rootIsEventBlock = block.type.startsWith('kintone_event_');
+  if (!rootIsEventBlock) {
+    return false;
+  }
+  return isAsyncableEventKey(block.getFieldValue('event_type'));
+}
+
 function enableInEventBlock(block: Blockly.Block) {
   enableIfRootBlockHasPrefix(block, 'kintone_event_');
 }
 
 function enableInAsyncEventBlock(block: Blockly.Block) {
-  const denyEventKeyPrefixes = [
-    'app.record.index.show',
-    'app.record.index.edit.show',
-    'app.record.index.edit.change',
-    'app.record.detail.show',
-    'app.record.create.show',
-    'app.record.create.change',
-    'app.record.edit.show',
-    'app.record.edit.change',
-  ];
   block.setOnChange((e: Blockly.Events.BlockChange) => {
     if (!block.isInFlyout) {
       const root = block.getRootBlock();
-      const rootIsValidBlockName = root.type.startsWith('kintone_event_');
-      const eventType = root.getFieldValue('event_type');
-      const rootIsAsyncEvent =
-        eventType != null
-          ? denyEventKeyPrefixes.filter(p => eventType.startsWith(p)).length ==
-            0
-          : false;
-
-      block.setEnabled(rootIsValidBlockName && rootIsAsyncEvent);
+      block.setEnabled(isAsyncableEventBlock(root));
     }
   });
 }
@@ -68,4 +80,9 @@ namespace BlockColors {
   export const KINTONE: string = '#9fa55b';
 }
 
-export { enableInEventBlock, enableInAsyncEventBlock, BlockColors };
+export {
+  isAsyncableEventBlock,
+  enableInEventBlock,
+  enableInAsyncEventBlock,
+  BlockColors,
+};

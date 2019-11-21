@@ -1,7 +1,7 @@
 import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { BlockColors } from './block-definition-util';
+import { BlockColors, isAsyncableEventBlock } from './block-definition-util';
 
 export type KintoneEventBlockCategoryDef = {
   blockName: string;
@@ -48,6 +48,9 @@ export class KintoneEventBlock implements KintoneBlock {
 
   jsGenerator(): (block: Blockly.Block) => string {
     return function(block): string {
+      const functionSigniture = isAsyncableEventBlock(block)
+        ? 'async function(event)'
+        : 'function(event)';
       const event_type = block.getFieldValue('event_type');
       // @ts-ignore
       const event_callback = Blockly.JavaScript.statementToCode(
@@ -55,7 +58,7 @@ export class KintoneEventBlock implements KintoneBlock {
         'event_callback',
       );
       return `
-kintone.events.on('${event_type}', async function(event) {
+kintone.events.on('${event_type}', ${functionSigniture} {
 ${event_callback};
 return event;
 });
