@@ -2,7 +2,7 @@ import { KintoneBlock } from './KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../schema/Field';
-import { BlockColors } from './block-definition-util';
+import { BlockColors, enableInEventBlock } from './block-definition-util';
 
 export class KintoneRecordGetFieldBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -24,6 +24,7 @@ export class KintoneRecordGetFieldBlock implements KintoneBlock {
         this.setColour(BlockColors.KINTONE);
         this.setTooltip('');
         this.setHelpUrl('');
+        enableInEventBlock(this);
       },
     };
   }
