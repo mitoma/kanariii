@@ -2,7 +2,11 @@ function injectScript(file: string) {
   const bodyTag = document.getElementsByTagName('body')[0];
   const mediaScript = document.createElement('script');
   mediaScript.setAttribute('type', 'text/javascript');
-  mediaScript.innerText = `kintoneBlocklyMediaUrl = ${JSON.stringify(
+  mediaScript.innerText = `
+  var KintoneBlockly = KintoneBlockly || {};
+  KintoneBlockly.sourceXml = KintoneBlockly.sourceXml || '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
+  KintoneBlockly.revisions = KintoneBlockly.revisions || [];
+  KintoneBlockly.mediaUrl = ${JSON.stringify(
     chrome.extension.getURL('/media/'),
   )};`;
   bodyTag.appendChild(mediaScript);

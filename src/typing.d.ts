@@ -17,4 +17,5 @@ declare namespace KintoneBlockly {
   }
   const sourceXml: string;
   const revisions: Revision[];
+  const mediaUrl: string;
 }

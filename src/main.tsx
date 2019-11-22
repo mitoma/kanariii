@@ -13,28 +13,9 @@ if (document.readyState === 'loading') {
 }
 
 function afterDOMLoaded() {
-  function initialSourceXml(): string {
-    if (
-      typeof KintoneBlockly !== 'undefined' &&
-      KintoneBlockly.sourceXml !== null
-    ) {
-      return KintoneBlockly.sourceXml;
-    } else {
-      return '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
-    }
-  }
-
-  function initialRevisions(): Revision[] {
-    if (
-      typeof KintoneBlockly !== 'undefined' &&
-      typeof KintoneBlockly.revisions !== 'undefined' &&
-      KintoneBlockly.revisions !== null
-    ) {
-      const revisions: Revision[] = KintoneBlockly.revisions;
-      return revisions;
-    } else {
-      return [];
-    }
+  // app id が解決できないページは非対応。
+  if (kintone.app.getId() == null) {
+    return;
   }
 
   async function setup() {
@@ -48,8 +29,8 @@ function afterDOMLoaded() {
       slashClient.loadOrganizationsAndGroups(),
     ]);
 
-    const sourceXml = initialSourceXml();
-    const revisions = initialRevisions();
+    const sourceXml = KintoneBlockly.sourceXml;
+    const revisions = KintoneBlockly.revisions;
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
     if (kintoneMenu != null) {
       const blocklyToggle = document.createElement('span');

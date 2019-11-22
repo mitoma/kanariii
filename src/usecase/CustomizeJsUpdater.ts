@@ -76,7 +76,7 @@ ${jsCode}
 })();
 
 // kintone-blockly's internal information. don't touch.
-KintoneBlockly = {};
+var KintoneBlockly = KintoneBlockly || {};
 KintoneBlockly.sourceXml=${JSON.stringify(xmlCode)};
 KintoneBlockly.revisions=${JSON.stringify(revisions)};
 `;
