@@ -13,6 +13,7 @@ export class KintoneRecordSetVisibleBlock implements KintoneBlock {
     });
     return {
       init: function() {
+        const block: Blockly.Block = this;
         const jsonDefinition = {
           message0: '%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_MSG}',
           args0: [
@@ -37,7 +38,7 @@ export class KintoneRecordSetVisibleBlock implements KintoneBlock {
           tooltip: '%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_TOOLTIP}',
           helpUrl: '',
         };
-        this.jsonInit(jsonDefinition);
+        block.jsonInit(jsonDefinition);
       },
     };
   }

@@ -13,6 +13,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
     });
     return {
       init: function() {
+        const block: Blockly.Block = this;
         const jsonDefinition = {
           message0: '%{BKY_KINTONE_APP_RECORD_SET_ERROR_MSG}',
           args0: [
@@ -34,7 +35,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
           tooltip: '%{BKY_KINTONE_APP_RECORD_SET_ERROR_TOOLTIP}',
           helpUrl: '',
         };
-        this.jsonInit(jsonDefinition);
+        block.jsonInit(jsonDefinition);
       },
     };
   }
