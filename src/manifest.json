@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "kintone blockly",
   "description": "kintone customize editor",
-  "version": "0.0.1",
+  "version": "$VERSION",
   "content_scripts": [
     {
       "matches": [
