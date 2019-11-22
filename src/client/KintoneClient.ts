@@ -103,14 +103,17 @@ class KintoneClient {
   }
 
   async getAppFields() {
-    const resp = await kintone.api(this.url('/k/v1/form'), 'GET', {
+    const resp = await kintone.api(this.url('/k/v1/app/form/fields'), 'GET', {
       app: kintone.app.getId(),
     });
-    const fields: Field[] = resp.properties.map((f: any) => ({
-      code: f.code,
-      type: f.type,
-      label: f.label,
-    }));
+    const fieldKeys = Object.keys(resp.properties);
+    const fields: Field[] = fieldKeys
+      .map(key => resp.properties[key])
+      .map((f: any) => ({
+        code: f.code,
+        type: f.type,
+        label: f.label,
+      }));
     return fields.filter(f => !UNSUPPORTED_FIELD_TYPES.includes(f.type));
   }
 }
