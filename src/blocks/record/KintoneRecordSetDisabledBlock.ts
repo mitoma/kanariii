@@ -34,7 +34,7 @@ export class KintoneRecordSetDisabledBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'フィールドの編集可/不可を設定します',
+          tooltip: '%{BKY_KINTONE_APP_RECORD_SET_DISABLED_TOOLTIP}',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);

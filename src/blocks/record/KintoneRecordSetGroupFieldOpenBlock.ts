@@ -49,7 +49,7 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'グループフィールドの表示/非表示を設定します',
+          tooltip: '%{BKY_KINTONE_APP_RECORD_SET_GROUP_FIELD_OPEN_TOOLTIP}',
           helpUrl: '',
         };
         block.jsonInit(jsonDefinition);
