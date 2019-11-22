@@ -7,9 +7,9 @@
     "build:dev": "webpack",
     "build:production": "webpack --mode production",
     "build": "npm run clean && npm run build:dev",
-    "build-prod": "npm run clean && npm run build:production",
     "watch": "webpack -w",
-    "clean": "rimraf build",
+    "package": "npm run clean && npm run build:production && mkdirp package && zip package/kintone-blockly.zip build/*",
+    "clean": "rimraf build package",
     "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
   },
   "repository": {
@@ -40,8 +40,10 @@
   },
   "devDependencies": {
     "@kintone/dts-gen": "^2.1.1",
+    "@types/chrome": "0.0.91",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
+    "mkdirp": "^0.5.1",
     "raw-loader": "^3.1.0",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.0",
