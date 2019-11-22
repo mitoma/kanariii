@@ -31,7 +31,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'フィールドのエラーメッセージをセットします',
+          tooltip: '%{BKY_KINTONE_APP_RECORD_SET_ERROR_TOOLTIP}',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);

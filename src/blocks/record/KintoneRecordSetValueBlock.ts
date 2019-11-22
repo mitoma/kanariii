@@ -30,7 +30,7 @@ export class KintoneRecordSetValueBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'フィールドの値をセットします',
+          tooltip: '%{BKY_KINTONE_APP_RECORD_SET_VALUE_TOOLTIP}',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);

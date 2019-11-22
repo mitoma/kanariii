@@ -34,7 +34,7 @@ export class KintoneRecordSetVisibleBlock implements KintoneBlock {
           previousStatement: 'Action',
           nextStatement: 'Action',
           colour: BlockColors.KINTONE,
-          tooltip: 'フィールドの表示/非表示を設定します',
+          tooltip: '%{BKY_KINTONE_APP_RECORD_SET_VISIBLE_TOOLTIP}',
           helpUrl: '',
         };
         this.jsonInit(jsonDefinition);
