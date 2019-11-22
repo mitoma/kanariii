@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const CopyPlugin = require('copy-webpack-plugin');
+const package_json = require(path.resolve(__dirname, 'package.json'));
 
 module.exports = {
   // モード値を production に設定すると最適化された状態で、
@@ -63,6 +64,15 @@ module.exports = {
       {
         from: path.resolve(__dirname, './node_modules/blockly/media'),
         to: path.resolve(__dirname, 'build/media'),
+      },
+    ]),
+    new CopyPlugin([
+      {
+        from: path.resolve(__dirname, 'src/manifest.json'),
+        to: path.resolve(__dirname, 'build/manifest.json'),
+        transform(content) {
+          return content.toString().replace('$VERSION', package_json.version);
+        },
       },
     ]),
   ],
