@@ -6,29 +6,16 @@ import { SlashClient, OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { KintoneClient } from './client/KintoneClient';
 
-document.addEventListener('DOMContentLoaded', function(loadedEvent) {
-  function initialSourceXml(): string {
-    if (
-      typeof KintoneBlockly !== 'undefined' &&
-      KintoneBlockly.sourceXml !== null
-    ) {
-      return KintoneBlockly.sourceXml;
-    } else {
-      return '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
-    }
-  }
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', afterDOMLoaded);
+} else {
+  afterDOMLoaded();
+}
 
-  function initialRevisions(): Revision[] {
-    if (
-      typeof KintoneBlockly !== 'undefined' &&
-      typeof KintoneBlockly.revisions !== 'undefined' &&
-      KintoneBlockly.revisions !== null
-    ) {
-      const revisions: Revision[] = KintoneBlockly.revisions;
-      return revisions;
-    } else {
-      return [];
-    }
+function afterDOMLoaded() {
+  // app id が解決できないページは非対応。
+  if (kintone.app.getId() == null) {
+    return;
   }
 
   async function setup() {
@@ -42,8 +29,8 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
       slashClient.loadOrganizationsAndGroups(),
     ]);
 
-    const sourceXml = initialSourceXml();
-    const revisions = initialRevisions();
+    const sourceXml = KintoneBlockly.sourceXml;
+    const revisions = KintoneBlockly.revisions;
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
     if (kintoneMenu != null) {
       const blocklyToggle = document.createElement('span');
@@ -63,4 +50,4 @@ document.addEventListener('DOMContentLoaded', function(loadedEvent) {
   }
 
   setup();
-});
+}
