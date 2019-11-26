@@ -2,7 +2,7 @@ import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../../schema/Field';
-import { BlockColors } from '../block-definition-util';
+import { BlockColors, enableInEventBlock } from '../block-definition-util';
 
 export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -16,14 +16,23 @@ export class KintoneRecordGetFieldElementBlock implements KintoneBlock {
 
     return {
       init: function() {
-        this.appendDummyInput()
-          .appendField('フィールドエレメント')
-          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
-
-        this.setOutput(true, null);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
+        const block: Blockly.Block = this;
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG}',
+          args0: [
+            {
+              type: 'field_dropdown',
+              name: 'field_code',
+              options: fieldsDropdown,
+            },
+          ],
+          output: null,
+          colour: BlockColors.KINTONE,
+          tooltip: '%{BKY_KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP}',
+          helpUrl: '',
+        };
+        block.jsonInit(jsonDefinition);
+        enableInEventBlock(block);
       },
     };
   }

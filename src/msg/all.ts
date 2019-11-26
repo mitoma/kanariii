@@ -28,6 +28,12 @@ export function loadJaLocale() {
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属している';
   JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
 
+  JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'フィールドエレメント %1';
+  JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'フィールドエレメントを取得します';
+  JA['KINTONE_APP_RECORD_GET_FIELD_VALUE_MSG'] = 'フィールド値 %1';
+  JA['KINTONE_APP_RECORD_GET_FIELD_VALUE_TOOLTIP'] = 'フィールド値を取得します';
+  JA['KINTONE_APP_RECORD_GET_ID_MSG'] = 'レコードID';
+  JA['KINTONE_APP_RECORD_GET_ID_TOOLTIP'] = 'レコードIDを取得します';
   JA['KINTONE_APP_RECORD_GET_EVENT_MSG'] = 'レコードイベント';
   JA['KINTONE_APP_RECORD_GET_EVENT_TOOLTIP'] = '関数の引数にレコードイベントを渡すためのオブジェクト';
   JA['KINTONE_APP_RECORD_SET_VALUE_MSG'] = '%1 の値に %2 をセット';
@@ -76,6 +82,12 @@ export function loadEnLocale() {
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
   EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
 
+  EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'field element %1';
+  EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'get field element';
+  EN['KINTONE_APP_RECORD_GET_FIELD_VALUE_MSG'] = 'field value %1';
+  EN['KINTONE_APP_RECORD_GET_FIELD_VALUE_TOOLTIP'] = 'get field value';
+  EN['KINTONE_APP_RECORD_GET_ID_MSG'] = 'record id';
+  EN['KINTONE_APP_RECORD_GET_ID_TOOLTIP'] = 'get record id';
   EN['KINTONE_APP_RECORD_GET_EVENT_MSG'] = 'record event';
   EN['KINTONE_APP_RECORD_GET_EVENT_TOOLTIP'] = 'record event for function args';
   EN['KINTONE_APP_RECORD_SET_VALUE_MSG'] = 'set %1 to %2';
