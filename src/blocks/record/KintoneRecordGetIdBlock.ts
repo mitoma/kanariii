@@ -1,7 +1,7 @@
 import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
-import { BlockColors } from '../block-definition-util';
+import { BlockColors, enableInEventBlock } from '../block-definition-util';
 
 export class KintoneRecordGetIdBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_id';
@@ -9,11 +9,16 @@ export class KintoneRecordGetIdBlock implements KintoneBlock {
   blockDefinition(): object {
     return {
       init: function() {
-        this.appendDummyInput().appendField('レコードID');
-        this.setOutput(true, null);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
+        const block: Blockly.Block = this;
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_GET_ID_MSG}',
+          output: null,
+          colour: BlockColors.KINTONE,
+          tooltip: '%{BKY_KINTONE_APP_RECORD_GET_ID_TOOLTIP}',
+          helpUrl: '',
+        };
+        block.jsonInit(jsonDefinition);
+        enableInEventBlock(block);
       },
     };
   }

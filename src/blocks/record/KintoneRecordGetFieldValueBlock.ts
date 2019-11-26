@@ -16,15 +16,23 @@ export class KintoneRecordGetFieldValueBlock implements KintoneBlock {
 
     return {
       init: function() {
-        this.appendDummyInput()
-          .appendField('フィールド値')
-          .appendField(new Blockly.FieldDropdown(fieldsDropdown), 'field_code');
-
-        this.setOutput(true, null);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
-        enableInEventBlock(this);
+        const block: Blockly.Block = this;
+        const jsonDefinition = {
+          message0: '%{BKY_KINTONE_APP_RECORD_GET_FIELD_VALUE_MSG}',
+          args0: [
+            {
+              type: 'field_dropdown',
+              name: 'field_code',
+              options: fieldsDropdown,
+            },
+          ],
+          output: null,
+          colour: BlockColors.KINTONE,
+          tooltip: '%{BKY_KINTONE_APP_RECORD_GET_FIELD_VALUE_TOOLTIP}',
+          helpUrl: '',
+        };
+        block.jsonInit(jsonDefinition);
+        enableInEventBlock(block);
       },
     };
   }
