@@ -30,7 +30,7 @@ import { BlockColors } from './block-definition-util';
 
 // レコード一覧
 const appRecordIndexDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード一覧',
+  blockLabel: 'レコード一覧 %1',
   blockName: 'kintone_event_app_record_index',
   details: [
     {
@@ -65,7 +65,7 @@ const appRecordIndexFieldDef: KintoneFieldEventBlockCategoryDef = {
 
 // レコード詳細画面
 const appRecordDetailDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード詳細画面',
+  blockLabel: 'レコード詳細画面 %1',
   blockName: 'kintone_event_app_record_detail',
   details: [
     {
@@ -85,7 +85,7 @@ const appRecordDetailDef: KintoneEventBlockCategoryDef = {
 
 // レコード追加画面
 const appRecordCreateDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード追加',
+  blockLabel: 'レコード追加 %1',
   blockName: 'kintone_event_app_record_create',
   details: [
     {
@@ -112,7 +112,7 @@ const appRecordCreateFieldDef: KintoneFieldEventBlockCategoryDef = {
 
 // レコード編集画面
 const appRecordEditDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード編集',
+  blockLabel: 'レコード編集 %1',
   blockName: 'kintone_event_app_record_edit',
   details: [
     {
