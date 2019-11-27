@@ -28,18 +28,18 @@
   },
   "homepage": "https://github.com/mitoma/kintone-blockly#readme",
   "dependencies": {
-    "@material-ui/core": "^4.6.0",
+    "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
-    "@types/prettier": "^1.18.3",
-    "@types/react": "^16.9.9",
+    "@types/prettier": "^1.19.0",
+    "@types/react": "^16.9.13",
     "@types/react-dom": "^16.9.4",
     "blockly": "^3.20191014.4",
     "prettier": "^1.19.1",
-    "react": "^16.11.0",
-    "react-dom": "^16.11.0"
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@kintone/dts-gen": "^2.1.1",
+    "@kintone/dts-gen": "^2.1.2",
     "@types/chrome": "0.0.91",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
