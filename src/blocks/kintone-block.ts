@@ -85,19 +85,19 @@ const appRecordDetailDef: KintoneEventBlockCategoryDef = {
 
 // レコード追加画面
 const appRecordCreateDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード追加 %1',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE}',
   blockName: 'kintone_event_app_record_create',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SHOW}',
       eventKey: 'app.record.create.show',
     },
     {
-      eventLabel: '保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT}',
       eventKey: 'app.record.create.submit',
     },
     {
-      eventLabel: '保存実行後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT_SUCCESS}',
       eventKey: 'app.record.create.submit.success',
     },
   ],
