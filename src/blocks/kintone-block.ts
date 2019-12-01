@@ -30,35 +30,35 @@ import { BlockColors } from './block-definition-util';
 
 // レコード一覧
 const appRecordIndexDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード一覧 %1',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX}',
   blockName: 'kintone_event_app_record_index',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_SHOW}',
       eventKey: 'app.record.index.show',
     },
     {
-      eventLabel: 'インライン編集開始',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW}',
       eventKey: 'app.record.index.edit.show',
     },
     {
-      eventLabel: 'インライン編集の保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT}',
       eventKey: 'app.record.index.edit.submit',
     },
     {
-      eventLabel: 'インライン編集の保存成功後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS}',
       eventKey: 'app.record.index.edit.submit.success',
     },
     {
-      eventLabel: 'レコード削除前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT}',
       eventKey: 'app.record.index.delete.submit',
     },
   ],
 };
 
 const appRecordIndexFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード一覧',
-  blockLabelSub: '(インライン編集フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_FIELD_SUB}',
   blockName: 'kintone_event_app_record_index_field',
   eventKeyPrefix: 'app.record.index.edit.change',
 };

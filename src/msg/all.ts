@@ -28,6 +28,14 @@ export function loadJaLocale() {
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属している';
   JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
 
+  JA['KINTONE_EVENT_APP_RECORD_INDEX'] = 'レコード一覧 %1';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_FIELD'] = '(インライン編集フィールド値変更)';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_SHOW'] = '表示';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW'] = 'インライン編集開始';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT'] = 'インライン編集の保存実行前';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS'] = 'インライン編集の保存成功後';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT'] = 'レコード削除前';
+
   JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'フィールドエレメント %1';
   JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'フィールドエレメントを取得します';
   JA['KINTONE_APP_RECORD_GET_FIELD_VALUE_MSG'] = 'フィールド値 %1';
@@ -81,6 +89,15 @@ export function loadEnLocale() {
   EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
   EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
+
+  EN['KINTONE_EVENT_APP_RECORD_INDEX'] = 'record index %1';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_SHOW'] = 'show';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW'] = 'edit inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT'] = 'before save inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS'] = 'after save inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT'] = 'before delete record';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_FIELD'] = 'record index';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_FIELD_SUB'] = 'change event by field value';
 
   EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'field element %1';
   EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'get field element';
