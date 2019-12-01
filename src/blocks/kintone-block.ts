@@ -65,19 +65,19 @@ const appRecordIndexFieldDef: KintoneFieldEventBlockCategoryDef = {
 
 // レコード詳細画面
 const appRecordDetailDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード詳細画面 %1',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL}',
   blockName: 'kintone_event_app_record_detail',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_SHOW}',
       eventKey: 'app.record.detail.show',
     },
     {
-      eventLabel: '削除前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_DELETE_SUBMIT}',
       eventKey: 'app.record.detail.delete.submit',
     },
     {
-      eventLabel: 'プロセス管理のアクション実行',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_PROCESS_PROCEED}',
       eventKey: 'app.record.detail.process.proceed',
     },
   ],
