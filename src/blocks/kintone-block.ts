@@ -30,54 +30,54 @@ import { BlockColors } from './block-definition-util';
 
 // レコード一覧
 const appRecordIndexDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード一覧',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX}',
   blockName: 'kintone_event_app_record_index',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_SHOW}',
       eventKey: 'app.record.index.show',
     },
     {
-      eventLabel: 'インライン編集開始',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW}',
       eventKey: 'app.record.index.edit.show',
     },
     {
-      eventLabel: 'インライン編集の保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT}',
       eventKey: 'app.record.index.edit.submit',
     },
     {
-      eventLabel: 'インライン編集の保存成功後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS}',
       eventKey: 'app.record.index.edit.submit.success',
     },
     {
-      eventLabel: 'レコード削除前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT}',
       eventKey: 'app.record.index.delete.submit',
     },
   ],
 };
 
 const appRecordIndexFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード一覧',
-  blockLabelSub: '(インライン編集フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_INDEX_FIELD_SUB}',
   blockName: 'kintone_event_app_record_index_field',
   eventKeyPrefix: 'app.record.index.edit.change',
 };
 
 // レコード詳細画面
 const appRecordDetailDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード詳細画面',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL}',
   blockName: 'kintone_event_app_record_detail',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_SHOW}',
       eventKey: 'app.record.detail.show',
     },
     {
-      eventLabel: '削除前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_DELETE_SUBMIT}',
       eventKey: 'app.record.detail.delete.submit',
     },
     {
-      eventLabel: 'プロセス管理のアクション実行',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_DETAIL_PROCESS_PROCEED}',
       eventKey: 'app.record.detail.process.proceed',
     },
   ],
@@ -85,54 +85,54 @@ const appRecordDetailDef: KintoneEventBlockCategoryDef = {
 
 // レコード追加画面
 const appRecordCreateDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード追加',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE}',
   blockName: 'kintone_event_app_record_create',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SHOW}',
       eventKey: 'app.record.create.show',
     },
     {
-      eventLabel: '保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT}',
       eventKey: 'app.record.create.submit',
     },
     {
-      eventLabel: '保存実行後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT_SUCCESS}',
       eventKey: 'app.record.create.submit.success',
     },
   ],
 };
 
 const appRecordCreateFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード追加',
-  blockLabelSub: '(フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_FIELD_SUB}',
   blockName: 'kintone_event_app_record_create_field',
   eventKeyPrefix: 'app.record.create.change',
 };
 
 // レコード編集画面
 const appRecordEditDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード編集',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT}',
   blockName: 'kintone_event_app_record_edit',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SHOW}',
       eventKey: 'app.record.edit.show',
     },
     {
-      eventLabel: '保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT}',
       eventKey: 'app.record.edit.submit',
     },
     {
-      eventLabel: '保存実行後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT_SUCCESS}',
       eventKey: 'app.record.edit.submit.success',
     },
   ],
 };
 
 const appRecordEditFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード編集',
-  blockLabelSub: '(フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_FIELD_SUB}',
   blockName: 'kintone_event_app_record_edit_field',
   eventKeyPrefix: 'app.record.edit.change',
 };
@@ -146,47 +146,68 @@ export function buildKintone(
 ) {
   // デバッグ用
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'デバッグ', BlockColors.SLASH, [
-      new ConsoleLogBlock(),
-      new DebuggerBlock(),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_DEBUG}',
+      BlockColors.SLASH,
+      [new ConsoleLogBlock(), new DebuggerBlock()],
+    ),
   );
 
   // ユーザー管理系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'ユーザー', BlockColors.SLASH, [
-      new SlashUserBlock(),
-      new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
-      new SlashUserGroupBlock(organizationsAndGroups.groups),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_USER}',
+      BlockColors.SLASH,
+      [
+        new SlashUserBlock(),
+        new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
+        new SlashUserGroupBlock(organizationsAndGroups.groups),
+      ],
+    ),
   );
 
   // イベント系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'イベント', BlockColors.KINTONE, [
-      new KintoneEventBlock(appRecordIndexDef),
-      new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
-      new KintoneEventBlock(appRecordDetailDef),
-      new KintoneEventBlock(appRecordCreateDef),
-      new KintoneEventFieldBlock(appRecordCreateFieldDef, fields),
-      new KintoneEventBlock(appRecordEditDef),
-      new KintoneEventFieldBlock(appRecordEditFieldDef, fields),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_EVENT}',
+      BlockColors.KINTONE,
+      [
+        new KintoneEventBlock(appRecordIndexDef),
+        new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
+        new KintoneEventBlock(appRecordDetailDef),
+        new KintoneEventBlock(appRecordCreateDef),
+        new KintoneEventFieldBlock(appRecordCreateFieldDef, fields),
+        new KintoneEventBlock(appRecordEditDef),
+        new KintoneEventFieldBlock(appRecordEditFieldDef, fields),
+      ],
+    ),
   );
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'レコード', BlockColors.KINTONE, [
-      new KintoneRecordGetIdBlock(),
-      new KintoneRecordGetEventBlock(),
-      new KintoneRecordGetFieldValueBlock(fields),
-      new KintoneRecordGetFieldElementBlock(fields),
-      new KintoneRecordSetValueBlock(fields),
-      new KintoneRecordSetErrorBlock(fields),
-      new KintoneRecordSetDisabledBlock(fields),
-      new KintoneRecordSetVisibleBlock(fields),
-      new KintoneRecordSetGroupFieldOpenBlock(fields),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_RECORD}',
+      BlockColors.KINTONE,
+      [
+        new KintoneRecordGetIdBlock(),
+        new KintoneRecordGetEventBlock(),
+        new KintoneRecordGetFieldValueBlock(fields),
+        new KintoneRecordGetFieldElementBlock(fields),
+        new KintoneRecordSetValueBlock(fields),
+        new KintoneRecordSetErrorBlock(fields),
+        new KintoneRecordSetDisabledBlock(fields),
+        new KintoneRecordSetVisibleBlock(fields),
+        new KintoneRecordSetGroupFieldOpenBlock(fields),
+      ],
+    ),
   );
 }
 

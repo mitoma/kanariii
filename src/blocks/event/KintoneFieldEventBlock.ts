@@ -3,7 +3,6 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../../schema/Field';
 import { BlockColors, isAsyncableEventBlock } from '../block-definition-util';
-import { func } from 'prop-types';
 
 export type KintoneFieldEventBlockCategoryDef = {
   blockName: string;
@@ -27,21 +26,35 @@ export class KintoneEventFieldBlock implements KintoneBlock {
     const fields = this.fields;
     return {
       init: function() {
-        this.appendDummyInput().appendField(categoryDef.blockLabel);
-        this.appendDummyInput().appendField(categoryDef.blockLabelSub);
-        this.appendDummyInput().appendField(
-          new Blockly.FieldDropdown(
-            fields.map(field => {
-              return [field.label, field.code];
-            }),
-          ),
-          'field_code',
-        );
-        this.appendStatementInput('event_callback').setCheck(null);
-        this.setInputsInline(false);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
+        const dropdown = fields.map(field => {
+          return [field.label, field.code];
+        });
+
+        const block: Blockly.Block = this;
+        const jsonDefinition = {
+          message0: categoryDef.blockLabel,
+          message1: categoryDef.blockLabelSub,
+          message2: '%1',
+          args2: [
+            {
+              type: 'field_dropdown',
+              name: 'field_code',
+              options: dropdown,
+            },
+          ],
+          message3: '%1',
+          args3: [
+            {
+              type: 'input_statement',
+              name: 'event_callback',
+            },
+          ],
+          inputsInline: false,
+          colour: BlockColors.KINTONE,
+          tooltip: '',
+          helpUrl: '',
+        };
+        block.jsonInit(jsonDefinition);
       },
     };
   }
