@@ -4,6 +4,11 @@ import * as Blockly from 'blockly';
 
 // prettier-ignore
 export function loadJaLocale() {
+  JA['KINTONE_MENU_CATEGORY_DEBUG'] = 'デバッグ';
+  JA['KINTONE_MENU_CATEGORY_USER'] = 'ユーザー';
+  JA['KINTONE_MENU_CATEGORY_EVENT'] = 'イベント';
+  JA['KINTONE_MENU_CATEGORY_RECORD'] = 'レコード';
+
   JA['CONSOLE_LOG_MSG'] = 'ログ出力 %1';
   JA['CONSOLE_LOG_TOOLTIP'] = 'console.log でログを出力します';
   JA['DEBUGGER_MSG'] = 'デバッガー';
@@ -27,6 +32,31 @@ export function loadJaLocale() {
   JA['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
   JA['SLASH_USER_GROUP_MSG'] = 'ログインユーザーがグループ %1 に所属している';
   JA['SLASH_USER_GROUP_TOOLTIP'] = 'ユーザーが組織に所属しているかどうかを返します';
+
+  JA['KINTONE_EVENT_APP_RECORD_INDEX'] = 'レコード一覧 %1';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_SHOW'] = '表示';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW'] = 'インライン編集開始';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT'] = 'インライン編集の保存実行前';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS'] = 'インライン編集の保存成功後';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT'] = 'レコード削除前';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_FIELD'] = 'レコード一覧';
+  JA['KINTONE_EVENT_APP_RECORD_INDEX_FIELD_SUB'] = '(インライン編集フィールド値変更)';
+  JA['KINTONE_EVENT_APP_RECORD_DETAIL'] = 'レコード詳細画面 %1';
+  JA['KINTONE_EVENT_APP_RECORD_DETAIL_SHOW'] = '表示';
+  JA['KINTONE_EVENT_APP_RECORD_DETAIL_DELETE_SUBMIT'] = '削除前';
+  JA['KINTONE_EVENT_APP_RECORD_DETAIL_PROCESS_PROCEED'] = 'プロセス管理のアクション実行';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE'] = 'レコード追加 %1';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE_SHOW'] = '表示';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT'] = '保存実行前';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT_SUCCESS'] = '保存実行後';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE_FIELD'] = 'レコード追加';
+  JA['KINTONE_EVENT_APP_RECORD_CREATE_FIELD_SUB'] = '(フィールド値変更)';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT'] = 'レコード編集 %1';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT_SHOW'] = '表示';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT'] = '保存実行前';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT_SUCCESS'] = '保存実行後';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT_FIELD'] = 'レコード編集';
+  JA['KINTONE_EVENT_APP_RECORD_EDIT_FIELD_SUB'] = '(フィールド値変更)';
 
   JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'フィールドエレメント %1';
   JA['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'フィールドエレメントを取得します';
@@ -58,6 +88,11 @@ export function loadJaLocale() {
 
 // prettier-ignore
 export function loadEnLocale() {
+  EN['KINTONE_MENU_CATEGORY_DEBUG'] = 'Debug';
+  EN['KINTONE_MENU_CATEGORY_USER'] = 'User';
+  EN['KINTONE_MENU_CATEGORY_EVENT'] = 'Event';
+  EN['KINTONE_MENU_CATEGORY_RECORD'] = 'Record';
+
   EN['CONSOLE_LOG_MSG'] = 'logger %1';
   EN['CONSOLE_LOG_TOOLTIP'] = 'write log with console.log';
   EN['DEBUGGER_MSG'] = 'debugger';
@@ -81,6 +116,31 @@ export function loadEnLocale() {
   EN['SLASH_USER_ORGANIZATION_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected organization';
   EN['SLASH_USER_GROUP_MSG'] = 'login user in group of %1';
   EN['SLASH_USER_GROUP_TOOLTIP'] = 'returns whether the logged-in user belongs to the selected group';
+
+  EN['KINTONE_EVENT_APP_RECORD_INDEX'] = 'record index %1';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_SHOW'] = 'show';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SHOW'] = 'edit inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT'] = 'before save inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_EDIT_SUBMIT_SUCCESS'] = 'after save inline';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_DELETE_SUBMIT'] = 'before delete record';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_FIELD'] = 'record index';
+  EN['KINTONE_EVENT_APP_RECORD_INDEX_FIELD_SUB'] = 'change event by field value';
+  EN['KINTONE_EVENT_APP_RECORD_DETAIL'] = 'record detail %1';
+  EN['KINTONE_EVENT_APP_RECORD_DETAIL_SHOW'] = 'show';
+  EN['KINTONE_EVENT_APP_RECORD_DETAIL_DELETE_SUBMIT'] = 'before delete record';
+  EN['KINTONE_EVENT_APP_RECORD_DETAIL_PROCESS_PROCEED'] = 'before process proceed';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE'] = 'record create %1';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE_SHOW'] = 'show';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT'] = 'before create record';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE_SUBMIT_SUCCESS'] = 'after create record';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE_FIELD'] = 'record create';
+  EN['KINTONE_EVENT_APP_RECORD_CREATE_FIELD_SUB'] = 'change event by field value';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT'] = 'record edit %1';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT_SHOW'] = 'show';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT'] = 'before edit record';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT_SUCCESS'] = 'after edit record';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT_FIELD'] = 'record edit';
+  EN['KINTONE_EVENT_APP_RECORD_EDIT_FIELD_SUB'] = 'change event by field value';
 
   EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_MSG'] = 'field element %1';
   EN['KINTONE_APP_RECORD_GET_FIELD_ELEMENT_TOOLTIP'] = 'get field element';

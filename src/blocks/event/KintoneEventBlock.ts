@@ -28,20 +28,34 @@ export class KintoneEventBlock implements KintoneBlock {
     const categoryDef = this.categoryDef;
     return {
       init: function() {
-        this.appendDummyInput().appendField(categoryDef.blockLabel);
-        this.appendDummyInput().appendField(
-          new Blockly.FieldDropdown(
-            categoryDef.details.map(detail => {
-              return [detail.eventLabel, detail.eventKey];
-            }),
-          ),
-          'event_type',
-        );
-        this.appendStatementInput('event_callback').setCheck(null);
-        this.setInputsInline(false);
-        this.setColour(BlockColors.KINTONE);
-        this.setTooltip('');
-        this.setHelpUrl('');
+        const dropdown = categoryDef.details.map(detail => [
+          detail.eventLabel,
+          detail.eventKey,
+        ]);
+
+        const block: Blockly.Block = this;
+        const jsonDefinition = {
+          message0: categoryDef.blockLabel,
+          args0: [
+            {
+              type: 'field_dropdown',
+              name: 'event_type',
+              options: dropdown,
+            },
+          ],
+          message1: '%1',
+          args1: [
+            {
+              type: 'input_statement',
+              name: 'event_callback',
+            },
+          ],
+          inputsInline: false,
+          colour: BlockColors.KINTONE,
+          tooltip: '',
+          helpUrl: '',
+        };
+        block.jsonInit(jsonDefinition);
       },
     };
   }
