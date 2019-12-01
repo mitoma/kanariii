@@ -24,7 +24,6 @@ export class KintoneEventFieldBlock implements KintoneBlock {
   blockDefinition(): object {
     const categoryDef = this.categoryDef;
     const fields = this.fields;
-
     return {
       init: function() {
         const dropdown = fields.map(field => {
