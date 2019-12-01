@@ -146,47 +146,68 @@ export function buildKintone(
 ) {
   // デバッグ用
   category.appendChild(
-    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_DEBUG}', BlockColors.SLASH, [
-      new ConsoleLogBlock(),
-      new DebuggerBlock(),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_DEBUG}',
+      BlockColors.SLASH,
+      [new ConsoleLogBlock(), new DebuggerBlock()],
+    ),
   );
 
   // ユーザー管理系
   category.appendChild(
-    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_USER}', BlockColors.SLASH, [
-      new SlashUserBlock(),
-      new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
-      new SlashUserGroupBlock(organizationsAndGroups.groups),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_USER}',
+      BlockColors.SLASH,
+      [
+        new SlashUserBlock(),
+        new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
+        new SlashUserGroupBlock(organizationsAndGroups.groups),
+      ],
+    ),
   );
 
   // イベント系
   category.appendChild(
-    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_EVENT}', BlockColors.KINTONE, [
-      new KintoneEventBlock(appRecordIndexDef),
-      new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
-      new KintoneEventBlock(appRecordDetailDef),
-      new KintoneEventBlock(appRecordCreateDef),
-      new KintoneEventFieldBlock(appRecordCreateFieldDef, fields),
-      new KintoneEventBlock(appRecordEditDef),
-      new KintoneEventFieldBlock(appRecordEditFieldDef, fields),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_EVENT}',
+      BlockColors.KINTONE,
+      [
+        new KintoneEventBlock(appRecordIndexDef),
+        new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
+        new KintoneEventBlock(appRecordDetailDef),
+        new KintoneEventBlock(appRecordCreateDef),
+        new KintoneEventFieldBlock(appRecordCreateFieldDef, fields),
+        new KintoneEventBlock(appRecordEditDef),
+        new KintoneEventFieldBlock(appRecordEditFieldDef, fields),
+      ],
+    ),
   );
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_RECORD}', BlockColors.KINTONE, [
-      new KintoneRecordGetIdBlock(),
-      new KintoneRecordGetEventBlock(),
-      new KintoneRecordGetFieldValueBlock(fields),
-      new KintoneRecordGetFieldElementBlock(fields),
-      new KintoneRecordSetValueBlock(fields),
-      new KintoneRecordSetErrorBlock(fields),
-      new KintoneRecordSetDisabledBlock(fields),
-      new KintoneRecordSetVisibleBlock(fields),
-      new KintoneRecordSetGroupFieldOpenBlock(fields),
-    ]),
+    createSubCategoryElement(
+      blocks,
+      js,
+      '%{BKY_KINTONE_MENU_CATEGORY_RECORD}',
+      BlockColors.KINTONE,
+      [
+        new KintoneRecordGetIdBlock(),
+        new KintoneRecordGetEventBlock(),
+        new KintoneRecordGetFieldValueBlock(fields),
+        new KintoneRecordGetFieldElementBlock(fields),
+        new KintoneRecordSetValueBlock(fields),
+        new KintoneRecordSetErrorBlock(fields),
+        new KintoneRecordSetDisabledBlock(fields),
+        new KintoneRecordSetVisibleBlock(fields),
+        new KintoneRecordSetGroupFieldOpenBlock(fields),
+      ],
+    ),
   );
 }
 
