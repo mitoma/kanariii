@@ -104,35 +104,35 @@ const appRecordCreateDef: KintoneEventBlockCategoryDef = {
 };
 
 const appRecordCreateFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード追加',
-  blockLabelSub: '(フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_CREATE_FIELD_SUB}',
   blockName: 'kintone_event_app_record_create_field',
   eventKeyPrefix: 'app.record.create.change',
 };
 
 // レコード編集画面
 const appRecordEditDef: KintoneEventBlockCategoryDef = {
-  blockLabel: 'レコード編集 %1',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT}',
   blockName: 'kintone_event_app_record_edit',
   details: [
     {
-      eventLabel: '表示',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SHOW}',
       eventKey: 'app.record.edit.show',
     },
     {
-      eventLabel: '保存実行前',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT}',
       eventKey: 'app.record.edit.submit',
     },
     {
-      eventLabel: '保存実行後',
+      eventLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_SUBMIT_SUCCESS}',
       eventKey: 'app.record.edit.submit.success',
     },
   ],
 };
 
 const appRecordEditFieldDef: KintoneFieldEventBlockCategoryDef = {
-  blockLabel: 'レコード編集',
-  blockLabelSub: '(フィールド値変更)',
+  blockLabel: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_FIELD}',
+  blockLabelSub: '%{BKY_KINTONE_EVENT_APP_RECORD_EDIT_FIELD_SUB}',
   blockName: 'kintone_event_app_record_edit_field',
   eventKeyPrefix: 'app.record.edit.change',
 };
@@ -146,7 +146,7 @@ export function buildKintone(
 ) {
   // デバッグ用
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'デバッグ', BlockColors.SLASH, [
+    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_DEBUG}', BlockColors.SLASH, [
       new ConsoleLogBlock(),
       new DebuggerBlock(),
     ]),
@@ -154,7 +154,7 @@ export function buildKintone(
 
   // ユーザー管理系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'ユーザー', BlockColors.SLASH, [
+    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_USER}', BlockColors.SLASH, [
       new SlashUserBlock(),
       new SlashUserOrganizationBlock(organizationsAndGroups.organizations),
       new SlashUserGroupBlock(organizationsAndGroups.groups),
@@ -163,7 +163,7 @@ export function buildKintone(
 
   // イベント系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'イベント', BlockColors.KINTONE, [
+    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_EVENT}', BlockColors.KINTONE, [
       new KintoneEventBlock(appRecordIndexDef),
       new KintoneEventFieldBlock(appRecordIndexFieldDef, fields),
       new KintoneEventBlock(appRecordDetailDef),
@@ -176,7 +176,7 @@ export function buildKintone(
 
   // レコードの値系
   category.appendChild(
-    createSubCategoryElement(blocks, js, 'レコード', BlockColors.KINTONE, [
+    createSubCategoryElement(blocks, js, '%{BKY_KINTONE_MENU_CATEGORY_RECORD}', BlockColors.KINTONE, [
       new KintoneRecordGetIdBlock(),
       new KintoneRecordGetEventBlock(),
       new KintoneRecordGetFieldValueBlock(fields),
