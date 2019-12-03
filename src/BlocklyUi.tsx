@@ -152,7 +152,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
             <CloseIcon />
           </IconButton>
           <Box>
-            <Typography variant="h6">KintoneBlockly</Typography>
+            <Typography variant="h6">KanariIi</Typography>
           </Box>
           <Box flex={1}>
             <Button
