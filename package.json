@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mitoma/kintone-blockly.git"
+    "url": "git+https://github.com/mitoma/kanariii.git"
   },
   "keywords": [
     "kintone",
@@ -24,9 +24,9 @@
   "author": "mitoma",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mitoma/kintone-blockly/issues"
+    "url": "https://github.com/mitoma/kanariii/issues"
   },
-  "homepage": "https://github.com/mitoma/kintone-blockly#readme",
+  "homepage": "https://github.com/mitoma/kanariii#readme",
   "dependencies": {
     "@material-ui/core": "^4.7.0",
     "@material-ui/icons": "^4.5.1",
