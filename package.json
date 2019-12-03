@@ -1,5 +1,5 @@
 {
-  "name": "kintone-blockly",
+  "name": "kanariii",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "build:production": "webpack --mode production",
     "build": "npm run clean && npm run build:dev",
     "watch": "webpack -w",
-    "package": "npm run clean && npm run build:production && mkdirp package && zip package/kintone-blockly.zip build/*",
+    "package": "npm run clean && npm run build:production && mkdirp package && zip package/kanariii.zip build/*",
     "clean": "rimraf build package",
     "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
   },

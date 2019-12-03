@@ -15,4 +15,4 @@ function injectScript(file: string) {
   bodyTag.appendChild(mainScript);
 }
 
-injectScript(chrome.extension.getURL('/kintone-blockly.js'));
+injectScript(chrome.extension.getURL('/kanariii.js'));
