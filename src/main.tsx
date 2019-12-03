@@ -29,8 +29,8 @@ function afterDOMLoaded() {
       slashClient.loadOrganizationsAndGroups(),
     ]);
 
-    const sourceXml = KintoneBlockly.sourceXml;
-    const revisions = KintoneBlockly.revisions;
+    const sourceXml = KanariIi.sourceXml;
+    const revisions = KanariIi.revisions;
     const kintoneMenu = document.querySelector('.gaia-argoui-app-toolbar-menu');
     if (kintoneMenu != null) {
       const blocklyToggle = document.createElement('span');
