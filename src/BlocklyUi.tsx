@@ -1,5 +1,4 @@
 import * as Blockly from 'blockly';
-import 'blockly/javascript';
 import styles from './BlocklyUi.css';
 import * as React from 'react';
 import { CustomizeJsUpdater } from './usecase/CustomizeJsUpdater';
@@ -26,6 +25,7 @@ import { OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { DeployDialog } from './view/DeployDialog';
 import { HistoryDialog } from './view/HistoryDialog';
+import { generateJavaScriptWithMetadata } from './usecase/CodeGenerator';
 
 type BlocklyUiProps = {
   sourceXml: string;
@@ -123,17 +123,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
 
   function handleDeploy(deployMessage: string) {
     handleOpenLoading();
+    const jsCode = generateJavaScriptWithMetadata(
+      workspace,
+      deployMessage,
+      props.revisions,
+    );
     customizeJsUpdater
-      .uploadCustomizeCode(
-        Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
-        // @ts-ignore
-        Blockly.JavaScript.workspaceToCode(workspace),
-        deployMessage,
-        props.revisions,
-      )
-      .then(() => {
-        location.reload();
-      })
+      .uploadCustomizeCode(jsCode)
+      .then(() => location.reload())
       .catch(error => {
         console.error(error);
         handleCloseLoading();
