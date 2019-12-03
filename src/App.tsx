@@ -32,8 +32,8 @@ export function App(props: AppProps) {
         startIcon={<BuildIcon />}
         color="inherit"
         onClick={handleOpenEditor}
-        aria-label="open blockly">
-        open blockly
+        aria-label="open kanariii">
+        open kanariii
       </Button>
       <div
         className={
