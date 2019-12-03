@@ -15,5 +15,5 @@
       "run_at": "document_end"
     }
   ],
-  "web_accessible_resources": ["kintone-blockly.js", "media/*"]
+  "web_accessible_resources": ["kanariii.js", "media/*"]
 }
