@@ -8,7 +8,7 @@ declare module '*.css' {
   export default classes;
 }
 
-declare namespace KintoneBlockly {
+declare namespace KanariIi {
   interface Revision {
     revisionId: number;
     deployDate: Date;

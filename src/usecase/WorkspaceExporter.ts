@@ -5,7 +5,7 @@ import { Revision } from '../history/Revision';
 
 export class WorkspaceExporter {
   exportXml(workspace: Blockly.Workspace) {
-    const filename = 'kintone-blockly.xml';
+    const filename = 'kanariii.xml';
     const xmlData = Blockly.Xml.domToText(
       Blockly.Xml.workspaceToDom(workspace),
     );
@@ -14,7 +14,7 @@ export class WorkspaceExporter {
   }
 
   exportJavaScript(workspace: Blockly.Workspace, revisions: Revision[]) {
-    const filename = 'kintone-blockly-app.js';
+    const filename = 'kanariii-app.js';
     const jsCode = new CustomizeJsUpdater().generateCode(
       Blockly.Xml.domToText(Blockly.Xml.workspaceToDom(workspace)),
       // @ts-ignore Blockly.JavaScript は型定義がまだ未対応。

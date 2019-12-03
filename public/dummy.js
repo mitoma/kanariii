@@ -1,6 +1,6 @@
-var KintoneBlockly = KintoneBlockly || {};
-KintoneBlockly.sourceXml =
-  KintoneBlockly.sourceXml ||
+var KanariIi = KanariIi || {};
+KanariIi.sourceXml =
+  KanariIi.sourceXml ||
   '<xml xmlns="https://developers.google.com/blockly/xml"></xml>';
-KintoneBlockly.revisions = KintoneBlockly.revisions || [];
-KintoneBlockly.mediaUrl = null;
+KanariIi.revisions = KanariIi.revisions || [];
+KanariIi.mediaUrl = null;

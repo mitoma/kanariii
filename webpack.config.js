@@ -10,7 +10,7 @@ module.exports = {
 
   // メインとなるJavaScriptファイル（エントリーポイント）
   entry: {
-    'kintone-blockly': './src/main.tsx',
+    kanariii: './src/main.tsx',
     'chrome-extension': './src/chrome-extension.ts',
   },
 
