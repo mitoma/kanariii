@@ -8,6 +8,7 @@ import {
   DialogContent,
   DialogActions,
   Button,
+  Typography,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { WorkspaceLoader } from '../usecase/WorkspaceLoader';
@@ -46,6 +47,7 @@ export function HistoryDialog(props: HistoryDialogProps) {
         </ListItem>
       );
     });
+  const noRevision = revisionList.length == 0;
   return (
     <React.Fragment>
       <Dialog
@@ -55,7 +57,11 @@ export function HistoryDialog(props: HistoryDialogProps) {
         maxWidth={'md'}>
         <DialogTitle>History</DialogTitle>
         <DialogContent>
-          <List component="nav">{revisionList}</List>
+          {noRevision ? (
+            <Typography>No History</Typography>
+          ) : (
+            <List component="nav">{revisionList}</List>
+          )}
         </DialogContent>
         <DialogActions>
           <Button startIcon={<CloseIcon />} onClick={props.handleCloseDialog}>
