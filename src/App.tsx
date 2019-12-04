@@ -2,10 +2,10 @@ import { BlocklyUi } from './BlocklyUi';
 import * as React from 'react';
 import { Field } from './schema/Field';
 import { Button } from '@material-ui/core';
-import BuildIcon from '@material-ui/icons/Build';
 import styles from './App.css';
 import { OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
+import SvgKanariIiIcon from './view/SvgKanariIiIcon';
 
 type AppProps = {
   sourceXml: string;
@@ -29,11 +29,11 @@ export function App(props: AppProps) {
   return (
     <React.Fragment>
       <Button
-        startIcon={<BuildIcon />}
+        startIcon={<SvgKanariIiIcon />}
         color="inherit"
         onClick={handleOpenEditor}
         aria-label="open kanariii">
-        open kanariii
+        kanariii
       </Button>
       <div
         className={
