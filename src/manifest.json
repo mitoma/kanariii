@@ -3,6 +3,9 @@
   "name": "KanariIi",
   "description": "kintone customize editor",
   "version": "$VERSION",
+  "icons": {
+    "128": "kanariii-icon-128.png"
+  },
   "content_scripts": [
     {
       "matches": [
