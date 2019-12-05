@@ -37,6 +37,9 @@ function calcNextRevision(revisions: Revision[]): number {
 }
 
 function innerGenerateCode(workspace: Blockly.Workspace): string {
+  if (workspace == null) {
+    return '';
+  }
   // @ts-ignore Blockly.JavaScript は型定義がまだ未対応。
   const jsCode = Blockly.JavaScript.workspaceToCode(workspace);
   return `
