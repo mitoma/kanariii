@@ -65,7 +65,7 @@ export function HistoryDialog(props: HistoryDialogProps) {
         </DialogContent>
         <DialogActions>
           <Button startIcon={<CloseIcon />} onClick={props.handleCloseDialog}>
-            Cancel
+            Close
           </Button>
         </DialogActions>
       </Dialog>

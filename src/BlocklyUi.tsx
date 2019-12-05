@@ -14,6 +14,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
+import CodeIcon from '@material-ui/icons/Code';
 import HistoryIcon from '@material-ui/icons/History';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
@@ -25,7 +26,11 @@ import { OrganizationsAndGroups } from './client/SlashClient';
 import { Revision } from './history/Revision';
 import { DeployDialog } from './view/DeployDialog';
 import { HistoryDialog } from './view/HistoryDialog';
-import { generateJavaScriptWithMetadata } from './usecase/CodeGenerator';
+import {
+  generateJavaScriptWithMetadata,
+  generateJavaScript,
+} from './usecase/CodeGenerator';
+import { CodeDialog } from './view/CodeDialog';
 
 type BlocklyUiProps = {
   sourceXml: string;
@@ -47,6 +52,7 @@ export function BlocklyUi(props: BlocklyUiProps) {
   const [exportMenu, setExportMenu] = React.useState(null);
   const [deploying, setDeploying] = React.useState(false);
   const [deployDialog, setDeployDialog] = React.useState(false);
+  const [codeDialog, setCodeDialog] = React.useState(false);
 
   const importFile = React.useRef<HTMLInputElement>();
   const blocklyDiv = React.useRef<HTMLDivElement>();
@@ -78,6 +84,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
 
   function handleCloseLoading() {
     setDeploying(false);
+  }
+
+  function handleOpenCodeDialog() {
+    setCodeDialog(true);
+  }
+
+  function handleCloseCodeDialog() {
+    setCodeDialog(false);
   }
 
   function handleOpenHistoryDialog() {
@@ -154,6 +168,14 @@ export function BlocklyUi(props: BlocklyUiProps) {
           <Box flex={1}>
             <Button
               color="inherit"
+              aria-label="show code"
+              component="label"
+              startIcon={<CodeIcon />}
+              onClick={handleOpenCodeDialog}>
+              js code
+            </Button>
+            <Button
+              color="inherit"
               aria-label="history"
               component="label"
               startIcon={<HistoryIcon />}
@@ -200,6 +222,11 @@ export function BlocklyUi(props: BlocklyUiProps) {
         </Toolbar>
       </AppBar>
       <div ref={blocklyDiv} className={styles['blocklyDiv']} />
+      <CodeDialog
+        open={codeDialog}
+        handleCloseDialog={handleCloseCodeDialog}
+        jsCode={generateJavaScript(workspace)}
+      />
       <DeployDialog
         open={deployDialog}
         handleDeploy={handleDeploy}
