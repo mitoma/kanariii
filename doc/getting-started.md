@@ -2,11 +2,11 @@
 
 このドキュメントでは KanariIi のインストールの仕方から基本的な利用の仕方を説明します。
 
-1. インストール
-1. KanariIi 開発環境を開く
-1. プログラミング
-1. プログラムのデプロイ
-1. 開発に便利な小技
+- [インストール](#インストール)
+- [KanariIi 開発環境を開く](#KanariIi_開発環境を開く)
+- [プログラミング](#プログラミング)
+- プログラムのデプロイ
+- 開発に便利な小技
     - 開発中のコードの確認
     - 変更のバージョン管理
     - プログラムのバックアップと復帰
@@ -15,25 +15,25 @@
 
 [KanariIi - Chrome ウェブストア](https://chrome.google.com/webstore/detail/kanariii/ophmonkcolbmbicbacadjdobmbpidaop) にアクセスし KanariIi をインストールします。
 
-![show store](./image/install-show-store.png)
+<img src="./image/install-show-store.png" width="600"/>
 
 KanariIi のインストール時には複数のWebサイト情報の読み取り、変更の権限を要求されますが、ここで表示されるサイトはすべて kintone を提供しているサイトのドメインです。**Add extension** ボタンをクリックすることでインストールされます。
 
-![show parmission](./image/install-permission.png)
+<img src="./image/install-permission.png" width="400"/>
 
 インストールが正常に完了すると Chrome のブックマークバーの右側にズのようなアイコンがグレーアウトで表示されます。
 
-![finish install](./image/install-finish.png)
+<img src="./image/install-finish.png" width="300"/>
 
-## KanariIi 開発環境を開く
+## KanariIi_開発環境を開く
 
 KanariIi をインストールすると、アプリ管理権限を持っているアプリにアクセスしたときに KANARIII ボタンが出現します。
 
-![open button](./image/open-button.png)
+<img src="./image/open-button.png" width="400"/>
 
 このボタンを押すと KanariIi 開発環境が開きます
 
-![open kanariii](./image/open-window.png)
+<img src="./image/open-window.png" width="600"/>
 
 ## プログラミング
 
@@ -41,6 +41,6 @@ KanariIi ではプログラミングのエディタに [Blockly](https://develop
 
 ブロックは KanariIi 開発環境の左側のメニューをクリックすることで選択できます。 Kintone と書かれたボタンをクリックすると kintone 特有のブロックが表示されます。
 
-![block tree](./image/programming-blocktree.png)
+<img src="./image/programming-blocktree.png" width="200"/>
 
 それでは試しにアプリのカスタマイズを作ってみましょう！
