@@ -39,7 +39,7 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
-    "@kintone/dts-gen": "^2.1.2",
+    "@kintone/dts-gen": "^2.2.0",
     "@types/chrome": "0.0.91",
     "copy-webpack-plugin": "^5.1.0",
     "css-loader": "^3.3.0",
