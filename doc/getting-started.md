@@ -106,7 +106,7 @@ KanariIi ではプログラミングのエディタに [Blockly](https://develop
 
 <img src="./image/sample-add-record-03.png" width="600"/>
 
-以上が KanariIi の開発の基本的な流れです。ぜひ、楽しんでいろいろなプログラミングを作ってみてください！
+以上が KanariIi の開発の基本的な流れです。ぜひ、楽しんでいろいろなプログラムを作ってみてください！
 
 ## 開発に便利な機能
 
