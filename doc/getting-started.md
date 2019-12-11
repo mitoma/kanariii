@@ -21,7 +21,7 @@ KanariIi のインストール時には複数のWebサイト情報の読み取�
 
 <img src="./image/install-permission.png" width="400"/>
 
-インストールが正常に完了すると Chrome のブックマークバーの右側にズのようなアイコンがグレーアウトで表示されます。
+インストールが正常に完了すると Chrome のブックマークバーの右側に下図のようなアイコンがグレーアウトで表示されます。
 
 <img src="./image/install-finish.png" width="300"/>
 
