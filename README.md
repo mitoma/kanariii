@@ -20,3 +20,11 @@ KanariIi は Chrome 拡張です。kintone 拡張を作るためのブロック�
 ```sh
 npm run ci && npm run package
 ```
+
+## License
+
+[MIT LICENSE](/LICENSE)
+
+## Disclaimer
+
+This OSS is my own personal work and does not have any relationship with Cybozu Inc. or any other organization which I belong to.
