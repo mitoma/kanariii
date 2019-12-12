@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "KanariIi",
   "description": "kintone customize editor",
-  "homepage_url": "https://github.com/mitoma/kanariii/blob/master/README.md"
+  "homepage_url": "https://github.com/mitoma/kanariii/",
   "version": "$VERSION",
   "icons": {
     "128": "kanariii-icon-128.png"
