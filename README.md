@@ -15,6 +15,10 @@ KanariIi は Chrome 拡張です。kintone 拡張を作るためのブロック�
 
 おなじみの日報アプリにレコードを追加するときにデフォルトの入力を設定するカスタマイズをデプロイしています。
 
+## Getting Started
+
+[Getting Started](/doc/getting-started.md) を読んで KanariIi を始めてみましょう。
+
 ## Build
 
 ```sh
