@@ -41,7 +41,7 @@
   "devDependencies": {
     "@kintone/dts-gen": "^2.2.0",
     "@types/chrome": "0.0.91",
-    "copy-webpack-plugin": "^5.1.0",
+    "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.3.0",
     "mkdirp": "^0.5.1",
     "raw-loader": "^3.1.0",
