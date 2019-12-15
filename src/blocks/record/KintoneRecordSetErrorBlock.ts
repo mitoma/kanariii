@@ -3,6 +3,7 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../../schema/Field';
 import { BlockColors, appendShadowText } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class KintoneRecordSetErrorBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -56,7 +57,7 @@ export class KintoneRecordSetErrorBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return appendShadowText(blockElement, 'error message');
   }

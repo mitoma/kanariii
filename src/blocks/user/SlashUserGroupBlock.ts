@@ -3,6 +3,7 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Group } from '../../client/SlashClient';
 import { BlockColors, enableInAsyncEventBlock } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class SlashUserGroupBlock implements KintoneBlock {
   constructor(private groups: Group[]) {}
@@ -72,7 +73,7 @@ export class SlashUserGroupBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return blockElement;
   }

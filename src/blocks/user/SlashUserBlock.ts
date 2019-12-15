@@ -2,6 +2,7 @@ import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { BlockColors } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class SlashUserBlock implements KintoneBlock {
   blockName = 'slash_user';
@@ -54,7 +55,7 @@ export class SlashUserBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return blockElement;
   }

@@ -1,4 +1,5 @@
 import * as Blockly from 'blockly';
+import { xmlCreateElement } from './kintone-block';
 
 // 返り値に Promise が使えない(async function)にできないイベントキーのprefix
 const syncOnlyEventKeyPrefixes = [
@@ -76,13 +77,13 @@ function calcEnable(
 }
 
 function appendShadowText(target: Element, defaultValue: string): Element {
-  const field = document.createElement('field');
+  const field = xmlCreateElement('field');
   field.setAttribute('name', 'TEXT');
-  field.innerText = defaultValue;
-  const shadow = document.createElement('shadow');
+  field.textContent = defaultValue;
+  const shadow = xmlCreateElement('shadow');
   shadow.setAttribute('type', 'text');
   shadow.appendChild(field);
-  const value = document.createElement('value');
+  const value = xmlCreateElement('value');
   value.setAttribute('name', 'TEXT');
   value.appendChild(shadow);
   target.appendChild(value);

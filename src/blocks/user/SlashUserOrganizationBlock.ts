@@ -3,6 +3,7 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Organization } from '../../client/SlashClient';
 import { BlockColors, enableInAsyncEventBlock } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class SlashUserOrganizationBlock implements KintoneBlock {
   constructor(private organization: Organization[]) {}
@@ -75,7 +76,7 @@ export class SlashUserOrganizationBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return blockElement;
   }

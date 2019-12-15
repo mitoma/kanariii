@@ -2,6 +2,7 @@ import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { BlockColors, appendShadowText } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class ConsoleLogBlock implements KintoneBlock {
   blockName = 'console_log';
@@ -45,7 +46,7 @@ export class ConsoleLogBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    const blockElement = document.createElement('block');
+    const blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return appendShadowText(blockElement, 'debug message');
   }

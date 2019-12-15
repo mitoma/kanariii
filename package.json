@@ -10,6 +10,7 @@
     "watch": "webpack -w",
     "package": "npm run clean && npm run build:production && mkdirp package && zip -r package/kanariii.zip build/*",
     "clean": "rimraf build package",
+    "test": "jest",
     "fmt": "prettier --write **/*.{js,jsx,ts,tsx,json,css,html}"
   },
   "repository": {
@@ -41,12 +42,15 @@
   "devDependencies": {
     "@kintone/dts-gen": "^2.2.0",
     "@types/chrome": "0.0.91",
+    "@types/jest": "^24.0.23",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^3.3.2",
+    "jest": "^24.9.0",
     "mkdirp": "^0.5.1",
     "raw-loader": "^3.1.0",
     "rimraf": "^3.0.0",
     "style-loader": "^1.0.1",
+    "ts-jest": "^24.2.0",
     "ts-loader": "^6.2.0",
     "typescript": "^3.7.3",
     "webpack": "^4.41.2",

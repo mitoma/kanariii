@@ -2,6 +2,7 @@ import { KintoneBlock } from '../KintoneBlock';
 import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { BlockColors, enableInEventBlock } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class KintoneRecordGetIdBlock implements KintoneBlock {
   blockName: string = 'kintone_app_record_get_id';
@@ -31,7 +32,7 @@ export class KintoneRecordGetIdBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return blockElement;
   }

@@ -24,6 +24,7 @@ import { SlashUserBlock } from './user/SlashUserBlock';
 import { SlashUserOrganizationBlock } from './user/SlashUserOrganizationBlock';
 import { SlashUserGroupBlock } from './user/SlashUserGroupBlock';
 import { BlockColors } from './block-definition-util';
+import Blockly from 'blockly';
 
 // イベントの定義
 // https://developer.cybozu.io/hc/ja/articles/360000361686
@@ -137,6 +138,10 @@ const appRecordEditFieldDef: KintoneFieldEventBlockCategoryDef = {
   eventKeyPrefix: 'app.record.edit.change',
 };
 
+export function xmlCreateElement(elementName: string): Element {
+  return Blockly.Xml.textToDom(`<${elementName}/>`);
+}
+
 export function buildKintone(
   blocks: object,
   js: object,
@@ -222,13 +227,14 @@ function createSubCategoryElement(
   kintoneBlocks.forEach(block => {
     blocks[block.blockName] = block.blockDefinition();
     js[block.blockName] = block.jsGenerator();
-    category.appendChild(block.menuElement());
+    const element = block.menuElement();
+    category.appendChild(element);
   });
   return category;
 }
 
 function subCategory(categoryName: string, colour: string): Element {
-  let categoryElement = document.createElement('category');
+  const categoryElement = xmlCreateElement('category');
   categoryElement.setAttribute('name', categoryName);
   categoryElement.setAttribute('colour', colour);
   return categoryElement;
