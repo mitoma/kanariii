@@ -9,5 +9,11 @@ test('test text_print block', () => {
           </shadow>
         </value>
       </block>`);
-  expect(code).toBe(TestHelper.format(" window.alert('hello');"));
+  expect(code).toBe(TestHelper.format("window.alert('hello')"));
+});
+
+test('test debugger block', () => {
+  TestHelper.loadKintoneBlocks();
+  const code: string = TestHelper.xmlToCode(`<block type="debugger"></block>`);
+  expect(code).toBe(TestHelper.format('debugger'));
 });

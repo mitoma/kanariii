@@ -3,6 +3,7 @@ import * as Blockly from 'blockly';
 import 'blockly/javascript';
 import { Field } from '../../schema/Field';
 import { BlockColors } from '../block-definition-util';
+import { xmlCreateElement } from '../kintone-block';
 
 export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
   constructor(private fields: Field[]) {}
@@ -68,7 +69,7 @@ export class KintoneRecordSetGroupFieldOpenBlock implements KintoneBlock {
   }
 
   menuElement(): Element {
-    let blockElement = document.createElement('block');
+    let blockElement = xmlCreateElement('block');
     blockElement.setAttribute('type', this.blockName);
     return blockElement;
   }
