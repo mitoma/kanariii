@@ -1,5 +1,6 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
+import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 import { Field, UNSUPPORTED_FIELD_TYPES } from '../schema/Field';
 
 type CustomizeSetting = {
@@ -36,10 +37,17 @@ type UploadFileBlob = {
 };
 
 class KintoneClient {
-  getCustomizeSetting() {
-    return kintone.api(this.url('/k/v1/preview/app/customize'), 'GET', {
-      app: kintone.app.getId(),
+  client: KintoneRestAPIClient;
+  constructor() {
+    this.client = new KintoneRestAPIClient({
+      host: document.location.origin,
+      auth: {},
     });
+  }
+
+  getCustomizeSetting() {
+    const appId = kintone.app.getId();
+    return this.client.app.getCustomize({ app: appId, preview: true });
   }
 
   putCustomizeSetting(customizeSetting: CustomizeSetting) {

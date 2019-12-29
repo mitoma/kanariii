@@ -15,11 +15,12 @@ export class CustomizeJsUpdater {
   readonly fileName = 'kanariii-app.js';
 
   async uploadCustomizeCode(jsCode: string) {
-    const customizeSetting: CustomizeSetting = await this.kintoneClient.getCustomizeSetting();
+    const customizeSetting = await this.kintoneClient.getCustomizeSetting();
     const uploadToBlob = await this.kintoneClient.uploadToBlob(
       jsCode,
       this.fileName,
     );
+
     customizeSetting.desktop.js = customizeSetting.desktop.js.filter(source => {
       if (source.type === 'FILE') {
         let fileSource = source as FileSource;
