@@ -63,7 +63,7 @@ describe('event block', () => {
       </block>`);
     expect(code).toBe(
       TestHelper.format(`
-        kintone.events.on("app.record.create.show", function(event) {
+        kintone.events.on("app.record.create.show", async function(event) {
           console.log("debug message");
           return event;
         });
