@@ -41,7 +41,7 @@ export class WorkspaceInitializer {
     };
 
     const workspace = Blockly.inject(blocklyDiv, {
-      toolbox: toolbox,
+      toolbox: Blockly.Xml.domToText(toolbox),
       trashcan: true,
       zoom: zoom,
       media: KanariIi.mediaUrl,
