@@ -3,13 +3,8 @@ import { xmlCreateElement } from './kintone-block';
 
 // 返り値に Promise が使えない(async function)にできないイベントキーのprefix
 const syncOnlyEventKeyPrefixes = [
-  'app.record.index.show',
-  'app.record.index.edit.show',
   'app.record.index.edit.change',
-  'app.record.detail.show',
-  'app.record.create.show',
   'app.record.create.change',
-  'app.record.edit.show',
   'app.record.edit.change',
 ];
 
