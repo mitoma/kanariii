@@ -3,7 +3,6 @@ import * as ReactDOM from 'react-dom';
 import { Field } from './schema/Field';
 import { App } from './App';
 import { SlashClient, OrganizationsAndGroups } from './client/SlashClient';
-import { Revision } from './history/Revision';
 import { KintoneClient } from './client/KintoneClient';
 
 if (document.readyState === 'loading') {
