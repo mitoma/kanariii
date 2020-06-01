@@ -1,6 +1,7 @@
 /// <reference path="../../node_modules/@kintone/dts-gen/kintone.d.ts" />
 
 import { Field, UNSUPPORTED_FIELD_TYPES } from '../schema/Field';
+import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 
 type CustomizeSetting = {
   app: string;
@@ -36,18 +37,31 @@ type UploadFileBlob = {
 };
 
 class KintoneClient {
-  getCustomizeSetting() {
-    return kintone.api(this.url('/k/v1/preview/app/customize'), 'GET', {
-      app: kintone.app.getId(),
-    });
+  kintoneRestApiClient: KintoneRestAPIClient;
+
+  constructor() {
+    this.kintoneRestApiClient = new KintoneRestAPIClient();
+  }
+
+  async getCustomizeSetting() {
+    const resp = await this.kintoneRestApiClient.app
+      .getAppCustomize({
+        app: kintone.app.getId(),
+      });
+    const setting: CustomizeSetting = {
+      app: kintone.app.getId().toString(),
+      scope: 'ALL',
+      desktop: {
+        css: resp.desktop.css,
+        js: resp.desktop.js,
+      },
+      revision: resp.revision,
+    };
+    return setting;
   }
 
   putCustomizeSetting(customizeSetting: CustomizeSetting) {
-    return kintone.api(
-      this.url('/k/v1/preview/app/customize'),
-      'PUT',
-      customizeSetting,
-    );
+    return this.kintoneRestApiClient.app.updateAppCustomize(customizeSetting);
   }
 
   sleep(waitMsec: number) {
@@ -59,19 +73,17 @@ class KintoneClient {
   }
 
   deployApp() {
-    return kintone.api(this.url('/k/v1/preview/app/deploy'), 'POST', {
+    return this.kintoneRestApiClient.app.deployApp({
       apps: [{ app: kintone.app.getId(), revision: -1 }],
     });
   }
 
-  deployAppProgress() {
-    return kintone
-      .api(this.url('/k/v1/preview/app/deploy'), 'GET', {
+  async deployAppProgress() {
+    const resp = await this.kintoneRestApiClient.app
+      .getDeployStatus({
         apps: [kintone.app.getId()],
-      })
-      .then(resp => {
-        return resp.apps[0].status;
       });
+    return resp.apps[0].status;
   }
 
   uploadToBlob(code: string, fileName: string) {
