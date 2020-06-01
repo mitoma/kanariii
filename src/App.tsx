@@ -16,7 +16,7 @@ type AppProps = {
 
 export function App(props: AppProps) {
   const [sourceXml, setSourceXml] = React.useState(props.sourceXml);
-  const [showBlocklyEditor, setShowBlocklyEditor] = React.useState();
+  const [showBlocklyEditor, setShowBlocklyEditor] = React.useState(false);
 
   function handleOpenEditor() {
     setShowBlocklyEditor(true);
