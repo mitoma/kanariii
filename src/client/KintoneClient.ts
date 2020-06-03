@@ -3,6 +3,8 @@
 import { Field, UNSUPPORTED_FIELD_TYPES } from '../schema/Field';
 import { KintoneRestAPIClient } from '@kintone/rest-api-client';
 
+type DeployStatus = 'PROCESSING' | 'SUCCESS' | 'FAIL' | 'CANCEL';
+
 type CustomizeSetting = {
   app: string;
   scope: 'ALL';
@@ -43,11 +45,10 @@ class KintoneClient {
     this.kintoneRestApiClient = new KintoneRestAPIClient();
   }
 
-  async getCustomizeSetting() {
-    const resp = await this.kintoneRestApiClient.app
-      .getAppCustomize({
-        app: kintone.app.getId(),
-      });
+  async getCustomizeSetting(): Promise<CustomizeSetting> {
+    const resp = await this.kintoneRestApiClient.app.getAppCustomize({
+      app: kintone.app.getId(),
+    });
     const setting: CustomizeSetting = {
       app: kintone.app.getId().toString(),
       scope: 'ALL',
@@ -60,11 +61,15 @@ class KintoneClient {
     return setting;
   }
 
-  putCustomizeSetting(customizeSetting: CustomizeSetting) {
-    return this.kintoneRestApiClient.app.updateAppCustomize(customizeSetting);
+  async putCustomizeSetting(
+    customizeSetting: CustomizeSetting,
+  ): Promise<string> {
+    return (
+      await this.kintoneRestApiClient.app.updateAppCustomize(customizeSetting)
+    ).revision;
   }
 
-  sleep(waitMsec: number) {
+  async sleep(waitMsec: number) {
     return new Promise(resolve => {
       setTimeout(() => {
         resolve();
@@ -72,50 +77,29 @@ class KintoneClient {
     });
   }
 
-  deployApp() {
+  async deployApp() {
     return this.kintoneRestApiClient.app.deployApp({
       apps: [{ app: kintone.app.getId(), revision: -1 }],
     });
   }
 
-  async deployAppProgress() {
-    const resp = await this.kintoneRestApiClient.app
-      .getDeployStatus({
-        apps: [kintone.app.getId()],
-      });
+  async deployAppProgress(): Promise<DeployStatus> {
+    const resp = await this.kintoneRestApiClient.app.getDeployStatus({
+      apps: [kintone.app.getId()],
+    });
     return resp.apps[0].status;
   }
 
-  uploadToBlob(code: string, fileName: string) {
-    return new Promise((resolve, reject) => {
-      const blob = new Blob([code], { type: 'application/xml' });
-      const formData = new FormData();
-      formData.append('__REQUEST_TOKEN__', kintone.getRequestToken());
-      formData.append('file', blob, fileName);
-
-      const url = this.url('/k/v1/file');
-      const xhr = new XMLHttpRequest();
-      xhr.open('POST', url);
-      xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-      xhr.onload = function() {
-        if (xhr.status === 200) {
-          // success
-          resolve(JSON.parse(xhr.responseText));
-        } else {
-          // error
-          reject(JSON.parse(xhr.responseText));
-        }
-      };
-      xhr.send(formData);
+  async uploadToBlob(code: string, fileName: string): Promise<string> {
+    const blob = new Blob([code], { type: 'application/xml' });
+    const resp = await this.kintoneRestApiClient.file.uploadFile({
+      file: { name: fileName, data: blob },
     });
+    return resp.fileKey;
   }
 
-  private url(path: string): string {
-    return kintone.api.url(path, true);
-  }
-
-  async getAppFields() {
-    const resp = await kintone.api(this.url('/k/v1/app/form/fields'), 'GET', {
+  async getAppFields(): Promise<Field[]> {
+    const resp = await this.kintoneRestApiClient.app.getFormFields({
       app: kintone.app.getId(),
     });
     const fieldKeys = Object.keys(resp.properties);
