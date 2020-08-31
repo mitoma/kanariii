@@ -7,11 +7,8 @@ import {
   Dialog,
   DialogTitle,
   DialogContent,
-  Typography,
-  List,
   DialogActions,
   Button,
-  DialogContentText,
   Snackbar,
 } from '@material-ui/core';
 
