@@ -16,7 +16,7 @@ export class CustomizeJsUpdater {
 
   async uploadCustomizeCode(jsCode: string) {
     const customizeSetting: CustomizeSetting = await this.kintoneClient.getCustomizeSetting();
-    const uploadToBlob = await this.kintoneClient.uploadToBlob(
+    const uploadFileKey = await this.kintoneClient.uploadToBlob(
       jsCode,
       this.fileName,
     );
@@ -29,7 +29,7 @@ export class CustomizeJsUpdater {
     });
     customizeSetting.desktop.js.push({
       type: 'FILE',
-      file: { fileKey: uploadToBlob['fileKey'] },
+      file: { fileKey: uploadFileKey },
     });
     customizeSetting.app = kintone.app.getId().toString();
     await this.kintoneClient.putCustomizeSetting(customizeSetting);
