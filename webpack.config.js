@@ -53,27 +53,25 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, 'public'),
-        to: path.resolve(__dirname, 'build'),
-      },
-    ]),
-    // Copy over media resources from the Blockly package
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, './node_modules/blockly/media'),
-        to: path.resolve(__dirname, 'build/media'),
-      },
-    ]),
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, 'src/manifest.json'),
-        to: path.resolve(__dirname, 'build/manifest.json'),
-        transform(content) {
-          return content.toString().replace('$VERSION', package_json.version);
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'public'),
+          to: path.resolve(__dirname, 'build'),
         },
-      },
-    ]),
+        // Copy over media resources from the Blockly package
+        {
+          from: path.resolve(__dirname, './node_modules/blockly/media'),
+          to: path.resolve(__dirname, 'build/media'),
+        },
+        {
+          from: path.resolve(__dirname, 'src/manifest.json'),
+          to: path.resolve(__dirname, 'build/manifest.json'),
+          transform(content) {
+            return content.toString().replace('$VERSION', package_json.version);
+          },
+        },
+      ],
+    }),
   ],
 };
